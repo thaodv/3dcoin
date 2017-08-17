@@ -131,7 +131,7 @@ bool AppInit(int argc, char* argv[])
 
         if (fCommandLine)
         {
-            fprintf(stderr, "Error: There is no RPC client functionality in 3dcoind anymore. Use the dash-cli utility instead.\n");
+            fprintf(stderr, "Error: There is no RPC client functionality in 3dcoind anymore. Use the 3dcoin-cli utility instead.\n");
             exit(EXIT_FAILURE);
         }
 #ifndef WIN32

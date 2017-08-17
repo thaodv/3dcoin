@@ -9,7 +9,7 @@
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between dash-cli and 3dcoind)
+ * CBaseChainParams defines the base parameters (shared between 3dcoin-cli and 3dcoind)
  * of a given instance of the 3DCoin system.
  */
 class CBaseChainParams
