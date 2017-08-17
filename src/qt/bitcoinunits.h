@@ -57,7 +57,7 @@ public:
      */
     enum Unit
     {
-        3DC,
+        D3DC,
         m3DC,
         u3DC,
         duffs

@@ -19,7 +19,7 @@ BitcoinUnits::BitcoinUnits(QObject *parent):
 QList<BitcoinUnits::Unit> BitcoinUnits::availableUnits()
 {
     QList<BitcoinUnits::Unit> unitlist;
-    unitlist.append(3DC);
+    unitlist.append(D3DC);
     unitlist.append(m3DC);
     unitlist.append(u3DC);
     unitlist.append(duffs);
@@ -30,7 +30,7 @@ bool BitcoinUnits::valid(int unit)
 {
     switch(unit)
     {
-    case 3DC:
+    case D3DC:
     case m3DC:
     case u3DC:
     case duffs:
@@ -46,7 +46,7 @@ QString BitcoinUnits::name(int unit)
     {
         switch(unit)
         {
-            case 3DC: return QString("3DC");
+            case D3DC: return QString("3DC");
             case m3DC: return QString("m3DC");
             case u3DC: return QString::fromUtf8("μ3DC");
             case duffs: return QString("duffs");
@@ -57,7 +57,7 @@ QString BitcoinUnits::name(int unit)
     {
         switch(unit)
         {
-            case 3DC: return QString("t3DC");
+            case D3DC: return QString("t3DC");
             case m3DC: return QString("mt3DC");
             case u3DC: return QString::fromUtf8("μt3DC");
             case duffs: return QString("tduffs");
@@ -72,7 +72,7 @@ QString BitcoinUnits::description(int unit)
     {
         switch(unit)
         {
-            case 3DC: return QString("3DC");
+            case D3DC: return QString("3DC");
             case m3DC: return QString("Milli-3DC (1 / 1" THIN_SP_UTF8 "000)");
             case u3DC: return QString("Micro-3DC (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             case duffs: return QString("Ten Nano-3DC (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
@@ -83,7 +83,7 @@ QString BitcoinUnits::description(int unit)
     {
         switch(unit)
         {
-            case 3DC: return QString("Test3dcs");
+            case D3DC: return QString("Test3dcs");
             case m3DC: return QString("Milli-Test3dc (1 / 1" THIN_SP_UTF8 "000)");
             case u3DC: return QString("Micro-Test3dc (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
             case duffs: return QString("Ten Nano-Test3dc (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
@@ -96,7 +96,7 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case 3DC:  return 100000000;
+    case D3DC:  return 100000000;
     case m3DC: return 100000;
     case u3DC: return 100;
     case duffs: return 1;
@@ -108,7 +108,7 @@ int BitcoinUnits::decimals(int unit)
 {
     switch(unit)
     {
-    case 3DC: return 8;
+    case D3DC: return 8;
     case m3DC: return 5;
     case u3DC: return 2;
     case duffs: return 0;
