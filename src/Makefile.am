@@ -63,7 +63,7 @@ if BUILD_BITCOIN_UTILS
 endif
 
 .PHONY: FORCE check-symbols check-security
-# dash core #
+# 3dcoin core #
 BITCOIN_CORE_H = \
   activemasternode.h \
   addressindex.h \
