@@ -49,7 +49,6 @@ GLOBAL sph_cubehash512_context  z_cubehash;
     sph_keccak512_init(&z_keccak); \
     sph_skein512_init(&z_skein); \
     sph_cubehash512_init(&z_cubehash); \
-    
 } while (0)
 
 #define ZBLAKE (memcpy(&ctx_blake, &z_blake, sizeof(z_blake)))
