@@ -122,9 +122,9 @@ public:
         nPruneAfterHeight = 100000;
 
         genesis = CreateGenesisBlock(1503187200, 21680453, 0x1e0ffff0, 1, 50 * COIN);
-        consensus.hashGenesisBlock = genesis.GetHash();
+       /* consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S(""));
-        assert(genesis.hashMerkleRoot == uint256S(""));
+        assert(genesis.hashMerkleRoot == uint256S(""));*/
 
 
         /*Seeds.push_back(CDNSSeedData("dash.org", "dnsseed.dash.org"));
@@ -223,9 +223,9 @@ public:
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1503187200, 3299711235, 0x1e0ffff0, 1, 50 * COIN);
-        consensus.hashGenesisBlock = genesis.GetHash();
+       /* consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S(""));
-        assert(genesis.hashMerkleRoot == uint256S(""));
+        assert(genesis.hashMerkleRoot == uint256S(""));*/
 
         /*vFixedSeeds.clear();
         vSeeds.clear();
@@ -322,9 +322,9 @@ public:
         nPruneAfterHeight = 1000;
 
         genesis = CreateGenesisBlock(1503187200, 1096447, 0x207fffff, 1, 50 * COIN);
-        consensus.hashGenesisBlock = genesis.GetHash();
+       /* consensus.hashGenesisBlock = genesis.GetHash();
         assert(consensus.hashGenesisBlock == uint256S(""));
-        assert(genesis.hashMerkleRoot == uint256S(""));
+        assert(genesis.hashMerkleRoot == uint256S(""));*/
 
         vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();  //! Regtest mode doesn't have any DNS seeds.
