@@ -72,7 +72,7 @@ merklehash: 6a8d14f36d8dc3089bb9c652b7691ab5a5ca4f292cd13fb1eed8bd2ff1ddab63
 
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-	const char* pszTimestamp = "Bitcoin Block #462720: 0000000000000000005b05764038a767b16533fb63c67d759afb2f2259d75c6a";
+	const char* pszTimestamp = "Wired 19/aug/2017 EXPLORE THE MOON USING AUGMENTED REALITY";
 	const CScript genesisOutputScript = CScript() << ParseHex("") << OP_CHECKSIG;
 	return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -144,7 +144,7 @@ public:
 		nPruneAfterHeight = 100000;
 		// genesis = CreateGenesisBlock(1390095618, 28917698, 0x1e0ffff0, 1, 50 * COIN);
 		// 2017-04-20 15:42:13 : 1492699333
-		genesis = CreateGenesisBlock(1503187200UL, 826326UL, 0x1e0ffff0, 1, 50 * COIN);
+		genesis = CreateGenesisBlock(1503187200, 20219441, 0x1e0ffff0, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
 
 		
@@ -289,7 +289,7 @@ public:
 
 		// 2017-04-20 15:42:13 : 1492699333
 		// genesis = CreateGenesisBlock(1390666206UL, 3861367235UL, 0x1e0ffff0, 1, 50 * COIN);
-		genesis = CreateGenesisBlock(1503187200UL, 1370248UL, 0x1e0ffff0, 1, 50 * COIN);
+		genesis = CreateGenesisBlock(1503187200, 12781667, 0x1e0ffff0, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
 
 		
@@ -429,7 +429,7 @@ public:
 		nDefaultPort = 19004;
 		nPruneAfterHeight = 1000;
 
-		genesis = CreateGenesisBlock(1503187200UL, 0UL, 0x207fffff, 1, 50 * COIN);
+		genesis = CreateGenesisBlock(1503187200, 2, 0x207fffff, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
 
 		
