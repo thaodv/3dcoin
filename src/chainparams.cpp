@@ -150,7 +150,7 @@ public:
 		std::cout << std::string("NONCE WRAPPED, incrementing time:\n");
 		++genesis.nTime;
 		}
-		if (genesis.nNonce % 10000 == 0)
+		if (genesis.nNonce % 10000000 == 0)
 		{
 		LogPrintf("Mainnet: nonce %08u: hash = %s \n", genesis.nNonce, genesis.GetHash().ToString().c_str());
 		// std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << "\n";
