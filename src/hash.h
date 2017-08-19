@@ -15,16 +15,11 @@
 #include "version.h"
 
 #include "crypto/sph_blake.h"
-#include "crypto/sph_bmw.h"
 #include "crypto/sph_groestl.h"
-#include "crypto/sph_jh.h"
 #include "crypto/sph_keccak.h"
 #include "crypto/sph_skein.h"
-#include "crypto/sph_luffa.h"
 #include "crypto/sph_cubehash.h"
-#include "crypto/sph_shavite.h"
-#include "crypto/sph_simd.h"
-#include "crypto/sph_echo.h"
+
 
 #include <vector>
 
@@ -275,7 +270,7 @@ void BIP32Hash(const ChainCode &chainCode, unsigned int nChild, unsigned char he
 
 /* ----------- 3DCoin Hash ------------------------------------------------ */
 template<typename T1>
-inline uint256 HashX11(const T1 pbegin, const T1 pend)
+inline uint256 HashX5(const T1 pbegin, const T1 pend)
 
 {
     sph_blake512_context     ctx_blake;
@@ -291,7 +286,7 @@ inline uint256 HashX11(const T1 pbegin, const T1 pend)
     //sph_echo512_context      ctx_echo;
     static unsigned char pblank[1];
 
-    uint512 hash[11];
+    uint512 hash[5];
 
     sph_blake512_init(&ctx_blake);
     sph_blake512 (&ctx_blake, (pbegin == pend ? pblank : static_cast<const void*>(&pbegin[0])), (pend - pbegin) * sizeof(pbegin[0]));
@@ -337,7 +332,7 @@ inline uint256 HashX11(const T1 pbegin, const T1 pend)
     sph_echo512 (&ctx_echo, static_cast<const void*>(&hash[9]), 64);
     sph_echo512_close(&ctx_echo, static_cast<void*>(&hash[10]));*/
 
-    return hash[10].trim256();
+    return hash[4].trim256();
 }
 
 #endif // BITCOIN_HASH_H
