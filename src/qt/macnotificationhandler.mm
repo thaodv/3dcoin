@@ -13,7 +13,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"org.dash.Dash-Qt";
+        return @"io.3dcoin.3DCoin-Qt";
     } else {
         return [self __bundleIdentifier];
     }

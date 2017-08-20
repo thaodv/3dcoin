@@ -41,7 +41,7 @@
 #define DBG( x ) 
 #endif
 
-//Dash only features
+//3DCoin only features
 
 extern bool fMasterNode;
 extern bool fLiteMode;
