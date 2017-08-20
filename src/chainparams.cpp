@@ -113,16 +113,16 @@ public:
 																				 * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
 																				 * a large 32-bit integer with any alignment.
 																				 */
-		pchMessageStart[0] = 0xbf;
-		pchMessageStart[1] = 0x0c;
-		pchMessageStart[2] = 0x6b;
-		pchMessageStart[3] = 0xbd;
+		pchMessageStart[0] = 0xd1;
+		pchMessageStart[1] = 0xd0;
+		pchMessageStart[2] = 0xa2;
+		pchMessageStart[3] = 0x7d;
 		vAlertPubKey = ParseHex("0x");
 		nDefaultPort = 15015;
 		nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in bitcoin
 		nPruneAfterHeight = 100000;
 
-		genesis = CreateGenesisBlock(1503187200UL, 826326UL, 0x207fffff, 1, 50 * COIN);
+		genesis = CreateGenesisBlock(1503187200, 826326, 0x1e0ffff0, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
 
 		// calculate Genesis Block
@@ -274,16 +274,16 @@ public:
 		consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 1456790400; // March 1st, 2016
 		consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1493596800; // May 1st, 2017
 
-		pchMessageStart[0] = 0xce;
-		pchMessageStart[1] = 0xe2;
-		pchMessageStart[2] = 0xca;
-		pchMessageStart[3] = 0xff;
+		pchMessageStart[0] = 0xde;
+		pchMessageStart[1] = 0xb2;
+		pchMessageStart[2] = 0xc4;
+		pchMessageStart[3] = 0xcf;
 		vAlertPubKey = ParseHex("04517d8a699cb43d3938d7b24faaff7cda448ca4ea267723ba614784de661949bf632d6304316b244646dea079735b9a6fc4af804efb4752075b9fe2245e14e412");
 		nDefaultPort = 16016;
 		nMaxTipAge = 0x7fffffff; // allow mining on top of old blocks for testnet
 		nPruneAfterHeight = 1000;
 
-		genesis = CreateGenesisBlock(1390666206UL, 3861367235UL, 0x1e0ffff0, 1, 50 * COIN);
+		genesis = CreateGenesisBlock(1503187200, 3861367, 0x1e0ffff0, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
 		assert(consensus.hashGenesisBlock == uint256S("0x00000bafbc94add76cb75e2ec92894837288a481e5c005f6563d91623bf8bc2c"));
 		assert(genesis.hashMerkleRoot == uint256S("0xe0028eb9648db56b1ac77cf090b99048a8007e2bb64b68f092c03c7f56a662c7"));
@@ -381,15 +381,15 @@ public:
 		consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nStartTime = 0;
 		consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 999999999999ULL;
 
-		pchMessageStart[0] = 0xfc;
-		pchMessageStart[1] = 0xc1;
-		pchMessageStart[2] = 0xb7;
-		pchMessageStart[3] = 0xdc;
+		pchMessageStart[0] = 0xec;
+		pchMessageStart[1] = 0xd1;
+		pchMessageStart[2] = 0xc7;
+		pchMessageStart[3] = 0xec;
 		nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in bitcoin
 		nDefaultPort = 17017;
 		nPruneAfterHeight = 1000;
 
-		genesis = CreateGenesisBlock(1417713337, 1096447, 0x207fffff, 1, 50 * COIN);
+		genesis = CreateGenesisBlock(1503187200, 1096447, 0x207fffff, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
 		assert(consensus.hashGenesisBlock == uint256S("0x000008ca1832a4baf228eb1553c03d3a2c8e02399550dd6ea8d65cec3ef23d2e"));
 		assert(genesis.hashMerkleRoot == uint256S("0xe0028eb9648db56b1ac77cf090b99048a8007e2bb64b68f092c03c7f56a662c7"));
