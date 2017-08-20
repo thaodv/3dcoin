@@ -122,9 +122,9 @@ public:
 		nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in bitcoin
 		nPruneAfterHeight = 100000;
 
-		genesis = CreateGenesisBlock(1390095618, 28917698, 0x1e0ffff0, 1, 50 * COIN);
+		genesis = CreateGenesisBlock(1390095618, 28982180, 0x1e0ffff0, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
-		assert(consensus.hashGenesisBlock == uint256S("0x0000002b162004783033261eb3d53a9cdde62da0e95acfecff1c65d4df988c1b"));
+		assert(consensus.hashGenesisBlock == uint256S("0x0000074841d1a62375a6c46c236b1770a8d691d5dc9b8bdff771dd73bc4f6abf"));
 		assert(genesis.hashMerkleRoot == uint256S("0x2f5f1621073cfb875c9028bc67f8c110e1baccd5574aee19c5830a7c5e0af605"));
 
 
