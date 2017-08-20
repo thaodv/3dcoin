@@ -10,7 +10,6 @@
 #include "tinyformat.h"
 #include "util.h"
 #include "utilstrencodings.h"
-#include "arith_uint256.h"
 
 #include <assert.h>
 
@@ -125,14 +124,14 @@ public:
 
 		genesis = CreateGenesisBlock(1390095618, 28917698, 0x1e0ffff0, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
-		assert(consensus.hashGenesisBlock == uint256S("0x00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6"));
-		assert(genesis.hashMerkleRoot == uint256S("0xe0028eb9648db56b1ac77cf090b99048a8007e2bb64b68f092c03c7f56a662c7"));
+		assert(consensus.hashGenesisBlock == uint256S("0x0000002b162004783033261eb3d53a9cdde62da0e95acfecff1c65d4df988c1b"));
+		assert(genesis.hashMerkleRoot == uint256S("0x2f5f1621073cfb875c9028bc67f8c110e1baccd5574aee19c5830a7c5e0af605"));
 
 
-		vSeeds.push_back(CDNSSeedData("dash.org", "dnsseed.dash.org"));
+		/*vSeeds.push_back(CDNSSeedData("dash.org", "dnsseed.dash.org"));
 		vSeeds.push_back(CDNSSeedData("3dcoindot.io", "dnsseed.3dcoindot.io"));
 		vSeeds.push_back(CDNSSeedData("masternode.io", "dnsseed.masternode.io"));
-		vSeeds.push_back(CDNSSeedData("dashpay.io", "dnsseed.dashpay.io"));
+		vSeeds.push_back(CDNSSeedData("dashpay.io", "dnsseed.dashpay.io"));*/
 
 		// 3DCoin addresses start with 'X'
 		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 76);
