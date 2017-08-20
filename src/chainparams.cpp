@@ -138,9 +138,9 @@ public:
 		genesis.nNonce = 0;
 		// This will figure out a valid hash and Nonce if you're
 		// creating a different genesis block:
-		//uint256 hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
-		//hashTarget.SetCompact(genesis.nBits, &fNegative, &fOverflow).getuint256();
-		//while (genesis.GetHash() > hashTarget)
+		uint256 hashTarget = num().SetCompact(genesis.nBits).getuint256();
+		hashTarget.SetCompact(genesis.nBits, &fNegative, &fOverflow().getuint256();
+		while (genesis.GetHash() > hashTarget)
 		while (UintToArith256(genesis.GetHash()) > hashTarget)
 		{
 		++genesis.nNonce;
@@ -150,7 +150,7 @@ public:
 		std::cout << std::string("NONCE WRAPPED, incrementing time:\n");
 		++genesis.nTime;
 		}
-		if (genesis.nNonce % 10000000 == 0)
+		if (genesis.nNonce % 10000 == 0)
 		{
 		LogPrintf("Mainnet: nonce %08u: hash = %s \n", genesis.nNonce, genesis.GetHash().ToString().c_str());
 		// std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << "\n";
