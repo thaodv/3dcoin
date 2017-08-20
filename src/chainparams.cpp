@@ -125,53 +125,6 @@ public:
 
 		genesis = CreateGenesisBlock(1390095618, 28917698, 0x1e0ffff0, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
-		//-------Mine genesis-------
-		
-		// calculate Genesis Block
-		// Reset genesis
-		consensus.hashGenesisBlock = uint256S("0x00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6");
-		std::cout << std::string("Begin calculating Mainnet Genesis Block:\n");
-		if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
-		LogPrintf("Calculating Mainnet Genesis Block:\n");
-		arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
-		uint256 hash;
-		genesis.nNonce = 0;
-		// This will figure out a valid hash and Nonce if you're
-		// creating a different genesis block:
-		uint256 hashTarget = num().SetCompact(genesis.nBits).getuint256();
-		hashTarget.SetCompact(genesis.nBits, &fNegative, &fOverflow().getuint256();
-		while (genesis.GetHash() > hashTarget)
-		while (UintToArith256(genesis.GetHash()) > hashTarget)
-		{
-		++genesis.nNonce;
-		if (genesis.nNonce == 0)
-		{
-		LogPrintf("NONCE WRAPPED, incrementing time");
-		std::cout << std::string("NONCE WRAPPED, incrementing time:\n");
-		++genesis.nTime;
-		}
-		if (genesis.nNonce % 10000 == 0)
-		{
-		LogPrintf("Mainnet: nonce %08u: hash = %s \n", genesis.nNonce, genesis.GetHash().ToString().c_str());
-		// std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << "\n";
-		}
-		}
-		std::cout << "Mainnet ---\n";
-		std::cout << "  nonce: " << genesis.nNonce <<  "\n";
-		std::cout << "   time: " << genesis.nTime << "\n";
-		std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
-		std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
-		// Mainnet --- nonce: 296277 time: 1390095618 hash: 000000bdd771b14e5a031806292305e563956ce2584278de414d9965f6ab54b0
-		}
-		std::cout << std::string("Finished calculating Mainnet Genesis Block:\n");
-		
-
-		// std::cout << "Mainnet ---\n";
-		// std::cout << "  nonce: " << genesis.nNonce <<  "\n";
-		// std::cout << "   time: " << genesis.nTime << "\n";
-		// std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
-		// std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
-
 		assert(consensus.hashGenesisBlock == uint256S("0x00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6"));
 		assert(genesis.hashMerkleRoot == uint256S("0xe0028eb9648db56b1ac77cf090b99048a8007e2bb64b68f092c03c7f56a662c7"));
 
