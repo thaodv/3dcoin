@@ -262,9 +262,9 @@ unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char
 
 void BIP32Hash(const ChainCode &chainCode, unsigned int nChild, unsigned char header, const unsigned char data[32], unsigned char output[64]);
 
-// 3DCoin Top5Hash 
+// 3DCoin Cassiopeia Hash 
 template<typename T1>
-inline uint256 HashTop5(const T1 pbegin, const T1 pend)
+inline uint256 Cassiopeia(const T1 pbegin, const T1 pend)
 
 {
     sph_blake512_context     ctx_blake;
