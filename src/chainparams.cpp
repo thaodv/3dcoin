@@ -408,9 +408,9 @@ public:
 		nDefaultPort = 17017;
 		nPruneAfterHeight = 1000;
 
-		genesis = CreateGenesisBlock(1503187200, 101841, 0x207fffff, 1, 50 * COIN);
+		genesis = CreateGenesisBlock(1503187200, 2, 0x207fffff, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
-
+		/*
 		// calculate Genesis Block
 		std::cout << std::string("Begin calculating ResTestnet Genesis Block:\n");
 		// Reset genesis hash
@@ -447,7 +447,7 @@ public:
 			std::cout << "   merklehash: " << genesis.hashMerkleRoot.ToString().c_str() << "\n";
 		}
 		std::cout << std::string("Finished calculating RegTestnet Genesis Block:\n");
-		
+		*/
 
 			// std::cout << "RegTestnet ---\n";
 			// std::cout << "  nonce: " << genesis.nNonce <<  "\n";
@@ -455,8 +455,8 @@ public:
 			// std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
 			// std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
 
-		assert(consensus.hashGenesisBlock == uint256S("0x000008ca1832a4baf228eb1553c03d3a2c8e02399550dd6ea8d65cec3ef23d2e"));
-		assert(genesis.hashMerkleRoot == uint256S("0xe0028eb9648db56b1ac77cf090b99048a8007e2bb64b68f092c03c7f56a662c7"));
+		assert(consensus.hashGenesisBlock == uint256S("0x2c870dcc21abe2be63fef2a41c8d7b840133fc99995b396689dc45fc02fe4ff3"));
+		assert(genesis.hashMerkleRoot == uint256S("0x0f06ea982c10bfcbad17e6ad1b7e577c3ac069e281e24278f4118e75af3c85ee"));
 
 		vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.
 		vSeeds.clear();  //! Regtest mode doesn't have any DNS seeds.
@@ -472,7 +472,7 @@ public:
 		checkpointData = (CCheckpointData)
 		{
 			boost::assign::map_list_of
-			(0, uint256S("0x000008ca1832a4baf228eb1553c03d3a2c8e02399550dd6ea8d65cec3ef23d2e")),
+			(0, uint256S("0x2c870dcc21abe2be63fef2a41c8d7b840133fc99995b396689dc45fc02fe4ff3")),
 				0,
 				0,
 				0
