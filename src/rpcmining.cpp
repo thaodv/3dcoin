@@ -134,9 +134,9 @@ UniValue generate(const UniValue& params, bool fHelp)
             "\nGenerate 11 blocks\n"
             + HelpExampleCli("generate", "11")
         );
-
-    if (!Params().MineBlocksOnDemand())
-        throw JSONRPCError(RPC_METHOD_NOT_FOUND, "This method can only be used on regtest");
+	//RPC mining mainnet(generate mainnet)
+    /*if (!Params().MineBlocksOnDemand())
+        throw JSONRPCError(RPC_METHOD_NOT_FOUND, "This method can only be used on regtest");*/
 
     int nHeightStart = 0;
     int nHeightEnd = 0;
