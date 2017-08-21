@@ -176,7 +176,7 @@ public:
 		// 3DCoin addresses start with 'X'
 		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 76);
 		// 3DCoin script addresses start with '7'
-		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 14);
+		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 16);
 		// 3DCoin private keys start with '7' or 'X'
 		base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 204);
 		// 3DCoin BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
@@ -478,7 +478,7 @@ public:
 				0
 		};
 		// Regtest 3DCoin addresses start with 'y'
-		base58Prefixes[PUBKEY_ADDRESS] = boost::assign::list_of(0x33)(0x44)(0x43).convert_to_container<std::vector<unsigned char> >();
+		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 122);
 		// Regtest 3DCoin script addresses start with '8' or '9'
 		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);
 		// Regtest private keys start with '9' or 'c' (Bitcoin defaults)
