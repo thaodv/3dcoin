@@ -8,7 +8,7 @@
 #define BITCOIN_MAIN_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/3dcoin-config.h"
+#include "config/dash-config.h"
 #endif
 
 #include "amount.h"
