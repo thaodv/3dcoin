@@ -168,10 +168,10 @@ public:
 		assert(genesis.hashMerkleRoot == uint256S("0x0f06ea982c10bfcbad17e6ad1b7e577c3ac069e281e24278f4118e75af3c85ee"));
 
 
-		/*vSeeds.push_back(CDNSSeedData("dash.org", "dnsseed.dash.org"));
+		/*vSeeds.push_back(CDNSSeedData("3dcoin.org", "dnsseed.3dcoin.org"));
 		vSeeds.push_back(CDNSSeedData("3dcoindot.io", "dnsseed.3dcoindot.io"));
 		vSeeds.push_back(CDNSSeedData("masternode.io", "dnsseed.masternode.io"));
-		vSeeds.push_back(CDNSSeedData("dashpay.io", "dnsseed.dashpay.io"));*/
+		vSeeds.push_back(CDNSSeedData("3dcoinpay.io", "dnsseed.3dcoinpay.io"));*/
 
 		// 3DCoin addresses start with 'X'
 		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 76);
@@ -478,7 +478,7 @@ public:
 				0
 		};
 		// Regtest 3DCoin addresses start with 'y'
-		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 122);
+		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 140);
 		// Regtest 3DCoin script addresses start with '8' or '9'
 		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);
 		// Regtest private keys start with '9' or 'c' (Bitcoin defaults)
