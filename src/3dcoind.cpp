@@ -70,7 +70,7 @@ bool AppInit(int argc, char* argv[])
     //
     // Parameters
     //
-    // If Qt is used, parameters/dash.conf are parsed in qt/dash.cpp's main()
+    // If Qt is used, parameters/3dcoin.conf are parsed in qt/3dcoin.cpp's main()
     ParseParameters(argc, argv);
 
     // Process help and version before taking care about datadir

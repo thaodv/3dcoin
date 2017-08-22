@@ -337,7 +337,7 @@ void IncrementExtraNonce(CBlock* pblock, const CBlockIndex* pindexPrev, unsigned
 // Internal miner
 //
 
-// ***TODO*** ScanHash is not yet used in Dash
+// ***TODO*** ScanHash is not yet used in 3DCoin
 //
 // ScanHash scans nonces looking for a hash with at least some zero bits.
 // The nonce is usually preserved between calls, but periodically or if the
@@ -399,7 +399,7 @@ void static BitcoinMiner(const CChainParams& chainparams)
 {
     LogPrintf("DashMiner -- started\n");
     SetThreadPriority(THREAD_PRIORITY_LOWEST);
-    RenameThread("dash-miner");
+    RenameThread("3dcoin-miner");
 
     unsigned int nExtraNonce = 0;
 
