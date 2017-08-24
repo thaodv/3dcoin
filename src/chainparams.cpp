@@ -168,8 +168,8 @@ public:
 		assert(genesis.hashMerkleRoot == uint256S("0x0f06ea982c10bfcbad17e6ad1b7e577c3ac069e281e24278f4118e75af3c85ee"));
 
 
-		/*vSeeds.push_back(CDNSSeedData("3dcoin.org", "dnsseed.3dcoin.org"));
-		vSeeds.push_back(CDNSSeedData("3dcoindot.io", "dnsseed.3dcoindot.io"));
+		vSeeds.push_back(CDNSSeedData("3dcoin.io", "173.212.246.10"));
+		/*vSeeds.push_back(CDNSSeedData("3dcoindot.io", "dnsseed.3dcoindot.io"));
 		vSeeds.push_back(CDNSSeedData("masternode.io", "dnsseed.masternode.io"));
 		vSeeds.push_back(CDNSSeedData("3dcoinpay.io", "dnsseed.3dcoinpay.io"));*/
 
