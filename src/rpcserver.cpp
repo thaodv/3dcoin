@@ -343,18 +343,18 @@ static const CRPCCommand vRPCCommands[] =
 #endif
 
     /* 3DCoin features */
-    { "dash",               "masternode",             &masternode,             true  },
-    { "dash",               "masternodelist",         &masternodelist,         true  },
-    { "dash",               "masternodebroadcast",    &masternodebroadcast,    true  },
-    { "dash",               "gobject",                &gobject,                true  },
-    { "dash",               "getgovernanceinfo",      &getgovernanceinfo,      true  },
-    { "dash",               "getsuperblockbudget",    &getsuperblockbudget,    true  },
-    { "dash",               "voteraw",                &voteraw,                true  },
-    { "dash",               "mnsync",                 &mnsync,                 true  },
-    { "dash",               "spork",                  &spork,                  true  },
-    { "dash",               "getpoolinfo",            &getpoolinfo,            true  },
+    { "3dcoin",               "masternode",             &masternode,             true  },
+    { "3dcoin",               "masternodelist",         &masternodelist,         true  },
+    { "3dcoin",               "masternodebroadcast",    &masternodebroadcast,    true  },
+    { "3dcoin",               "gobject",                &gobject,                true  },
+    { "3dcoin",               "getgovernanceinfo",      &getgovernanceinfo,      true  },
+    { "3dcoin",               "getsuperblockbudget",    &getsuperblockbudget,    true  },
+    { "3dcoin",               "voteraw",                &voteraw,                true  },
+    { "3dcoin",               "mnsync",                 &mnsync,                 true  },
+    { "3dcoin",               "spork",                  &spork,                  true  },
+    { "3dcoin",               "getpoolinfo",            &getpoolinfo,            true  },
 #ifdef ENABLE_WALLET
-    { "dash",               "privatesend",            &privatesend,            false },
+    { "3dcoin",               "privatesend",            &privatesend,            false },
 
     /* Wallet */
     { "wallet",             "keepass",                &keepass,                true },

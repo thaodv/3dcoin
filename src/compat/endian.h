@@ -5,9 +5,7 @@
 #ifndef BITCOIN_COMPAT_ENDIAN_H
 #define BITCOIN_COMPAT_ENDIAN_H
 
-#if defined(HAVE_CONFIG_H)
-#include "config/dash-config.h"
-#endif
+
 
 #include <stdint.h>
 

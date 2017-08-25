@@ -5,9 +5,7 @@
 #ifndef BITCOIN_CRYPTO_COMMON_H
 #define BITCOIN_CRYPTO_COMMON_H
 
-#if defined(HAVE_CONFIG_H)
-#include "dash-config.h"
-#endif
+
 
 #include <stdint.h>
 

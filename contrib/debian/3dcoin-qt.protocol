@@ -1,6 +1,6 @@
 [Protocol]
-exec=dash-qt '%u'
-protocol=dash
+exec=3dcoin-qt '%u'
+protocol=3dcoin
 input=none
 output=none
 helper=true

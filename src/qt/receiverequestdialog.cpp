@@ -21,9 +21,7 @@
 #include <QUrl>
 #endif
 
-#if defined(HAVE_CONFIG_H)
-#include "config/dash-config.h" /* for USE_QRCODE */
-#endif
+
 
 #ifdef USE_QRCODE
 #include <qrencode.h>
