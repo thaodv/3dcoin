@@ -625,7 +625,11 @@ bool CMasternodeBroadcast::CheckOutpoint(int& nDos)
             return false;
         }
         if(coins.vout[vin.prevout.n].nValue != 1000 * COIN) {
+<<<<<<< HEAD
             LogPrint("masternode", "CMasternodeBroadcast::CheckOutpoint -- Masternode UTXO should have 1000 3DCoin, masternode=%s\n", vin.prevout.ToStringShort());
+=======
+            LogPrint("masternode", "CMasternodeBroadcast::CheckOutpoint -- Masternode UTXO should have 1000 3DC, masternode=%s\n", vin.prevout.ToStringShort());
+>>>>>>> origin/test
             return false;
         }
         if(chainActive.Height() - coins.nHeight + 1 < Params().GetConsensus().nMasternodeMinimumConfirmations) {
@@ -648,7 +652,11 @@ bool CMasternodeBroadcast::CheckOutpoint(int& nDos)
     }
 
     // verify that sig time is legit in past
+<<<<<<< HEAD
     // should be at least not earlier than block when 1000 3DCoin tx got nMasternodeMinimumConfirmations
+=======
+    // should be at least not earlier than block when 1000 3DC tx got nMasternodeMinimumConfirmations
+>>>>>>> origin/test
     uint256 hashBlock = uint256();
     CTransaction tx2;
     GetTransaction(vin.prevout.hash, tx2, Params().GetConsensus(), hashBlock, true);
@@ -656,7 +664,11 @@ bool CMasternodeBroadcast::CheckOutpoint(int& nDos)
         LOCK(cs_main);
         BlockMap::iterator mi = mapBlockIndex.find(hashBlock);
         if (mi != mapBlockIndex.end() && (*mi).second) {
+<<<<<<< HEAD
             CBlockIndex* pMNIndex = (*mi).second; // block for 1000 3DCoin tx -> 1 confirmation
+=======
+            CBlockIndex* pMNIndex = (*mi).second; // block for 1000 3DC tx -> 1 confirmation
+>>>>>>> origin/test
             CBlockIndex* pConfIndex = chainActive[pMNIndex->nHeight + Params().GetConsensus().nMasternodeMinimumConfirmations - 1]; // block where tx got nMasternodeMinimumConfirmations
             if(pConfIndex->GetBlockTime() > sigTime) {
                 LogPrintf("CMasternodeBroadcast::CheckOutpoint -- Bad sigTime %d (%d conf block is at %d) for Masternode %s %s\n",
