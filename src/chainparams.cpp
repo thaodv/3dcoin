@@ -202,7 +202,7 @@ public:
 		checkpointData = (CCheckpointData)
 		{
 			boost::assign::map_list_of
-			(0, uint256S("0x00000b0c1544a3df92602c24057a6bab07537875f8b1d9db36ac17c887d3e7ce")),
+			(0, uint256S("0x000006421e4f07d4d4ec8884ce41be66ccbb5bc423983859f10cadbc1346febb")),
 				1503187200, // * UNIX timestamp of last checkpoint block
 				0,    // * total number of transactions between genesis and last checkpoint
 							//   (the tx=... number in the SetBestChain debug.log lines)
@@ -264,53 +264,53 @@ public:
 		nMaxTipAge = 0x7fffffff; // allow mining on top of old blocks for testnet
 		nPruneAfterHeight = 1000;
 
-		genesis = CreateGenesisBlock(1503187200, 1445509, 0x1e0ffff0, 1, 50 * COIN);
+		genesis = CreateGenesisBlock(1503187200, 151965, 0x1e0ffff0, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
 
 		
 		std::cout << std::string("Begin calculating Testnet Genesis Block:\n");
-		// Reset consensus
-		consensus.hashGenesisBlock = uint256S("0x");
-		// calculate Genesis Block
-		if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
-		LogPrintf("Calculating Testnet Genesis Block:\n");
-		arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
-		uint256 hash;
-		genesis.nNonce = 0;
-		// This will figure out a valid hash and Nonce if you're
-		// creating a different genesis block:
-		// uint256 hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
-		// hashTarget.SetCompact(genesis.nBits, &fNegative, &fOverflow).getuint256();
-		// while (genesis.GetHash() > hashTarget)
-		while (UintToArith256(genesis.GetHash()) > hashTarget)
-		{
-		++genesis.nNonce;
-		if (genesis.nNonce == 0)
-		{
-		LogPrintf("NONCE WRAPPED, incrementing time");
-		std::cout << std::string("NONCE WRAPPED, incrementing time\n");
-		++genesis.nTime;
-		}
-		if (genesis.nNonce % 10000 == 0)
-		{
-		LogPrintf("Testnet: nonce %08u: hash = %s \n", genesis.nNonce, genesis.GetHash().ToString().c_str());
-		}
-		}
-		std::cout << "Testnet ---\n";
-		std::cout << "  nonce: " << genesis.nNonce <<  "\n";
-		std::cout << "   time: " << genesis.nTime << "\n";
-		std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
-		std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
-		}
-		std::cout << std::string("Finished calculating Testnet Genesis Block:\n");
-		
-		// std::cout << "Testnet ---\n";
-		// std::cout << "  nonce: " << genesis.nNonce <<  "\n";
-		// std::cout << "   time: " << genesis.nTime << "\n";
-		// std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
-		// std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
+		//// Reset consensus
+		//consensus.hashGenesisBlock = uint256S("0x");
+		//// calculate Genesis Block
+		//if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
+		//LogPrintf("Calculating Testnet Genesis Block:\n");
+		//arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
+		//uint256 hash;
+		//genesis.nNonce = 0;
+		//// This will figure out a valid hash and Nonce if you're
+		//// creating a different genesis block:
+		//// uint256 hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
+		//// hashTarget.SetCompact(genesis.nBits, &fNegative, &fOverflow).getuint256();
+		//// while (genesis.GetHash() > hashTarget)
+		//while (UintToArith256(genesis.GetHash()) > hashTarget)
+		//{
+		//++genesis.nNonce;
+		//if (genesis.nNonce == 0)
+		//{
+		//LogPrintf("NONCE WRAPPED, incrementing time");
+		//std::cout << std::string("NONCE WRAPPED, incrementing time\n");
+		//++genesis.nTime;
+		//}
+		//if (genesis.nNonce % 10000 == 0)
+		//{
+		//LogPrintf("Testnet: nonce %08u: hash = %s \n", genesis.nNonce, genesis.GetHash().ToString().c_str());
+		//}
+		//}
+		//std::cout << "Testnet ---\n";
+		//std::cout << "  nonce: " << genesis.nNonce <<  "\n";
+		//std::cout << "   time: " << genesis.nTime << "\n";
+		//std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
+		//std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
+		//}
+		//std::cout << std::string("Finished calculating Testnet Genesis Block:\n");
+		//
+		//// std::cout << "Testnet ---\n";
+		//// std::cout << "  nonce: " << genesis.nNonce <<  "\n";
+		//// std::cout << "   time: " << genesis.nTime << "\n";
+		//// std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
+		//// std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
 
-		assert(consensus.hashGenesisBlock == uint256S("0x00000b0c1544a3df92602c24057a6bab07537875f8b1d9db36ac17c887d3e7ce"));
+		assert(consensus.hashGenesisBlock == uint256S("0x000006421e4f07d4d4ec8884ce41be66ccbb5bc423983859f10cadbc1346febb"));
 		assert(genesis.hashMerkleRoot == uint256S("0x0f06ea982c10bfcbad17e6ad1b7e577c3ac069e281e24278f4118e75af3c85ee"));
 
 		vFixedSeeds.clear();
@@ -347,7 +347,7 @@ public:
 		checkpointData = (CCheckpointData)
 		{
 			boost::assign::map_list_of
-			(0, uint256S("0x00000b0c1544a3df92602c24057a6bab07537875f8b1d9db36ac17c887d3e7ce")),
+			(0, uint256S("0x000006421e4f07d4d4ec8884ce41be66ccbb5bc423983859f10cadbc1346febb")),
 
 				1503187200, // * UNIX timestamp of last checkpoint block
 				0,     // * total number of transactions between genesis and last checkpoint
