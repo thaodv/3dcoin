@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017 The 3DCoin Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -582,7 +582,11 @@ bool CMasternodeBlockPayees::IsTransactionValid(const CTransaction& txNew)
         }
     }
 
-    LogPrintf("CMasternodeBlockPayees::IsTransactionValid -- ERROR: Missing required payment, possible payees: '%s', amount: %f DASH\n", strPayeesPossible, (float)nMasternodePayment/COIN);
+<<<<<<< HEAD
+    LogPrintf("CMasternodeBlockPayees::IsTransactionValid -- ERROR: Missing required payment, possible payees: '%s', amount: %f 3DCoin\n", strPayeesPossible, (float)nMasternodePayment/COIN);
+=======
+    LogPrintf("CMasternodeBlockPayees::IsTransactionValid -- ERROR: Missing required payment, possible payees: '%s', amount: %f 3DC\n", strPayeesPossible, (float)nMasternodePayment/COIN);
+>>>>>>> origin/test
     return false;
 }
 

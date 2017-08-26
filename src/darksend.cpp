@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2017 The 3DCoin Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -2196,10 +2196,10 @@ int CDarksendPool::GetDenominations(const std::vector<CTxOut>& vecTxOut, bool fS
 bool CDarksendPool::GetDenominationsBits(int nDenom, std::vector<int> &vecBitsRet)
 {
     // ( bit on if present, 4 denominations example )
-    // bit 0 - 100DASH+1
-    // bit 1 - 10DASH+1
-    // bit 2 - 1DASH+1
-    // bit 3 - .1DASH+1
+    // bit 0 - 1003DC+1
+    // bit 1 - 103DC+1
+    // bit 2 - 13DC+1
+    // bit 3 - .13DC+1
 
     int nMaxDenoms = vecPrivateSendDenominations.size();
 
@@ -2470,7 +2470,7 @@ void ThreadCheckDarkSendPool()
     fOneThread = true;
 
     // Make this thread recognisable as the PrivateSend thread
-    RenameThread("dash-privatesend");
+    RenameThread("3dcoin-privatesend");
 
     unsigned int nTick = 0;
     unsigned int nDoAutoNextRun = nTick + PRIVATESEND_AUTO_TIMEOUT_MIN;

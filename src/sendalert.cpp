@@ -57,7 +57,7 @@ void ThreadSendAlert()
     //  Higher numbers mean higher priority
     alert.nPriority     = 5000;
     alert.strComment    = "";
-    alert.strStatusBar  = "URGENT: Upgrade required: see https://www.dash.org";
+    alert.strStatusBar  = "URGENT: Upgrade required: see https://www.3dcoin.io";
 
     // Set specific client version/versions here. If setSubVer is empty, no filtering on subver is done:
     // alert.setSubVer.insert(std::string("/3DCoin Core:0.12.0.58/"));

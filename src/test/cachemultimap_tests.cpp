@@ -1,8 +1,8 @@
-// Copyright (c) 2014-2017 The 3DCoin Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
 
 #include "cachemultimap.h"
 
-#include "test/test_dash.h"
+#include "test/test_3dcoin.h"
 
 #include <algorithm>
 #include <iostream>

@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2014-2017 The 3DCoin Core developers
+// Copyright (c) 2014-2017 The Dash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -187,8 +187,8 @@ UniValue addnode(const UniValue& params, bool fHelp)
             "1. \"node\"     (string, required) The node (see getpeerinfo for nodes)\n"
             "2. \"command\"  (string, required) 'add' to add a node to the list, 'remove' to remove a node from the list, 'onetry' to try a connection to the node once\n"
             "\nExamples:\n"
-            + HelpExampleCli("addnode", "\"192.168.0.6:9999\" \"onetry\"")
-            + HelpExampleRpc("addnode", "\"192.168.0.6:9999\", \"onetry\"")
+            + HelpExampleCli("addnode", "\"192.168.0.6:15015\" \"onetry\"")
+            + HelpExampleRpc("addnode", "\"192.168.0.6:15015\", \"onetry\"")
         );
 
     string strNode = params[0].get_str();
@@ -263,7 +263,11 @@ UniValue getaddednodeinfo(const UniValue& params, bool fHelp)
             "    \"connected\" : true|false,          (boolean) If connected\n"
             "    \"addresses\" : [\n"
             "       {\n"
-            "         \"address\" : \"192.168.0.201:9999\",  (string) The dash server host and port\n"
+<<<<<<< HEAD
+            "         \"address\" : \"192.168.0.201:9999\",  (string) The 3dcoin server host and port\n"
+=======
+            "         \"address\" : \"192.168.0.201:15015\",  (string) The 3dcoin server host and port\n"
+>>>>>>> origin/test
             "         \"connected\" : \"outbound\"           (string) connection, inbound or outbound\n"
             "       }\n"
             "       ,...\n"
