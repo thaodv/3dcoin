@@ -125,7 +125,7 @@ public:
 		genesis = CreateGenesisBlock(1503187200, 1445509, 0x1e0ffff0, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
 
-		/*// calculate Genesis Block
+		// calculate Genesis Block
 		// Reset genesis
 		consensus.hashGenesisBlock = uint256S("0x");
 		std::cout << std::string("Begin calculating Mainnet Genesis Block:\n");
@@ -162,7 +162,7 @@ public:
 			// Mainnet --- nonce: 296277 time: 1390095618 hash: 000000bdd771b14e5a031806292305e563956ce2584278de414d9965f6ab54b0
 		}
 		std::cout << std::string("Finished calculating Mainnet Genesis Block:\n");
-		*/
+		
 
 		assert(consensus.hashGenesisBlock == uint256S("0x00000b0c1544a3df92602c24057a6bab07537875f8b1d9db36ac17c887d3e7ce"));
 		assert(genesis.hashMerkleRoot == uint256S("0x0f06ea982c10bfcbad17e6ad1b7e577c3ac069e281e24278f4118e75af3c85ee"));
@@ -267,7 +267,7 @@ public:
 		genesis = CreateGenesisBlock(1503187200, 1445509, 0x1e0ffff0, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
 
-		/*
+		
 		std::cout << std::string("Begin calculating Testnet Genesis Block:\n");
 		// Reset consensus
 		consensus.hashGenesisBlock = uint256S("0x");
@@ -303,7 +303,7 @@ public:
 		std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
 		}
 		std::cout << std::string("Finished calculating Testnet Genesis Block:\n");
-		*/
+		
 		// std::cout << "Testnet ---\n";
 		// std::cout << "  nonce: " << genesis.nNonce <<  "\n";
 		// std::cout << "   time: " << genesis.nTime << "\n";
@@ -410,7 +410,7 @@ public:
 
 		genesis = CreateGenesisBlock(1503187200, 2, 0x207fffff, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
-		/*
+		
 		// calculate Genesis Block
 		std::cout << std::string("Begin calculating ResTestnet Genesis Block:\n");
 		// Reset genesis hash
@@ -447,7 +447,7 @@ public:
 			std::cout << "   merklehash: " << genesis.hashMerkleRoot.ToString().c_str() << "\n";
 		}
 		std::cout << std::string("Finished calculating RegTestnet Genesis Block:\n");
-		*/
+		
 
 			// std::cout << "RegTestnet ---\n";
 			// std::cout << "  nonce: " << genesis.nNonce <<  "\n";
