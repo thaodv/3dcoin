@@ -12,7 +12,7 @@
 
 uint256 CBlockHeader::GetHash() const
 {
-    return Cassiopeia(BEGIN(nVersion), END(nNonce));
+    return nist5_hash(BEGIN(nVersion), END(nNonce));
 }
 
 std::string CBlock::ToString() const
