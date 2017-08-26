@@ -268,7 +268,7 @@ public:
 		consensus.hashGenesisBlock = genesis.GetHash();
 
 		
-		std::cout << std::string("Begin calculating Testnet Genesis Block:\n");
+		//std::cout << std::string("Begin calculating Testnet Genesis Block:\n");
 		//// Reset consensus
 		//consensus.hashGenesisBlock = uint256S("0x");
 		//// calculate Genesis Block
