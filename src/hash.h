@@ -262,9 +262,15 @@ unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char
 
 void BIP32Hash(const ChainCode &chainCode, unsigned int nChild, unsigned char header, const unsigned char data[32], unsigned char output[64]);
 
+<<<<<<< HEAD
+// 3DCoin Cassiopeia Hash 
+template<typename T1>
+inline uint256 Cassiopeia(const T1 pbegin, const T1 pend)
+=======
 // 3DCoin nist5_hash Hash 
 template<typename T1>
 inline uint256 nist5_hash(const T1 pbegin, const T1 pend)
+>>>>>>> origin/test
 
 {
     sph_blake512_context     ctx_blake;
@@ -284,6 +290,26 @@ inline uint256 nist5_hash(const T1 pbegin, const T1 pend)
     sph_groestl512_init(&ctx_groestl);
     sph_groestl512 (&ctx_groestl, static_cast<const void*>(&hash[0]), 64);
     sph_groestl512_close(&ctx_groestl, static_cast<void*>(&hash[1]));
+<<<<<<< HEAD
+
+    sph_skein512_init(&ctx_skein);
+    sph_skein512 (&ctx_skein, static_cast<const void*>(&hash[1]), 64);
+    sph_skein512_close(&ctx_skein, static_cast<void*>(&hash[2]));
+
+    sph_jh512_init(&ctx_jh);
+    sph_jh512 (&ctx_jh, static_cast<const void*>(&hash[2]), 64);
+    sph_jh512_close(&ctx_jh, static_cast<void*>(&hash[3]));
+
+    sph_keccak512_init(&ctx_keccak);
+<<<<<<< HEAD
+    sph_keccak512 (&ctx_keccak, static_cast<const void*>(&hash[4]), 64);
+    sph_keccak512_close(&ctx_keccak, static_cast<void*>(&hash[5]));
+=======
+    sph_keccak512 (&ctx_keccak, static_cast<const void*>(&hash[3]), 64);
+    sph_keccak512_close(&ctx_keccak, static_cast<void*>(&hash[4]));
+>>>>>>> origin/test
+
+=======
   
     sph_jh512_init(&ctx_jh);
     sph_jh512 (&ctx_jh, static_cast<const void*>(&hash[1]), 64);
@@ -296,6 +322,7 @@ inline uint256 nist5_hash(const T1 pbegin, const T1 pend)
 	sph_skein512_init(&ctx_skein);
     sph_skein512 (&ctx_skein, static_cast<const void*>(&hash[3]), 64);
     sph_skein512_close(&ctx_skein, static_cast<void*>(&hash[4]));
+>>>>>>> origin/test
 
     return hash[4].trim256();
 }

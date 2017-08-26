@@ -263,7 +263,11 @@ UniValue getaddednodeinfo(const UniValue& params, bool fHelp)
             "    \"connected\" : true|false,          (boolean) If connected\n"
             "    \"addresses\" : [\n"
             "       {\n"
+<<<<<<< HEAD
+            "         \"address\" : \"192.168.0.201:9999\",  (string) The 3dcoin server host and port\n"
+=======
             "         \"address\" : \"192.168.0.201:15015\",  (string) The 3dcoin server host and port\n"
+>>>>>>> origin/test
             "         \"connected\" : \"outbound\"           (string) connection, inbound or outbound\n"
             "       }\n"
             "       ,...\n"
