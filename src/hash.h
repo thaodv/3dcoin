@@ -32,26 +32,27 @@ typedef uint256 ChainCode;
 #define GLOBAL extern
 #endif
 
-GLOBAL sph_blake512_context     z_blake;
+//GLOBAL sph_blake512_context     z_blake;
 GLOBAL sph_groestl512_context   z_groestl;
-GLOBAL sph_jh512_context        z_jh;
-GLOBAL sph_keccak512_context    z_keccak;
-GLOBAL sph_skein512_context     z_skein;
+//GLOBAL sph_jh512_context        z_jh;
+//GLOBAL sph_keccak512_context    z_keccak;
+//GLOBAL sph_skein512_context     z_skein;
 
 
 #define fillz() do { \
-    sph_blake512_init(&z_blake); \
-    sph_groestl512_init(&z_groestl); \
-    sph_jh512_init(&z_jh); \
+	sph_groestl512_init(&z_groestl); 
+    //sph_blake512_init(&z_blake); \
+    
+   /* sph_jh512_init(&z_jh); \
     sph_keccak512_init(&z_keccak); \
-    sph_skein512_init(&z_skein); \
+    sph_skein512_init(&z_skein); \*/
 } while (0)
 
-#define ZBLAKE (memcpy(&ctx_blake, &z_blake, sizeof(z_blake)))
+//#define ZBLAKE (memcpy(&ctx_blake, &z_blake, sizeof(z_blake)))
 #define ZGROESTL (memcpy(&ctx_groestl, &z_groestl, sizeof(z_groestl)))
-#define ZJH (memcpy(&ctx_jh, &z_jh, sizeof(z_jh)))
-#define ZKECCAK (memcpy(&ctx_keccak, &z_keccak, sizeof(z_keccak)))
-#define ZSKEIN (memcpy(&ctx_skein, &z_skein, sizeof(z_skein)))
+//#define ZJH (memcpy(&ctx_jh, &z_jh, sizeof(z_jh)))
+//#define ZKECCAK (memcpy(&ctx_keccak, &z_keccak, sizeof(z_keccak)))
+//#define ZSKEIN (memcpy(&ctx_skein, &z_skein, sizeof(z_skein)))
 
 /* ----------- Bitcoin Hash ------------------------------------------------- */
 /** A hasher class for Bitcoin's 256-bit hash (double SHA-256). */
@@ -282,7 +283,7 @@ inline uint256 Cassiopeia(const T1 pbegin, const T1 pend)
     sph_blake512_close(&ctx_blake, static_cast<void*>(&hash[0]));*/
 
     sph_groestl512_init(&ctx_groestl);
-    sph_groestl512 (&ctx_groestl, (pbegin == pend ? pblank : static_cast<const void*>(&pbegin[0])), (pend - pbegin) * sizeof(pbegin[0]), 64);
+    sph_groestl512 (&ctx_groestl, static_cast<const void*>(&hash[0]), 64);
     sph_groestl512_close(&ctx_groestl, static_cast<void*>(&hash[0]));
 
 
@@ -300,7 +301,7 @@ inline uint256 Cassiopeia(const T1 pbegin, const T1 pend)
     sph_keccak512_close(&ctx_keccak, static_cast<void*>(&hash[4]));*/
 
 
-    return hash[1].trim256();
+    return hash[0].trim256();
 }
 
 #endif // BITCOIN_HASH_H
