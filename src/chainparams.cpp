@@ -411,51 +411,51 @@ public:
 		genesis = CreateGenesisBlock(1503187200, 2, 0x207fffff, 1, 50 * COIN);
 		consensus.hashGenesisBlock = genesis.GetHash();
 		
-		// calculate Genesis Block
-		std::cout << std::string("Begin calculating ResTestnet Genesis Block:\n");
-		// Reset genesis hash
-		consensus.hashGenesisBlock = uint256S("0x");
-		if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
-			LogPrintf("Calculating RegTestnet Genesis Block:\n");
-			arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
-			uint256 hash;
-			genesis.nNonce = 0;
-			// This will figure out a valid hash and Nonce if you're
-			// creating a different genesis block:
-			// uint256 hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
-			// hashTarget.SetCompact(genesis.nBits, &fNegative, &fOverflow).getuint256();
-			// while (genesis.GetHash() > hashTarget)
-			while (UintToArith256(genesis.GetHash()) > hashTarget)
-			{
-				++genesis.nNonce;
-				if (genesis.nNonce == 0)
-				{
-					LogPrintf("NONCE WRAPPED, incrementing time");
-					std::cout << std::string("NONCE WRAPPED, incrementing time:\n");
-					++genesis.nTime;
-				}
-				if (genesis.nNonce % 10000 == 0)
-				{
-					LogPrintf("RegTestnet: nonce %08u: hash = %s \n", genesis.nNonce, genesis.GetHash().ToString().c_str());
-					// std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << "\n";
-				}
-			}
-			std::cout << "RegTestnet ---\n";
-			std::cout << "  nonce: " << genesis.nNonce << "\n";
-			std::cout << "   time: " << genesis.nTime << "\n";
-			std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
-			std::cout << "   merklehash: " << genesis.hashMerkleRoot.ToString().c_str() << "\n";
-		}
-		std::cout << std::string("Finished calculating RegTestnet Genesis Block:\n");
-		
+		//// calculate Genesis Block
+		//std::cout << std::string("Begin calculating ResTestnet Genesis Block:\n");
+		//// Reset genesis hash
+		//consensus.hashGenesisBlock = uint256S("0x");
+		//if (true && (genesis.GetHash() != consensus.hashGenesisBlock)) {
+		//	LogPrintf("Calculating RegTestnet Genesis Block:\n");
+		//	arith_uint256 hashTarget = arith_uint256().SetCompact(genesis.nBits);
+		//	uint256 hash;
+		//	genesis.nNonce = 0;
+		//	// This will figure out a valid hash and Nonce if you're
+		//	// creating a different genesis block:
+		//	// uint256 hashTarget = CBigNum().SetCompact(genesis.nBits).getuint256();
+		//	// hashTarget.SetCompact(genesis.nBits, &fNegative, &fOverflow).getuint256();
+		//	// while (genesis.GetHash() > hashTarget)
+		//	while (UintToArith256(genesis.GetHash()) > hashTarget)
+		//	{
+		//		++genesis.nNonce;
+		//		if (genesis.nNonce == 0)
+		//		{
+		//			LogPrintf("NONCE WRAPPED, incrementing time");
+		//			std::cout << std::string("NONCE WRAPPED, incrementing time:\n");
+		//			++genesis.nTime;
+		//		}
+		//		if (genesis.nNonce % 10000 == 0)
+		//		{
+		//			LogPrintf("RegTestnet: nonce %08u: hash = %s \n", genesis.nNonce, genesis.GetHash().ToString().c_str());
+		//			// std::cout << strNetworkID << " nonce: " << genesis.nNonce << " time: " << genesis.nTime << " hash: " << genesis.GetHash().ToString().c_str() << "\n";
+		//		}
+		//	}
+		//	std::cout << "RegTestnet ---\n";
+		//	std::cout << "  nonce: " << genesis.nNonce << "\n";
+		//	std::cout << "   time: " << genesis.nTime << "\n";
+		//	std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
+		//	std::cout << "   merklehash: " << genesis.hashMerkleRoot.ToString().c_str() << "\n";
+		//}
+		//std::cout << std::string("Finished calculating RegTestnet Genesis Block:\n");
+		//
 
-			// std::cout << "RegTestnet ---\n";
-			// std::cout << "  nonce: " << genesis.nNonce <<  "\n";
-			// std::cout << "   time: " << genesis.nTime << "\n";
-			// std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
-			// std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
+		//	// std::cout << "RegTestnet ---\n";
+		//	// std::cout << "  nonce: " << genesis.nNonce <<  "\n";
+		//	// std::cout << "   time: " << genesis.nTime << "\n";
+		//	// std::cout << "   hash: " << genesis.GetHash().ToString().c_str() << "\n";
+		//	// std::cout << "   merklehash: "  << genesis.hashMerkleRoot.ToString().c_str() << "\n";
 
-		assert(consensus.hashGenesisBlock == uint256S("0x2c870dcc21abe2be63fef2a41c8d7b840133fc99995b396689dc45fc02fe4ff3"));
+		assert(consensus.hashGenesisBlock == uint256S("0x5e97796426c76bb2fcaf101c8a67fc000be374b13ac31032ba11e0c822782ce2"));
 		assert(genesis.hashMerkleRoot == uint256S("0x0f06ea982c10bfcbad17e6ad1b7e577c3ac069e281e24278f4118e75af3c85ee"));
 
 		vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.
@@ -472,7 +472,7 @@ public:
 		checkpointData = (CCheckpointData)
 		{
 			boost::assign::map_list_of
-			(0, uint256S("0x2c870dcc21abe2be63fef2a41c8d7b840133fc99995b396689dc45fc02fe4ff3")),
+			(0, uint256S("0x5e97796426c76bb2fcaf101c8a67fc000be374b13ac31032ba11e0c822782ce2")),
 				0,
 				0,
 				0
