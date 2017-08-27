@@ -80,7 +80,7 @@ std::string EncodeBase58(const unsigned char* pbegin, const unsigned char* pend)
         // Apply "b58 = b58 * 256 + ch".
         for (std::vector<unsigned char>::reverse_iterator it = b58.rbegin(); it != b58.rend(); it++) {
             carry += 256 * (*it);
-            *it = carry % 58;
+            *it = carry % 34;
             carry /= 34;
         }
         assert(carry == 0);
