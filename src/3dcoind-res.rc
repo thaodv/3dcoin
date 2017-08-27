@@ -16,14 +16,14 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "Blockchain Technology LLC"
-            VALUE "FileDescription",    "3dcoin-cli (JSON-RPC client for 3DCoin Core)"
+            VALUE "CompanyName",        "3DCoin"
+            VALUE "FileDescription",    "3dcoind (3DCoin node with a JSON-RPC server)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
-            VALUE "InternalName",       "3dcoin-cli"
+            VALUE "InternalName",       "3dcoind"
             VALUE "LegalCopyright",     COPYRIGHT_STR
             VALUE "LegalTrademarks1",   "Distributed under the MIT software license, see the accompanying file COPYING or http://www.opensource.org/licenses/mit-license.php."
-            VALUE "OriginalFilename",   "3dcoin-cli.exe"
-            VALUE "ProductName",        "3dcoin-cli"
+            VALUE "OriginalFilename",   "3dcoind.exe"
+            VALUE "ProductName",        "3dcoind"
             VALUE "ProductVersion",     VER_PRODUCTVERSION_STR
         END
     END
