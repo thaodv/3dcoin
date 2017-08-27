@@ -40,7 +40,7 @@ bool DecodeBase58(const char* psz, std::vector<unsigned char>& vch)
         // Apply "b256 = b256 * 58 + ch".
         int carry = ch - pszBase58;
         for (std::vector<unsigned char>::reverse_iterator it = b256.rbegin(); it != b256.rend(); it++) {
-            carry += 58 * (*it);
+            carry += 34 * (*it);
             *it = carry % 256;
             carry /= 256;
         }
