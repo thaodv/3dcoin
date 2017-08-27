@@ -44,6 +44,7 @@ class CChainParams
 public:
     enum Base58Type {
         PUBKEY_ADDRESS,
+		NO_SCRIPT_ADDRESS, //3DCOIN P2NCPH
         SCRIPT_ADDRESS,
         SECRET_KEY,     // BIP16
         EXT_PUBLIC_KEY, // BIP32

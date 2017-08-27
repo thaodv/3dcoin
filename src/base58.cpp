@@ -230,6 +230,8 @@ bool CBitcoinAddress::Set(const CScriptID& id)
     return true;
 }
 
+//TODO ADD NO_SCRIPT_ADDRESS
+
 bool CBitcoinAddress::Set(const CTxDestination& dest)
 {
     return boost::apply_visitor(CBitcoinAddressVisitor(this), dest);
