@@ -173,14 +173,12 @@ public:
 		vSeeds.push_back(CDNSSeedData("masternode.io", "dnsseed.masternode.io"));
 		vSeeds.push_back(CDNSSeedData("3dcoinpay.io", "dnsseed.3dcoinpay.io"));*/
 
-		// 3DCoin addresses start with 'T'
-		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 66);
-		// 3DCoin no script addresses start with 'P'
-		base58Prefixes[NO_SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 28);
-		// 3DCoin script addresses start with '6'
-		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 15);
-		// 3DCoin private keys start with '7' or 'X'
-		base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 31);
+		// 3DCoin addresses start with '1'
+		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 0);
+		// 3DCoin script addresses start with '2'
+		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 3);
+		// 3DCoin private keys start with 'A'
+		base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 23);
 		// 3DCoin BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
 		base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
 		// 3DCoin BIP32 prvkeys start with 'xprv' (Bitcoin defaults)
@@ -320,12 +318,10 @@ public:
 		vSeeds.push_back(CDNSSeedData("3dcoin.io", "seed2.3dcoin.io"));
 		//vSeeds.push_back(CDNSSeedData("masternode.io", "test.dnsseed.masternode.io"));
 
-		// Testnet 3DCoin addresses start with 'z'
-		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 143);
-		// 3DCoin no script addresses start with 'P'
-		base58Prefixes[NO_SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 33);
-		// Testnet 3DCoin script addresses start with '8' or '9'
-		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);
+		// Testnet 3DCoin addresses start with 'T'
+		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 66);
+		// Testnet 3DCoin script addresses start with 't'
+		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 128);
 		// Testnet private keys start with '9' or 'c' (Bitcoin defaults)
 		base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);
 		// Testnet 3DCoin BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
@@ -481,12 +477,10 @@ public:
 				0,
 				0
 		};
-		// Regtest 3DCoin addresses start with 'y'
-		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 140);
-		// 3DCoin no script addresses start with 'P'
-		base58Prefixes[NO_SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 33);
-		// Regtest 3DCoin script addresses start with '8' or '9'
-		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);
+		// Regtest 3DCoin addresses start with 'R'
+		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 61);
+		// Regtest 3DCoin script addresses start with 'r'
+		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 123);
 		// Regtest private keys start with '9' or 'c' (Bitcoin defaults)
 		base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);
 		// Regtest 3DCoin BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
