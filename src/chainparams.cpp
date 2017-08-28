@@ -174,7 +174,7 @@ public:
 		vSeeds.push_back(CDNSSeedData("3dcoinpay.io", "dnsseed.3dcoinpay.io"));*/
 
 		// 3DCoin addresses start with '1'
-		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(51, 53);
+		base58Prefixes[PUBKEY_ADDRESS] = boost::assign::list_of(0x4D)(0x4E).convert_to_container<std::vector<unsigned char> >();
 		// 3DCoin script addresses start with '2'
 		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(53, 63);
 		// 3DCoin private keys start with 'A'
