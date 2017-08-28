@@ -6,7 +6,7 @@
 #define BITCOIN_CRYPTO_COMMON_H
 
 #if defined(HAVE_CONFIG_H)
-#include "3dcoin-config.h"
+#include "config/3dcoin-config.h"
 #endif
 
 #include <stdint.h>
