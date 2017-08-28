@@ -4,10 +4,14 @@ Construct a linear, no-fork, best version of the blockchain.
 ## Step 0: Install 3dcoin_hash
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 https://github.com/BlockchainTechLLC/cassiopeia
 =======
 https://github.com/BlockchainTechLLC/nist5_hash
 >>>>>>> origin/test
+=======
+https://github.com/3dcoincoin/3dcoin_hash
+>>>>>>> dd0d598dc4487020daf90c13d6d230fa7fe14cbf
 
 ## Step 1: Download hash list
 

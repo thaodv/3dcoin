@@ -18,10 +18,14 @@ import httplib
 import sys
 import hashlib
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 3dcoin_hash
 =======
 import nist5_hash_hash
 >>>>>>> origin/test
+=======
+import 3dcoin_hash
+>>>>>>> dd0d598dc4487020daf90c13d6d230fa7fe14cbf
 import datetime
 import time
 from collections import namedtuple
@@ -60,10 +64,14 @@ def calc_hdr_hash(blk_hdr):
 
 	#return hash2_o
 <<<<<<< HEAD
+<<<<<<< HEAD
         pow_hash = 3dcoin_hash.getPoWHash(blk_hdr)
 =======
         pow_hash = nist5_hash_hash.getPoWHash(blk_hdr)
 >>>>>>> origin/test
+=======
+        pow_hash = 3dcoin_hash.getPoWHash(blk_hdr)
+>>>>>>> dd0d598dc4487020daf90c13d6d230fa7fe14cbf
         return pow_hash
 
 def calc_hash_str(blk_hdr):

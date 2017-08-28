@@ -4,22 +4,22 @@
 
 	* means the category has an associated class
 	
-	CDashNetwork: 3DCoin NETWORK (ROOT)
+	C3DCoinNetwork: 3DCOIN NETWORK (ROOT)
 	has:
 		vector<CNetworkVariable> vecNetworkVariables;
-		vector<CDashProject> vecProjects;
+		vector<C3DCoinProject> vecProjects;
 		vector<CGovernanceObject> vecProposals;
 		vector<CBudgetContract> vecContracts;
 		vector<CBudgetUsers> vecUsers;
 
-	CDashProject:
+	C3DCoinProject:
 	has:
 		name
 		employees
 
 */
 
-	// 3DCoin NETWORK (ROOT)
+	// 3DCOIN NETWORK (ROOT)
 	// 	-> NETWORK VARIABLE
 	// 		-> switch, setting
 	// 	-> CATEGORIES

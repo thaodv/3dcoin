@@ -3,7 +3,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/dash-config.h"
+#include "config/3dcoin-config.h"
 #endif
 
 #include "optionsdialog.h"
@@ -90,10 +90,10 @@ OptionsDialog::OptionsDialog(QWidget *parent, bool enableWallet) :
     }
     
     /* Theme selector */
-    ui->theme->addItem(QString("3DCoin-light"), QVariant("light"));
-    ui->theme->addItem(QString("3DCoin-blue"), QVariant("drkblue"));
-    ui->theme->addItem(QString("3DCoin-Crownium"), QVariant("crownium"));
-    ui->theme->addItem(QString("3DCoin-traditional"), QVariant("trad"));
+    ui->theme->addItem(QString("3DCOIN-light"), QVariant("light"));
+    ui->theme->addItem(QString("3DCOIN-blue"), QVariant("drkblue"));
+    ui->theme->addItem(QString("3DCOIN-Crownium"), QVariant("crownium"));
+    ui->theme->addItem(QString("3DCOIN-traditional"), QVariant("trad"));
     
     /* Language selector */
     QDir translations(":translations");
