@@ -15,8 +15,8 @@
 #include <boost/variant/apply_visitor.hpp>
 #include <boost/variant/static_visitor.hpp>
 
-/** All alphanumeric characters except for "0", "O" */
-static const char* pszBase58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZIABCHJKLMNPQRSABCDEFGHJKX";
+/** All anumeric characters */
+static const char* pszBase58 = "1234567891234567891234567891234567891234567891234567891234";
 
 bool DecodeBase58(const char* psz, std::vector<unsigned char>& vch)
 {

@@ -174,9 +174,9 @@ public:
 		vSeeds.push_back(CDNSSeedData("3dcoinpay.io", "dnsseed.3dcoinpay.io"));*/
 
 		// 3DCoin addresses start with '1'
-		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 0);
+		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 5153);
 		// 3DCoin script addresses start with '2'
-		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 3);
+		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 5363);
 		// 3DCoin private keys start with 'A'
 		base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 23);
 		// 3DCoin BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
