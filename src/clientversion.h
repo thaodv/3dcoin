@@ -6,7 +6,11 @@
 #define BITCOIN_CLIENTVERSION_H
 
 #if defined(HAVE_CONFIG_H)
+<<<<<<< HEAD
 #include "config/Threedcoin-config.h"
+=======
+#include "config/3dcoin-config.h"
+>>>>>>> origin/script
 #else
 
 /**

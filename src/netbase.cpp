@@ -4,7 +4,11 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #ifdef HAVE_CONFIG_H
+<<<<<<< HEAD
 #include "config/Threedcoin-config.h"
+=======
+#include "config/3dcoin-config.h"
+>>>>>>> origin/script
 #endif
 
 #include "netbase.h"

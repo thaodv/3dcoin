@@ -6,7 +6,11 @@
 #define BITCOIN_CRYPTO_COMMON_H
 
 #if defined(HAVE_CONFIG_H)
+<<<<<<< .merge_file_a27524
 #include "config/Threedcoin-config.h"
+=======
+#include "config/3dcoin-config.h"
+>>>>>>> .merge_file_a04476
 #endif
 
 #include <stdint.h>

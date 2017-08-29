@@ -262,7 +262,20 @@ unsigned int MurmurHash3(unsigned int nHashSeed, const std::vector<unsigned char
 
 void BIP32Hash(const ChainCode &chainCode, unsigned int nChild, unsigned char header, const unsigned char data[32], unsigned char output[64]);
 
+<<<<<<< HEAD
 // 3DCoin nist5 Hash 
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+// 3DCoin Cassiopeia Hash 
+template<typename T1>
+inline uint256 Cassiopeia(const T1 pbegin, const T1 pend)
+=======
+// 3DCoin nist5_hash Hash 
+=======
+// 3DCoin nist5 Hash 
+>>>>>>> dd0d598dc4487020daf90c13d6d230fa7fe14cbf
+>>>>>>> origin/script
 template<typename T1>
 inline uint256 nist5_hash(const T1 pbegin, const T1 pend)
 

@@ -22,7 +22,11 @@
 #endif
 
 #if defined(HAVE_CONFIG_H)
+<<<<<<< HEAD
 #include "config/Threedcoin-config.h" /* for USE_QRCODE */
+=======
+#include "config/3dcoin-config.h" /* for USE_QRCODE */
+>>>>>>> origin/script
 #endif
 
 #ifdef USE_QRCODE

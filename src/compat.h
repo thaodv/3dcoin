@@ -7,7 +7,11 @@
 #define BITCOIN_COMPAT_H
 
 #if defined(HAVE_CONFIG_H)
+<<<<<<< HEAD
 #include "config/Threedcoin-config.h"
+=======
+#include "config/3dcoin-config.h"
+>>>>>>> origin/script
 #endif
 
 #ifdef WIN32
