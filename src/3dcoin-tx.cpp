@@ -54,18 +54,8 @@ static int AppInitRawTx(int argc, char* argv[])
         // First part of help message is specific to this utility
         std::string strUsage = _("3DCoin Core 3dcoin-tx utility version") + " " + FormatFullVersion() + "\n\n" +
             _("Usage:") + "\n" +
-<<<<<<< HEAD:src/3dcoin-tx.cpp
-<<<<<<< HEAD:src/3dcoin-tx.cpp
-              "  3dcoin-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded dash transaction") + "\n" +
-              "  3dcoin-tx [options] -create [commands]   " + _("Create hex-encoded dash transaction") + "\n" +
-=======
               "  3dcoin-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded 3dcoin transaction") + "\n" +
               "  3dcoin-tx [options] -create [commands]   " + _("Create hex-encoded 3dcoin transaction") + "\n" +
->>>>>>> origin/test:src/3dcoin-tx.cpp
-=======
-              "  3dcoin-tx [options] <hex-tx> [commands]  " + _("Update hex-encoded 3dcoin transaction") + "\n" +
-              "  3dcoin-tx [options] -create [commands]   " + _("Create hex-encoded 3dcoin transaction") + "\n" +
->>>>>>> origin/test:src/3dcoin-tx.cpp
               "\n";
 
         fprintf(stdout, "%s", strUsage.c_str());

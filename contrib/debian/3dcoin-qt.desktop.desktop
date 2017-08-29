@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=3DCoin
+Comment=3DCoin P2P Cryptocurrency
+Exec=3dcoin-qt %u
+Terminal=false
+Type=Application
+Icon=3dcoin128
+MimeType=x-scheme-handler/3dcoin;
+Categories=Office;Finance;
+Name[en_US]=3dcoin-qt.desktop
