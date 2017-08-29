@@ -3125,7 +3125,7 @@ Näillä toiminnoilla voit korjata korruptoituneen lohkoketjun tai puuttuvat/van
         <translation>Bitcoin Core kehittäjät</translation>
     </message>
     <message>
-        <source>The Dash Core developers</source>
+        <source>The x Core developers</source>
         <translation>3DCoin Core kehittäjät</translation>
     </message>
     <message>

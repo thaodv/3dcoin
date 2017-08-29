@@ -3120,7 +3120,7 @@ https://www.transifex.com/projects/p/3dcoin/</translation>
         <translation>Nhóm phát triển Bitcoin Core</translation>
     </message>
     <message>
-        <source>The Dash Core developers</source>
+        <source>The x Core developers</source>
         <translation>Nhóm phát triển 3DCoin Core</translation>
     </message>
     <message>

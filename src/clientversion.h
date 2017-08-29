@@ -6,7 +6,7 @@
 #define BITCOIN_CLIENTVERSION_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/dash-config.h"
+#include "config/3dcoin-config.h"
 #else
 
 /**
@@ -38,7 +38,7 @@
 #define DO_STRINGIZE(X) #X
 
 //! Copyright string used in Windows .rc files
-#define COPYRIGHT_STR "2009-" STRINGIZE(COPYRIGHT_YEAR) " The Bitcoin Core Developers, 2014-" STRINGIZE(COPYRIGHT_YEAR) " The Dash Core Developers 2017" STRINGIZE(COPYRIGHT_YEAR) " The 3DCoin Core Developers"
+#define COPYRIGHT_STR "2009-" STRINGIZE(COPYRIGHT_YEAR) " The Bitcoin Core Developers, 2014-" STRINGIZE(COPYRIGHT_YEAR) " The x Core Developers 2017" STRINGIZE(COPYRIGHT_YEAR) " The 3DCoin Core Developers 2018"
 
 /**
  * 3dcoind-res.rc includes this file, but it cannot cope with real c++ code.
