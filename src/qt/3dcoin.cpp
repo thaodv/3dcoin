@@ -567,8 +567,8 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 #endif
 
-    Q_INIT_RESOURCE(3dcoin);
-    Q_INIT_RESOURCE(3dcoin_locale);
+    Q_INIT_RESOURCE(tdcoin);
+    Q_INIT_RESOURCE(tdcoin_locale);
 
     BitcoinApplication app(argc, argv);
 #if QT_VERSION > 0x050100

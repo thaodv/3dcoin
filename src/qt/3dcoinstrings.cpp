@@ -8,7 +8,7 @@
 #else
 #define UNUSED
 #endif
-static const char UNUSED *D3dcoin_strings[] = {
+static const char UNUSED *tdcoin_strings[] = {
 QT_TRANSLATE_NOOP("3dcoin-core", ""
 "(1 = keep tx meta data e.g. account owner and payment request information, 2 "
 "= drop tx meta data)"),
