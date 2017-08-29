@@ -35,8 +35,8 @@ config.log
 config.status
 configure
 libtool
-src/config/3dcoin-config.h
-src/config/3dcoin-config.h.in
+src/config/tdcoin-config.h
+src/config/tdcoin-config.h.in
 src/config/stamp-h1
 share/setup.nsi
 share/qt/Info.plist

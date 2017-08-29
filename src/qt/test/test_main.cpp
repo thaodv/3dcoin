@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include "config/3dcoin-config.h"
+#include "config/tdcoin-config.h"
 #endif
 
 #include "util.h"

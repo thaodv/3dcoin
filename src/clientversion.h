@@ -6,7 +6,7 @@
 #define BITCOIN_CLIENTVERSION_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/3dcoin-config.h"
+#include "config/tdcoin-config.h"
 #else
 
 /**
