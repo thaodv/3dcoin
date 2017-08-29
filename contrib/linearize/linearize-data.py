@@ -17,19 +17,7 @@ import base64
 import httplib
 import sys
 import hashlib
-<<<<<<< HEAD
-import 3dcoin_hash
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-import 3dcoin_hash
-=======
-import nist5_hash_hash
->>>>>>> origin/test
-=======
-import 3dcoin_hash
->>>>>>> dd0d598dc4487020daf90c13d6d230fa7fe14cbf
->>>>>>> origin/script
+import cassiopeia_hash
 import datetime
 import time
 from collections import namedtuple
@@ -67,19 +55,7 @@ def calc_hdr_hash(blk_hdr):
 	#hash2_o = hash2.digest()
 
 	#return hash2_o
-<<<<<<< HEAD
-        pow_hash = 3dcoin_hash.getPoWHash(blk_hdr)
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        pow_hash = 3dcoin_hash.getPoWHash(blk_hdr)
-=======
-        pow_hash = nist5_hash_hash.getPoWHash(blk_hdr)
->>>>>>> origin/test
-=======
-        pow_hash = 3dcoin_hash.getPoWHash(blk_hdr)
->>>>>>> dd0d598dc4487020daf90c13d6d230fa7fe14cbf
->>>>>>> origin/script
+        pow_hash = cassiopeia_hash.getPoWHash(blk_hdr)
         return pow_hash
 
 def calc_hash_str(blk_hdr):

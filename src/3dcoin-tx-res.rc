@@ -16,7 +16,7 @@ BEGIN
     BEGIN
         BLOCK "040904E4" // U.S. English - multilingual (hex)
         BEGIN
-            VALUE "CompanyName",        "3DCoin"
+            VALUE "CompanyName",        "Blockchain Technology LLC"
             VALUE "FileDescription",    "3dcoin-tx (CLI 3DCoin transaction editor utility)"
             VALUE "FileVersion",        VER_FILEVERSION_STR
             VALUE "InternalName",       "3dcoin-tx"

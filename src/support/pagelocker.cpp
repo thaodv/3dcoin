@@ -5,11 +5,7 @@
 #include "support/pagelocker.h"
 
 #if defined(HAVE_CONFIG_H)
-<<<<<<< HEAD
-#include "config/Threedcoin-config.h"
-=======
-#include "config/3dcoin-config.h"
->>>>>>> origin/script
+#include "config/dash-config.h"
 #endif
 
 #ifdef WIN32

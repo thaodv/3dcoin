@@ -4,11 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-<<<<<<< HEAD
-#include "config/Threedcoin-config.h"
-=======
-#include "config/3dcoin-config.h"
->>>>>>> origin/script
+#include "config/dash-config.h"
 #endif
 
 #include "optionsmodel.h"
@@ -134,10 +130,10 @@ void OptionsModel::Init(bool resetSettings)
 
     if (!settings.contains("nPrivateSendAmount")) {
         // for migration from old settings
-        if (!settings.contains("nAnonymize3DCoinAmount"))
+        if (!settings.contains("nAnonymizeDashAmount"))
             settings.setValue("nPrivateSendAmount", DEFAULT_PRIVATESEND_AMOUNT);
         else
-            settings.setValue("nPrivateSendAmount", settings.value("nAnonymize3DCoinAmount").toInt());
+            settings.setValue("nPrivateSendAmount", settings.value("nAnonymizeDashAmount").toInt());
     }
     if (!SoftSetArg("-privatesendamount", settings.value("nPrivateSendAmount").toString().toStdString()))
         addOverriddenOption("-privatesendamount");

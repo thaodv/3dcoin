@@ -6,11 +6,7 @@
 #define BITCOIN_QT_BITCOINGUI_H
 
 #if defined(HAVE_CONFIG_H)
-<<<<<<< HEAD
-#include "config/Threedcoin-config.h"
-=======
-#include "config/3dcoin-config.h"
->>>>>>> origin/script
+#include "config/dash-config.h"
 #endif
 
 #include "amount.h"

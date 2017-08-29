@@ -81,32 +81,32 @@ def connect_JSON(config):
         sys.stderr.write("Error connecting to RPC server at "+connect+"\n")
         sys.exit(1)
 
-def unlock_wallet(3dcoind):
-    info = 3dcoind.getinfo()
+def unlock_wallet(D3dcoind):
+    info = D3dcoind.getinfo()
     if 'unlocked_until' not in info:
         return True # wallet is not encrypted
     t = int(info['unlocked_until'])
     if t <= time.time():
         try:
             passphrase = getpass.getpass("Wallet is locked; enter passphrase: ")
-            3dcoind.walletpassphrase(passphrase, 5)
+            D3dcoind.walletpassphrase(passphrase, 5)
         except:
             sys.stderr.write("Wrong passphrase\n")
 
-    info = 3dcoind.getinfo()
+    info = D3dcoind.getinfo()
     return int(info['unlocked_until']) > time.time()
 
-def list_available(3dcoind):
+def list_available(D3dcoind):
     address_summary = dict()
 
     address_to_account = dict()
-    for info in 3dcoind.listreceivedbyaddress(0):
+    for info in D3dcoind.listreceivedbyaddress(0):
         address_to_account[info["address"]] = info["account"]
 
-    unspent = 3dcoind.listunspent(0)
+    unspent = D3dcoind.listunspent(0)
     for output in unspent:
         # listunspent doesn't give addresses, so:
-        rawtx = 3dcoind.getrawtransaction(output['txid'], 1)
+        rawtx = D3dcoind.getrawtransaction(output['txid'], 1)
         vout = rawtx["vout"][output['vout']]
         pk = vout["scriptPubKey"]
 
@@ -139,8 +139,8 @@ def select_coins(needed, inputs):
         n += 1
     return (outputs, have-needed)
 
-def create_tx(3dcoind, fromaddresses, toaddress, amount, fee):
-    all_coins = list_available(3dcoind)
+def create_tx(D3dcoind, fromaddresses, toaddress, amount, fee):
+    all_coins = list_available(D3dcoind)
 
     total_available = Decimal("0.0")
     needed = amount+fee
@@ -159,7 +159,7 @@ def create_tx(3dcoind, fromaddresses, toaddress, amount, fee):
     # Note:
     # Python's json/jsonrpc modules have inconsistent support for Decimal numbers.
     # Instead of wrestling with getting json.dumps() (used by jsonrpc) to encode
-    # Decimals, I'm casting amounts to float before sending them to 3dcoind.
+    # Decimals, I'm casting amounts to float before sending them to D3dcoind.
     #
     outputs = { toaddress : float(amount) }
     (inputs, change_amount) = select_coins(needed, potential_inputs)
@@ -170,8 +170,8 @@ def create_tx(3dcoind, fromaddresses, toaddress, amount, fee):
         else:
             outputs[change_address] = float(change_amount)
 
-    rawtx = 3dcoind.createrawtransaction(inputs, outputs)
-    signed_rawtx = 3dcoind.signrawtransaction(rawtx)
+    rawtx = D3dcoind.createrawtransaction(inputs, outputs)
+    signed_rawtx = D3dcoind.signrawtransaction(rawtx)
     if not signed_rawtx["complete"]:
         sys.stderr.write("signrawtransaction failed\n")
         sys.exit(1)
@@ -179,10 +179,10 @@ def create_tx(3dcoind, fromaddresses, toaddress, amount, fee):
 
     return txdata
 
-def compute_amount_in(3dcoind, txinfo):
+def compute_amount_in(D3dcoind, txinfo):
     result = Decimal("0.0")
     for vin in txinfo['vin']:
-        in_info = 3dcoind.getrawtransaction(vin['txid'], 1)
+        in_info = D3dcoind.getrawtransaction(vin['txid'], 1)
         vout = in_info['vout'][vin['vout']]
         result = result + vout['value']
     return result
@@ -193,12 +193,12 @@ def compute_amount_out(txinfo):
         result = result + vout['value']
     return result
 
-def sanity_test_fee(3dcoind, txdata_hex, max_fee):
+def sanity_test_fee(D3dcoind, txdata_hex, max_fee):
     class FeeError(RuntimeError):
         pass
     try:
-        txinfo = 3dcoind.decoderawtransaction(txdata_hex)
-        total_in = compute_amount_in(3dcoind, txinfo)
+        txinfo = D3dcoind.decoderawtransaction(txdata_hex)
+        total_in = compute_amount_in(D3dcoind, txinfo)
         total_out = compute_amount_out(txinfo)
         if total_in-total_out > max_fee:
             raise FeeError("Rejecting transaction, unreasonable fee of "+str(total_in-total_out))
@@ -240,10 +240,10 @@ def main():
     check_json_precision()
     config = read_bitcoin_config(options.datadir)
     if options.testnet: config['testnet'] = True
-    3dcoind = connect_JSON(config)
+    D3dcoind = connect_JSON(config)
 
     if options.amount is None:
-        address_summary = list_available(3dcoind)
+        address_summary = list_available(D3dcoind)
         for address,info in address_summary.iteritems():
             n_transactions = len(info['outputs'])
             if n_transactions > 1:
@@ -253,14 +253,14 @@ def main():
     else:
         fee = Decimal(options.fee)
         amount = Decimal(options.amount)
-        while unlock_wallet(3dcoind) == False:
+        while unlock_wallet(D3dcoind) == False:
             pass # Keep asking for passphrase until they get it right
-        txdata = create_tx(3dcoind, options.fromaddresses.split(","), options.to, amount, fee)
-        sanity_test_fee(3dcoind, txdata, amount*Decimal("0.01"))
+        txdata = create_tx(D3dcoind, options.fromaddresses.split(","), options.to, amount, fee)
+        sanity_test_fee(D3dcoind, txdata, amount*Decimal("0.01"))
         if options.dry_run:
             print(txdata)
         else:
-            txid = 3dcoind.sendrawtransaction(txdata)
+            txid = D3dcoind.sendrawtransaction(txdata)
             print(txid)
 
 if __name__ == '__main__':

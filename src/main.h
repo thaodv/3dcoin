@@ -8,11 +8,7 @@
 #define BITCOIN_MAIN_H
 
 #if defined(HAVE_CONFIG_H)
-<<<<<<< HEAD
-#include "config/Threedcoin-config.h"
-=======
-#include "config/3dcoin-config.h"
->>>>>>> origin/script
+#include "config/dash-config.h"
 #endif
 
 #include "amount.h"
