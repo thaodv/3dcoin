@@ -140,7 +140,7 @@ make
 *.db
 *.filters
 *.opendb
-src/qt/3d.config
 src/qt/3d.includes
 src/qt/3d.files
 src/qt/3d.creator
+src/qt/3d.config
