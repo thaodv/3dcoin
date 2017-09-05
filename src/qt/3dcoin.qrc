@@ -202,11 +202,6 @@
         <file alias="about_qt">res/icons/trad/about_qt.png</file>
         <file alias="verify">res/icons/trad/verify.png</file>
     </qresource>
-    <qresource prefix="/css">
-        <file alias="drkblue">res/css/drkblue.css</file>
-        <file alias="crownium">res/css/crownium.css</file>
-        <file alias="light">res/css/light.css</file>
-    </qresource>
     <qresource prefix="/images/drkblue">
         <file alias="about">res/images/drkblue/about.png</file>
         <file alias="3dcoin_logo_horizontal">res/images/drkblue/3dcoin_logo_horizontal.png</file>

@@ -4012,8 +4012,8 @@ https://www.transifex.com/projects/p/3dcoin/</translation>
     </message>
     <message>
         <location line="+1"/>
-        <source>The x Core developers</source>
-        <translation>The x Core developers</translation>
+        <source>The Dash Core developers</source>
+        <translation>The Dash Core developers</translation>
     </message>
     <message>
         <location filename="../networkstyle.cpp" line="+21"/>

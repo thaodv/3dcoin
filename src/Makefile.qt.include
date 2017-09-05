@@ -470,10 +470,7 @@ RES_IMAGES = \
   qt/res/images/trad/drkblue_qtreeview_selected.png \
   qt/res/images/trad/drkblue_walletFrame_bg.png
 
-RES_CSS = \
-  qt/res/css/drkblue.css \
-  qt/res/css/crownium.css \
-  qt/res/css/light.css
+
 
 RES_MOVIES = $(wildcard qt/res/movies/spinner-*.png)
 

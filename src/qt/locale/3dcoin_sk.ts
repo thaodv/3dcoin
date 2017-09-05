@@ -2777,7 +2777,7 @@ https://www.transifex.com/projects/p/3dcoin/</translation>
         <translation>Vývojári Bitcoin Core</translation>
     </message>
     <message>
-        <source>The x Core developers</source>
+        <source>The Dash Core developers</source>
         <translation>Vývojári 3DCoin Core</translation>
     </message>
     <message>
