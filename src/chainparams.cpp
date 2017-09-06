@@ -174,9 +174,9 @@ public:
 		vSeeds.push_back(CDNSSeedData("3dcoinpay.io", "dnsseed.3dcoinpay.io"));*/
 
 		// 3DCoin addresses start with '1'
-		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 19790);
+		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 7444);
 		// 3DCoin script addresses start with '2'
-		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19795);
+		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 7449);
 		// 3DCoin private keys start with 'A'
 		base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 23);
 		// 3DCoin BIP32 pubkeys start with 'xpub' (Bitcoin defaults)
@@ -319,9 +319,9 @@ public:
 		//vSeeds.push_back(CDNSSeedData("masternode.io", "test.dnsseed.masternode.io"));
 
 		// Testnet 3DCoin addresses start with 'T'
-		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 66);
+		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 1529);
 		// Testnet 3DCoin script addresses start with 't'
-		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 128);
+		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 88707);
 		// Testnet private keys start with '9' or 'c' (Bitcoin defaults)
 		base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);
 		// Testnet 3DCoin BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
@@ -478,9 +478,9 @@ public:
 				0
 		};
 		// Regtest 3DCoin addresses start with 'R'
-		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 61);
+		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 1407);
 		// Regtest 3DCoin script addresses start with 'r'
-		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 123);
+		base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 81631);
 		// Regtest private keys start with '9' or 'c' (Bitcoin defaults)
 		base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 239);
 		// Regtest 3DCoin BIP32 pubkeys start with 'tpub' (Bitcoin defaults)
