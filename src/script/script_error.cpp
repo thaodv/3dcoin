@@ -67,9 +67,20 @@ const char* ScriptErrorString(const ScriptError serror)
             return "NOPx reserved for soft-fork upgrades";
         case SCRIPT_ERR_PUBKEYTYPE:
             return "Public key is neither compressed or uncompressed";
-        case SCRIPT_ERR_UNKNOWN_ERROR:
+		//3DCoin smartscript
+		case SCRIPT_ERR_INVALIDARGUMENT_INPUT:
+			return "Script has invalid input";        
+		case SCRIPT_ERR_INVALIDARGUMENT_RANGE:
+			return "Script has invalid range";
+		case SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG:
+			return "Script has duplicate arguments";
+		case SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR:
+			return "Argument exceeds stack  size";
+		//end of 3DCoin smartscript
+		case SCRIPT_ERR_UNKNOWN_ERROR:
         case SCRIPT_ERR_ERROR_COUNT:
         default: break;
     }
     return "unknown error";
 }
+
