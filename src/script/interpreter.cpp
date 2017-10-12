@@ -12,7 +12,7 @@
 #include "pubkey.h"
 #include "script/script.h"
 #include "uint256.h"
-#include <tuple>
+#include "boost/tuple/tuple_io.hpp"
 
 using namespace std;
 
@@ -239,7 +239,7 @@ bool static CheckMinimalPush(const valtype& data, opcodetype opcode) {
 // Smart script
 //
 
-std::tuple <valtype, valtype> CheckSig(valtypeInt x)
+boost::tuple <valtype, valtype> CheckSig(valtypeInt x)
 {
 	vector <valtype> altstack;
 	valtype v;
@@ -275,7 +275,7 @@ std::tuple <valtype, valtype> CheckSig(valtypeInt x)
 	}
 	Arg1 = (stack.at(stack.size() - x[0]));
 	Arg2 = (stack.at(stack.size() - x[1]));
-	return std::make_tuple(Arg1, Arg2);
+	return boost::make_tuple(Arg1, Arg2);
 }
 
 

@@ -75,8 +75,8 @@ const char* ScriptErrorString(const ScriptError serror)
 		case SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG:
 			return "Script has duplicate arguments";
 		case SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR:
-			return "Argument exceeds stack  size";
-		//end of 3DCoin smartscript
+			return "Argument exceeds stack size";
+			//end of 3DCoin smartscript
 		case SCRIPT_ERR_UNKNOWN_ERROR:
         case SCRIPT_ERR_ERROR_COUNT:
         default: break;
