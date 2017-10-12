@@ -12,10 +12,16 @@
 #include "pubkey.h"
 #include "script/script.h"
 #include "uint256.h"
+#include <tuple>
 
 using namespace std;
 
 typedef vector<unsigned char> valtype;
+//
+typedef vector <unsigned int> valtypeInt;
+valtypeInt ExecVector;
+valtype arg;
+//
 
 namespace {
 
@@ -228,6 +234,54 @@ bool static CheckMinimalPush(const valtype& data, opcodetype opcode) {
     }
     return true;
 }
+
+//
+// Smart script
+//
+
+std::tuple <valtype, valtype> CheckSig(valtypeInt x)
+{
+	vector <valtype> altstack;
+	valtype v;
+	valtypeInt VectCopy = x;
+	valtype Arg1, Arg2;
+
+	if (x.size() == 1)
+	{
+		return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+	}
+	if (x.size() > 2)
+	{
+		return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+	}
+	if (VectCopy[0] > stack.size())
+	{
+		return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
+	}
+	//end of checking for stack size
+	for (int i = 0; i <= x.size() - 1; i++)
+	{
+		if (x[i] == 0)
+		{
+			return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+		}
+		else
+		{
+			if (i < x.size() - 1 && x[i] == x[i + 1])
+			{
+				return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
+			}
+		}
+	}
+	Arg1 = (stack.at(stack.size() - x[0]));
+	Arg2 = (stack.at(stack.size() - x[1]));
+	return std::make_tuple(Arg1, Arg2);
+}
+
+
+//
+//End of Smart script
+//
 
 bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, unsigned int flags, const BaseSignatureChecker& checker, ScriptError* serror)
 {
