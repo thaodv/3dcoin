@@ -14,7 +14,7 @@
 #include "uint256.h"
 #include <functional>
 #include <algorithm>
-#include <string>
+#include <boost/lexical_cast.hpp>
 
 using namespace std;
 
@@ -57,12 +57,12 @@ void get_Argument(vector<vector<unsigned char> >& stack)
 		{
 			if (!range)
 			{
-				ExecVector.push_back(stoi(str_arg));
+				ExecVector.push_back(boost::lexical_cast<int>(str_arg));
 				str_arg.clear();
 			}
 			else
 			{
-				for (size_t i = RngMIN + 1; i <= stoi(str_arg); i++)
+				for (size_t i = RngMIN + 1; i <= boost::lexical_cast<int>(str_arg); i++)
 				{
 					ExecVector.push_back(i);
 				}
@@ -75,8 +75,8 @@ void get_Argument(vector<vector<unsigned char> >& stack)
 		case '-':
 		{
 			range = true;
-			ExecVector.push_back(stoi(str_arg));
-			RngMIN = stoi(str_arg);
+			ExecVector.push_back(boost::lexical_cast<int>(str_arg));
+			RngMIN = boost::lexical_cast<int>(str_arg);
 			str_arg.clear();
 		}
 		break;
@@ -86,11 +86,11 @@ void get_Argument(vector<vector<unsigned char> >& stack)
 		{
 			if (!range)
 			{
-				ExecVector.push_back(stoi(str_arg));
+				ExecVector.push_back(boost::lexical_cast<int>(str_arg));
 			}
 			else
 			{
-				for (size_t i = RngMIN + 1; i <= stoi(str_arg); i++)
+				for (size_t i = RngMIN + 1; i <= boost::lexical_cast<int>(str_arg); i++)
 				{
 					ExecVector.push_back(i);
 				}
@@ -164,7 +164,7 @@ bool Arg_Verify(vector<vector<unsigned char> >& stack)
 			}
 			else
 			{
-				if (stoi(str_arg) <= RngMIN)
+				if (boost::lexical_cast<int>(str_arg) <= RngMIN)
 				{
 
 					return false;
@@ -201,7 +201,7 @@ bool Arg_Verify(vector<vector<unsigned char> >& stack)
 			{
 				if (i >= arg.size() - 1)
 				{
-					if (stoi(str_arg) <= RngMIN)
+					if (boost::lexical_cast<int>(str_arg) <= RngMIN)
 					{
 
 						return false;
@@ -209,7 +209,7 @@ bool Arg_Verify(vector<vector<unsigned char> >& stack)
 				}
 				//
 				range = true;
-				RngMIN = stoi(str_arg);
+				RngMIN = boost::lexical_cast<int>(str_arg);
 				str_arg.clear();
 			}
 		}
@@ -225,7 +225,7 @@ bool Arg_Verify(vector<vector<unsigned char> >& stack)
 			}
 			else
 			{
-				if (stoi(str_arg) <= RngMIN)
+				if (boost::lexical_cast<int>(str_arg) <= RngMIN)
 				{
 
 					return false;
