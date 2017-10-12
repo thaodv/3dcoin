@@ -12,7 +12,8 @@
 #include "pubkey.h"
 #include "script/script.h"
 #include "uint256.h"
-#include "boost/tuple/tuple_io.hpp"
+#include <functional>
+#include <algorithm>
 
 using namespace std;
 
@@ -20,7 +21,225 @@ typedef vector<unsigned char> valtype;
 //
 typedef vector <unsigned int> valtypeInt;
 valtypeInt ExecVector;
-valtype arg;
+//
+// Smart script
+//
+
+void get_Argument(vector<vector<unsigned char> >& stack)
+{
+	valtype arg = stack.back();
+	stack.pop_back();
+	string  str_arg = "";
+	bool range = false;
+	int RngMIN = 0;
+	ExecVector.clear();
+	for (size_t i = 0; i <= arg.size() - 1; i++)
+	{
+		switch (arg[i])
+		{
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+		{
+			str_arg += arg[i];
+		}
+		break;
+		// end digit
+		case ',':
+		{
+			if (!range)
+			{
+				ExecVector.push_back(stoi(str_arg));
+				str_arg.clear();
+			}
+			else
+			{
+				for (size_t i = RngMIN + 1; i <= stoi(str_arg); i++)
+				{
+					ExecVector.push_back(i);
+				}
+				range = false;
+				str_arg.clear();
+			}
+		}
+		break;
+		// end ','
+		case '-':
+		{
+			range = true;
+			ExecVector.push_back(stoi(str_arg));
+			RngMIN = stoi(str_arg);
+			str_arg.clear();
+		}
+		break;
+		// end '-'
+		}
+		if (i == arg.size() - 1)
+		{
+			if (!range)
+			{
+				ExecVector.push_back(stoi(str_arg));
+			}
+			else
+			{
+				for (size_t i = RngMIN + 1; i <= stoi(str_arg); i++)
+				{
+					ExecVector.push_back(i);
+				}
+			}
+		}
+	}
+	
+}
+
+
+
+bool Arg_Verify(vector<vector<unsigned char> >& stack)
+{
+	valtype arg = stack.back();
+	string  str_arg = "";
+	bool range = false;
+	int RngMIN = 0;
+
+	for (size_t i = 0; i <= arg.size() - 1; i++)
+	{
+		if (!isdigit(arg[i]))
+		{
+			switch (arg[i])
+			{
+			case ',':
+			case '-':
+				break;
+			default:
+
+				return false;
+				break;
+			}
+		}
+		switch (arg[i])
+		{
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+		{
+			str_arg += arg[i];
+		}
+		break;
+		// end digit
+		case ',':
+		{
+			if (i > 0 && (arg[i - 1] == '-' || arg[i - 1] == ','))
+			{
+
+				return false;
+			}
+			if (i == 0)
+			{
+
+				return false;
+			}
+			if (i >= arg.size() - 1)
+			{
+
+				return false;
+			}
+			if (!range)
+			{
+				str_arg.clear();
+			}
+			else
+			{
+				if (stoi(str_arg) <= RngMIN)
+				{
+
+					return false;
+				}
+				range = false;
+				str_arg.clear();
+			}
+		}
+		break;
+		// end ','
+		case '-':
+		{
+			if (i == 0)
+			{
+
+				return false;
+			}
+			if (i > 0 && (arg[i - 1] == '-' || arg[i - 1] == ','))
+			{
+
+				return false;
+			}
+			if (i >= arg.size() - 1)
+			{
+
+				return false;
+			}
+			if (range)
+			{
+
+				return false;
+			}
+			else
+			{
+				if (i >= arg.size() - 1)
+				{
+					if (stoi(str_arg) <= RngMIN)
+					{
+
+						return false;
+					}
+				}
+				//
+				range = true;
+				RngMIN = stoi(str_arg);
+				str_arg.clear();
+			}
+		}
+		break;
+		// end '-'
+		}
+		//
+		if (i >= arg.size() - 1)
+		{
+			if (!range)
+			{
+				str_arg.clear();
+			}
+			else
+			{
+				if (stoi(str_arg) <= RngMIN)
+				{
+
+					return false;
+				}
+			}
+		}
+
+	}
+}
+
+
+
+
+//
+//End of Smart script
 //
 
 namespace {
@@ -235,53 +454,7 @@ bool static CheckMinimalPush(const valtype& data, opcodetype opcode) {
     return true;
 }
 
-//
-// Smart script
-//
 
-boost::tuple <valtype, valtype> CheckSig(valtypeInt x)
-{
-	vector <valtype> altstack;
-	valtype v;
-	valtypeInt VectCopy = x;
-	valtype Arg1, Arg2;
-
-	if (x.size() == 1)
-	{
-		return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
-	}
-	if (x.size() > 2)
-	{
-		return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
-	}
-	if (VectCopy[0] > stack.size())
-	{
-		return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
-	}
-	//end of checking for stack size
-	for (int i = 0; i <= x.size() - 1; i++)
-	{
-		if (x[i] == 0)
-		{
-			return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
-		}
-		else
-		{
-			if (i < x.size() - 1 && x[i] == x[i + 1])
-			{
-				return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
-			}
-		}
-	}
-	Arg1 = (stack.at(stack.size() - x[0]));
-	Arg2 = (stack.at(stack.size() - x[1]));
-	return boost::make_tuple(Arg1, Arg2);
-}
-
-
-//
-//End of Smart script
-//
 
 bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, unsigned int flags, const BaseSignatureChecker& checker, ScriptError* serror)
 {
@@ -909,7 +1082,83 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                 }
                 break;
 
-                case OP_CHECKSIG:
+				case CHECKSIG:
+				case CHECKSIGVERIFY:
+				{
+					if (!Arg_Verify(stack))
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					get_Argument(stack);
+					valtypeInt VectCopy = ExecVector;
+					valtype Arg1, Arg2;
+
+					if (ExecVector.size() == 1)
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					}
+					if (ExecVector.size() > 2)
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					}
+					sort(VectCopy.begin(), VectCopy.end(), greater<int>());
+					if (VectCopy[0] > stack.size())
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
+					}
+					//end of checking for stack size
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						if (ExecVector[i] == 0)
+						{
+							return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+						}
+						else
+						{
+							if (i < ExecVector.size() - 1 && ExecVector[i] == x[i + 1])
+							{
+								return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
+							}
+						}
+					}
+					Arg1 = (stack.at(stack.size() - ExecVector[0]));
+					Arg2 = (stack.at(stack.size() - ExecVector[1]));
+
+					valtype& vchSig = Arg2;
+					valtype& vchPubKey = Arg1;
+
+					// Subset of script starting at the most recent codeseparator
+					CScript scriptCode(pbegincodehash, pend);
+
+					// Drop the signature, since there's no way for a signature to sign itself
+					scriptCode.FindAndDelete(CScript(vchSig));
+
+					if (!CheckSignatureEncoding(vchSig, flags, serror) || !CheckPubKeyEncoding(vchPubKey, flags, serror)) {
+						//serror is set
+						return false;
+					}
+					bool fSuccess = checker.CheckSig(vchSig, vchPubKey, scriptCode);
+
+					
+					stack.push_back(fSuccess ? vchTrue : vchFalse);
+					if (opcode == CHECKSIGVERIFY)
+					{
+						if (fSuccess)
+							popstack(stack);
+						else
+							return set_error(serror, SCRIPT_ERR_CHECKSIGVERIFY);
+					}
+				}
+
+
+					
+
+
+
+
+
+
+				}
+				break;
+				case OP_CHECKSIG:
                 case OP_CHECKSIGVERIFY:
                 {
                     // (sig pubkey -- bool)
@@ -1356,4 +1605,5 @@ bool VerifyScript(const CScript& scriptSig, const CScript& scriptPubKey, unsigne
     }
 
     return set_success(serror);
+
 }
