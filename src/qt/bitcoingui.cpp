@@ -17,6 +17,8 @@
 #include "platformstyle.h"
 #include "rpcconsole.h"
 #include "utilitydialog.h"
+#include "topinfoarea.h"
+
 
 #ifdef ENABLE_WALLET
 #include "walletframe.h"
@@ -558,14 +560,48 @@ void BitcoinGUI::createToolBars()
         /** Create additional container for toolbar and walletFrame and make it the central widget.
             This is a workaround mostly for toolbar styling on Mac OS but should work fine for every other OSes too.
         */
-        QVBoxLayout *layout = new QVBoxLayout;
-        layout->addWidget(toolbar);
-        layout->addWidget(walletFrame);
-        layout->setSpacing(0);
-        layout->setContentsMargins(QMargins());
-        QWidget *containerWidget = new QWidget();
-        containerWidget->setLayout(layout);
-        setCentralWidget(containerWidget);
+//        QVBoxLayout *layout = new QVBoxLayout;
+//        layout->addWidget(toolbar);
+//        layout->addWidget(walletFrame);
+//        layout->setSpacing(0);
+//        layout->setContentsMargins(QMargins());
+//        QWidget *containerWidget = new QWidget();
+//        containerWidget->setLayout(layout);
+//        setCentralWidget(containerWidget);
+
+        QWidget *centralWidget = new QWidget(this);
+        QVBoxLayout* verticalLayout = new QVBoxLayout(centralWidget);
+        TopInfoArea *topInfoArea = new TopInfoArea(centralWidget);
+        topInfoArea->setMinimumHeight(172);
+        verticalLayout->addWidget(topInfoArea);
+
+        QTabWidget *tabWidget = new QTabWidget(centralWidget);
+        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tabWidget->setTabPosition(QTabWidget::West);
+        //TODO: Insert overview page here
+        QWidget *overviewTab = new QWidget();
+        overviewTab->setObjectName(QStringLiteral("overview"));
+        tabWidget->addTab(overviewTab, QString("Overview"));
+
+        //TODO: Insert send page here
+        QWidget *sendTab = new QWidget();
+        sendTab->setObjectName(QStringLiteral("send"));
+        tabWidget->addTab(sendTab, QString("Send"));
+
+        //TODO: Insert receive page here
+        QWidget *receiveTab = new QWidget();
+        receiveTab->setObjectName(QStringLiteral("receive"));
+        tabWidget->addTab(receiveTab, QString("Receive"));
+
+         //TODO: Insert transaction page here
+        QWidget *transactionTab = new QWidget();
+        transactionTab->setObjectName(QStringLiteral("transaction"));
+        tabWidget->addTab(transactionTab, QString("Transaction"));
+
+        verticalLayout->addWidget(tabWidget);
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+
+        setCentralWidget(centralWidget);
     }
 }
 
