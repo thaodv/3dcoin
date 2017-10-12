@@ -14,6 +14,7 @@
 #include "uint256.h"
 #include <functional>
 #include <algorithm>
+#include <string>
 
 using namespace std;
 
@@ -1113,7 +1114,7 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 						}
 						else
 						{
-							if (i < ExecVector.size() - 1 && ExecVector[i] == x[i + 1])
+							if (i < ExecVector.size() - 1 && ExecVector[i] == ExecVector[i + 1])
 							{
 								return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
 							}
@@ -1146,16 +1147,6 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 						else
 							return set_error(serror, SCRIPT_ERR_CHECKSIGVERIFY);
 					}
-				}
-
-
-					
-
-
-
-
-
-
 				}
 				break;
 				case OP_CHECKSIG:
