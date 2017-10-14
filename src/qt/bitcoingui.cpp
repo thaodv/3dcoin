@@ -600,7 +600,7 @@ void BitcoinGUI::createToolBars()
 
         verticalLayout->addWidget(tabWidget);
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-
+        centralWidget->setStyleSheet("background-color: rgb(170, 255, 255);");
         setCentralWidget(centralWidget);
     }
 }
