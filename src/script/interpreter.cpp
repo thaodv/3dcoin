@@ -819,7 +819,7 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 					if (!Arg_Verify(stack))
 						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
 					get_Argument(stack);
-					vector<vector<unsigned char>> stackCopy;
+					vector<vector<unsigned char> > stackCopy;
 					valtype v;
 
 					//Sorting ExecVector and Checking for stack size
