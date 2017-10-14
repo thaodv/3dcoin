@@ -813,7 +813,70 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                 }
                 break;
 
-                case OP_DROP:
+                //3DCoin DROP
+				case DROP:
+				{
+					if (!Arg_Verify(stack))
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					get_Argument(stack);
+					vector<vector<unsigned char>> stackCopy;
+					valtype v;
+
+					//Sorting ExecVector and Checking for stack size
+					sort(ExecVector.begin(), ExecVector.end(), greater<int>());
+					if (ExecVector[0] > stack.size())
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
+					}
+					//Checking for 0 and duplicates
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						if (ExecVector[i] == 0)
+						{
+							return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+						}
+						else
+						{
+							if (i < ExecVector.size() - 1 && ExecVector[i] == ExecVector[i + 1])
+							{
+								return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
+							}
+						}
+					}
+					//Dropping ...
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						switch (ExecVector[i])
+						{
+						default:
+						{
+							if (ExecVector[i] == 1)
+							{
+								stack.pop_back();
+								break;
+							}
+							for (int j = 1; j < ExecVector[i]; j++)
+							{
+								v = stack.back();
+								stackCopy.push_back(v);
+								stack.pop_back();
+							}
+							stack.pop_back();
+							for (int j = 1; j < ExecVector[i]; j++)
+							{
+								v = stackCopy.back();
+								stack.push_back(v);
+								stackCopy.pop_back();
+							}
+						}
+						break;
+						}
+					}
+				}
+				break;
+				//3DCoin DROP - ends
+				
+				case OP_DROP:
                 {
                     // (x -- )
                     if (stack.size() < 1)
@@ -821,6 +884,55 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                     popstack(stack);
                 }
                 break;
+
+				//3DCoin DUP
+				case DUP:
+				{
+					if (!Arg_Verify(stack))
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					get_Argument(stack);
+					valtype v;
+
+					//Sorting and Checking for stack size
+					sort(ExecVector.begin(), ExecVector.end(), greater<int>());
+					if (ExecVector[0] > stack.size())
+					{
+						return  set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
+					}
+					//Checking for 0 and duplicates
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						if (ExecVector[i] == 0)
+						{
+							return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+						}
+						else
+						{
+							if (i < ExecVector.size() - 1 && ExecVector[i] == ExecVector[i + 1])
+							{
+								return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
+							}
+						}
+					}
+					//Duplicating ...
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						switch (ExecVector[i])
+						{
+						default:
+						{
+							if (ExecVector[i] >= 1)
+							{
+								v = stack.at(stack.size()-i-ExecVector[i]);
+								stack.push_back(v);
+							}
+						}
+						break;
+						}
+					}
+				}
+				break;
+				//3DCoin DUP - ends
 
                 case OP_DUP:
                 {
@@ -1083,6 +1195,7 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                 }
                 break;
 
+				//3DCoin CHECKSIG && CHECKSIGVERIFY
 				case CHECKSIG:
 				case CHECKSIGVERIFY:
 				{
@@ -1092,6 +1205,7 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 					valtypeInt VectCopy = ExecVector;
 					valtype Arg1, Arg2;
 
+					//Checking for ExecVector
 					if (ExecVector.size() == 1)
 					{
 						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
@@ -1100,12 +1214,13 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 					{
 						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
 					}
+					//Sorting vectCopy and checking for stack size
 					sort(VectCopy.begin(), VectCopy.end(), greater<int>());
 					if (VectCopy[0] > stack.size())
 					{
 						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
 					}
-					//end of checking for stack size
+					//Checking for 0 and duplicates
 					for (int i = 0; i <= ExecVector.size() - 1; i++)
 					{
 						if (ExecVector[i] == 0)
@@ -1120,8 +1235,9 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 							}
 						}
 					}
-					Arg1 = (stack.at(stack.size() - ExecVector[0]));
-					Arg2 = (stack.at(stack.size() - ExecVector[1]));
+					//Transfering arguments ...
+					Arg1 = (stack.at(stack.size()-ExecVector[0]));
+					Arg2 = (stack.at(stack.size()-ExecVector[1]));
 
 					valtype& vchSig = Arg2;
 					valtype& vchPubKey = Arg1;
@@ -1137,8 +1253,7 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 						return false;
 					}
 					bool fSuccess = checker.CheckSig(vchSig, vchPubKey, scriptCode);
-
-					
+										
 					stack.push_back(fSuccess ? vchTrue : vchFalse);
 					if (opcode == CHECKSIGVERIFY)
 					{
@@ -1149,6 +1264,8 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 					}
 				}
 				break;
+				//3DCoin CHECKSIG && CHECKSIGVERIFY - ends
+
 				case OP_CHECKSIG:
                 case OP_CHECKSIGVERIFY:
                 {
