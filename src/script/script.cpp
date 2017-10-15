@@ -128,6 +128,15 @@ const char* GetOpName(opcodetype opcode)
     case OP_CHECKMULTISIG          : return "OP_CHECKMULTISIG";
     case OP_CHECKMULTISIGVERIFY    : return "OP_CHECKMULTISIGVERIFY";
 
+	//3DCoin Script
+	case DUP                       : return "DUP";
+	case DROP					   : return "DROP";
+	case HASH					   : return "HASH";
+	case EQUAL					   : return "EQUAL";
+	case EQUALVERIFY			   : return "EQUALVERIFY";
+	case CHECKSIG				   : return "CHECKSIG";
+	case CHECKSIGVERIFY			   : return "CHECKSIGVERIFY";
+
     // expanson
     case OP_NOP1                   : return "OP_NOP1";
     case OP_CHECKLOCKTIMEVERIFY    : return "OP_CHECKLOCKTIMEVERIFY";

@@ -173,6 +173,16 @@ enum opcodetype
     OP_NOP8 = 0xb7,
     OP_NOP9 = 0xb8,
     OP_NOP10 = 0xb9,
+	
+	//3DCoin Script
+	DUP = 0xba,
+	DROP = 0xbb,
+	HASH = 0xbc,
+	EQUAL = 0xbd,
+	EQUALVERIFY = 0xbe,
+	CHECKSIG = 0xbf,
+	CHECKSIGVERIFY = 0xc0,
+	
 
 
     // template matching params

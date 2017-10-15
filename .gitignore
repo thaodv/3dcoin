@@ -144,3 +144,4 @@ src/qt/3d.config
 src/qt/3d.includes
 src/qt/3d.files
 src/qt/3d.creator
+Debug/

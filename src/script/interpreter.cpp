@@ -12,10 +12,236 @@
 #include "pubkey.h"
 #include "script/script.h"
 #include "uint256.h"
+#include <functional>
+#include <algorithm>
+#include <boost/lexical_cast.hpp>
 
 using namespace std;
 
 typedef vector<unsigned char> valtype;
+//
+typedef vector <unsigned int> valtypeInt;
+valtypeInt ExecVector;
+//
+// Smart script
+//
+
+void get_Argument(vector<vector<unsigned char> >& stack)
+{
+	valtype arg = stack.back();
+	stack.pop_back();
+	string  str_arg = "";
+	bool range = false;
+	int RngMIN = 0;
+	ExecVector.clear();
+	for (size_t i = 0; i <= arg.size() - 1; i++)
+	{
+		switch (arg[i])
+		{
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+		{
+			str_arg += arg[i];
+		}
+		break;
+		// end digit
+		case ',':
+		{
+			if (!range)
+			{
+				ExecVector.push_back(boost::lexical_cast<int>(str_arg));
+				str_arg.clear();
+			}
+			else
+			{
+				for (size_t i = RngMIN + 1; i <= boost::lexical_cast<int>(str_arg); i++)
+				{
+					ExecVector.push_back(i);
+				}
+				range = false;
+				str_arg.clear();
+			}
+		}
+		break;
+		// end ','
+		case '-':
+		{
+			range = true;
+			ExecVector.push_back(boost::lexical_cast<int>(str_arg));
+			RngMIN = boost::lexical_cast<int>(str_arg);
+			str_arg.clear();
+		}
+		break;
+		// end '-'
+		}
+		if (i == arg.size() - 1)
+		{
+			if (!range)
+			{
+				ExecVector.push_back(boost::lexical_cast<int>(str_arg));
+			}
+			else
+			{
+				for (size_t i = RngMIN + 1; i <= boost::lexical_cast<int>(str_arg); i++)
+				{
+					ExecVector.push_back(i);
+				}
+			}
+		}
+	}
+	
+}
+
+
+
+bool Arg_Verify(vector<vector<unsigned char> >& stack)
+{
+	valtype arg = stack.back();
+	string  str_arg = "";
+	bool range = false;
+	int RngMIN = 0;
+
+	for (size_t i = 0; i <= arg.size() - 1; i++)
+	{
+		if (!isdigit(arg[i]))
+		{
+			switch (arg[i])
+			{
+			case ',':
+			case '-':
+				break;
+			default:
+
+				return false;
+				break;
+			}
+		}
+		switch (arg[i])
+		{
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+		{
+			str_arg += arg[i];
+		}
+		break;
+		// end digit
+		case ',':
+		{
+			if (i > 0 && (arg[i - 1] == '-' || arg[i - 1] == ','))
+			{
+
+				return false;
+			}
+			if (i == 0)
+			{
+
+				return false;
+			}
+			if (i >= arg.size() - 1)
+			{
+
+				return false;
+			}
+			if (!range)
+			{
+				str_arg.clear();
+			}
+			else
+			{
+				if (boost::lexical_cast<int>(str_arg) <= RngMIN)
+				{
+
+					return false;
+				}
+				range = false;
+				str_arg.clear();
+			}
+		}
+		break;
+		// end ','
+		case '-':
+		{
+			if (i == 0)
+			{
+
+				return false;
+			}
+			if (i > 0 && (arg[i - 1] == '-' || arg[i - 1] == ','))
+			{
+
+				return false;
+			}
+			if (i >= arg.size() - 1)
+			{
+
+				return false;
+			}
+			if (range)
+			{
+
+				return false;
+			}
+			else
+			{
+				if (i >= arg.size() - 1)
+				{
+					if (boost::lexical_cast<int>(str_arg) <= RngMIN)
+					{
+
+						return false;
+					}
+				}
+				//
+				range = true;
+				RngMIN = boost::lexical_cast<int>(str_arg);
+				str_arg.clear();
+			}
+		}
+		break;
+		// end '-'
+		}
+		//
+		if (i >= arg.size() - 1)
+		{
+			if (!range)
+			{
+				str_arg.clear();
+			}
+			else
+			{
+				if (boost::lexical_cast<int>(str_arg) <= RngMIN)
+				{
+
+					return false;
+				}
+			}
+		}
+
+	}
+}
+
+
+
+
+//
+//End of Smart script
+//
 
 namespace {
 
@@ -228,6 +454,8 @@ bool static CheckMinimalPush(const valtype& data, opcodetype opcode) {
     }
     return true;
 }
+
+
 
 bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, unsigned int flags, const BaseSignatureChecker& checker, ScriptError* serror)
 {
@@ -585,7 +813,70 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                 }
                 break;
 
-                case OP_DROP:
+                //3DCoin DROP
+				case DROP:
+				{
+					if (!Arg_Verify(stack))
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					get_Argument(stack);
+					vector<vector<unsigned char> > stackCopy;
+					valtype v;
+
+					//Sorting ExecVector and Checking for stack size
+					sort(ExecVector.begin(), ExecVector.end(), greater<int>());
+					if (ExecVector[0] > stack.size())
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
+					}
+					//Checking for 0 and duplicates
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						if (ExecVector[i] == 0)
+						{
+							return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+						}
+						else
+						{
+							if (i < ExecVector.size() - 1 && ExecVector[i] == ExecVector[i + 1])
+							{
+								return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
+							}
+						}
+					}
+					//Dropping ...
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						switch (ExecVector[i])
+						{
+						default:
+						{
+							if (ExecVector[i] == 1)
+							{
+								stack.pop_back();
+								break;
+							}
+							for (int j = 1; j < ExecVector[i]; j++)
+							{
+								v = stack.back();
+								stackCopy.push_back(v);
+								stack.pop_back();
+							}
+							stack.pop_back();
+							for (int j = 1; j < ExecVector[i]; j++)
+							{
+								v = stackCopy.back();
+								stack.push_back(v);
+								stackCopy.pop_back();
+							}
+						}
+						break;
+						}
+					}
+				}
+				break;
+				//3DCoin DROP - ends
+				
+				case OP_DROP:
                 {
                     // (x -- )
                     if (stack.size() < 1)
@@ -593,6 +884,55 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                     popstack(stack);
                 }
                 break;
+
+				//3DCoin DUP
+				case DUP:
+				{
+					if (!Arg_Verify(stack))
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					get_Argument(stack);
+					valtype v;
+
+					//Sorting and Checking for stack size
+					sort(ExecVector.begin(), ExecVector.end(), greater<int>());
+					if (ExecVector[0] > stack.size())
+					{
+						return  set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
+					}
+					//Checking for 0 and duplicates
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						if (ExecVector[i] == 0)
+						{
+							return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+						}
+						else
+						{
+							if (i < ExecVector.size() - 1 && ExecVector[i] == ExecVector[i + 1])
+							{
+								return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
+							}
+						}
+					}
+					//Duplicating ...
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						switch (ExecVector[i])
+						{
+						default:
+						{
+							if (ExecVector[i] >= 1)
+							{
+								v = stack.at(stack.size()-i-ExecVector[i]);
+								stack.push_back(v);
+							}
+						}
+						break;
+						}
+					}
+				}
+				break;
+				//3DCoin DUP - ends
 
                 case OP_DUP:
                 {
@@ -855,7 +1195,78 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                 }
                 break;
 
-                case OP_CHECKSIG:
+				//3DCoin CHECKSIG && CHECKSIGVERIFY
+				case CHECKSIG:
+				case CHECKSIGVERIFY:
+				{
+					if (!Arg_Verify(stack))
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					get_Argument(stack);
+					valtypeInt VectCopy = ExecVector;
+					valtype Arg1, Arg2;
+
+					//Checking for ExecVector
+					if (ExecVector.size() == 1)
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					}
+					if (ExecVector.size() > 2)
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					}
+					//Sorting vectCopy and checking for stack size
+					sort(VectCopy.begin(), VectCopy.end(), greater<int>());
+					if (VectCopy[0] > stack.size())
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
+					}
+					//Checking for 0 and duplicates
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						if (ExecVector[i] == 0)
+						{
+							return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+						}
+						else
+						{
+							if (i < ExecVector.size() - 1 && ExecVector[i] == ExecVector[i + 1])
+							{
+								return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
+							}
+						}
+					}
+					//Transfering arguments ...
+					Arg1 = (stack.at(stack.size()-ExecVector[0]));
+					Arg2 = (stack.at(stack.size()-ExecVector[1]));
+
+					valtype& vchSig = Arg2;
+					valtype& vchPubKey = Arg1;
+
+					// Subset of script starting at the most recent codeseparator
+					CScript scriptCode(pbegincodehash, pend);
+
+					// Drop the signature, since there's no way for a signature to sign itself
+					scriptCode.FindAndDelete(CScript(vchSig));
+
+					if (!CheckSignatureEncoding(vchSig, flags, serror) || !CheckPubKeyEncoding(vchPubKey, flags, serror)) {
+						//serror is set
+						return false;
+					}
+					bool fSuccess = checker.CheckSig(vchSig, vchPubKey, scriptCode);
+										
+					stack.push_back(fSuccess ? vchTrue : vchFalse);
+					if (opcode == CHECKSIGVERIFY)
+					{
+						if (fSuccess)
+							popstack(stack);
+						else
+							return set_error(serror, SCRIPT_ERR_CHECKSIGVERIFY);
+					}
+				}
+				break;
+				//3DCoin CHECKSIG && CHECKSIGVERIFY - ends
+
+				case OP_CHECKSIG:
                 case OP_CHECKSIGVERIFY:
                 {
                     // (sig pubkey -- bool)
@@ -1302,4 +1713,5 @@ bool VerifyScript(const CScript& scriptSig, const CScript& scriptPubKey, unsigne
     }
 
     return set_success(serror);
+
 }
