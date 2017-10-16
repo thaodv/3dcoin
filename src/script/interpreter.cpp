@@ -1027,6 +1027,64 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                 //
                 // Bitwise logic
                 //
+
+				//3DCoin EQUAL
+
+				case EQUAL:
+				case EQUALVERIFY:
+				{
+					valtype v;
+					valtypeInt VectCopy = ExecVector;
+					valtype Arg1, Arg2;
+
+					//Checking for EQUAL arguments
+					if (ExecVector.size() == 1)
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					}
+					if (ExecVector.size() > 2)
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					}
+					//Sorting vector copy and checking for stack arguments
+					sort(VectCopy.begin(), VectCopy.end(), greater<int>());
+					if (VectCopy[0] > stack.size())
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
+					}
+					//Checking for ducplicates
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						if (ExecVector[i] == 0)
+						{
+							return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+						}
+						else
+						{
+							if (i < ExecVector.size() - 1 && ExecVector[i] == ExecVector[i + 1])
+							{
+								return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
+							}
+						}
+					}
+					//Push true or false in stack
+					Arg1 = (stack.at(stack.size()-ExecVector[0]));
+					Arg2 = (stack.at(stack.size()-ExecVector[1]));
+					bool fEqual = (Arg1 == Arg2);
+					stack.push_back(fEqual ? vchTrue : vchFalse);
+					//if EQUALVERIFY ...
+					if (opcode == EQUALVERIFY)
+					{
+						if (fEqual)
+							popstack(stack);
+						else
+							return set_error(serror, SCRIPT_ERR_EQUALVERIFY);
+					}
+				}
+				break;
+				
+				//3DCoin EQUAL - ends
+
                 case OP_EQUAL:
                 case OP_EQUALVERIFY:
                 //case OP_NOTEQUAL: // use OP_NUMNOTEQUAL
