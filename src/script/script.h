@@ -177,11 +177,15 @@ enum opcodetype
 	//3DCoin Script
 	DUP = 0xba,
 	DROP = 0xbb,
-	HASH = 0xbc,
-	EQUAL = 0xbd,
-	EQUALVERIFY = 0xbe,
-	CHECKSIG = 0xbf,
-	CHECKSIGVERIFY = 0xc0,
+	RIPEMD = 0xbc,
+	SHA1 = 0xbd,
+	SHA2 = 0xbe,
+	HASH160 = 0xbf,
+	HASH256 = 0xc0,
+	EQUAL = 0xc1,
+	EQUALVERIFY = 0xc2,
+	CHECKSIG = 0xc3,
+	CHECKSIGVERIFY = 0xc4,
 	
 
 

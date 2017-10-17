@@ -1220,6 +1220,83 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                 //
                 // Crypto
                 //
+
+				//3DCoin Hash
+				case RIPEMD:
+				case SHA1:
+				case SHA2:
+				case HASH160:
+				case HASH256:
+				{
+					if (!Arg_Verify(stack))
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					get_Argument(stack);
+
+					vector<vector<unsigned char> > stackCopy;
+					valtype v;
+
+					//Sorting and checking for stack size
+					sort(ExecVector.begin(), ExecVector.end(), greater<int>());
+					if (ExecVector[0] > stack.size())
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
+					}
+					//end of 0 and duplicates
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						if (ExecVector[i] == 0)
+						{
+							return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+						}
+						else
+						{
+							if (i < ExecVector.size() - 1 && ExecVector[i] == ExecVector[i + 1])
+							{
+								return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
+							}
+						}
+					}
+					//Hashing ...
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						valtype& vch = stack.at(stack.size()-ExecVector[i]);
+						switch (ExecVector[i])
+						{
+						default:
+						{
+							valtype vchHash((opcode == RIPEMD || opcode == SHA1 || opcode == HASH160) ? 20 : 32);
+							if (opcode == RIPEMD)
+								CRIPEMD160().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
+							else if (opcode == SHA1)
+								CSHA1().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
+							else if (opcode == SHA2)
+								CSHA256().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
+							else if (opcode == HASH160)
+								CHash160().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
+							else if (opcode == HASH256)
+								CHash256().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
+							stack.insert(stack.end() - ExecVector[i], vchHash);
+							for (int j = 1; j < ExecVector[i]; j++)
+							{
+								v = stack.back();
+								stackCopy.push_back(v);
+								stack.pop_back();
+							}
+							stack.pop_back();
+							for (int j = 1; j < ExecVector[i]; j++)
+							{
+								v = stackCopy.back();
+								stack.push_back(v);
+								stackCopy.pop_back();
+							}
+						}
+						break;
+						}
+					}
+				}
+				break;
+				//3DCoinHash -  ends
+
                 case OP_RIPEMD160:
                 case OP_SHA1:
                 case OP_SHA256:

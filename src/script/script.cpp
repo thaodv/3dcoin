@@ -131,7 +131,11 @@ const char* GetOpName(opcodetype opcode)
 	//3DCoin Script
 	case DUP                       : return "DUP";
 	case DROP					   : return "DROP";
-	case HASH					   : return "HASH";
+	case RIPEMD                    : return "RIPEMD";
+	case SHA1                      : return "SHA1";
+  	case SHA2                      : return "SHA2";
+	case HASH160                   : return "HASH160";
+	case HASH256                   : return "HASH256";
 	case EQUAL					   : return "EQUAL";
 	case EQUALVERIFY			   : return "EQUALVERIFY";
 	case CHECKSIG				   : return "CHECKSIG";
