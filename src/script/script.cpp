@@ -132,8 +132,8 @@ const char* GetOpName(opcodetype opcode)
 	case DUP                       : return "DUP";
 	case DROP					   : return "DROP";
 	case RIPEMD                    : return "RIPEMD";
-	case SHA1                      : return "SHA1";
-  	case SHA2                      : return "SHA2";
+	case SHA160                    : return "SHA160";
+  	case SHA256                    : return "SHA256";
 	case HASH160                   : return "HASH160";
 	case HASH256                   : return "HASH256";
 	case EQUAL					   : return "EQUAL";

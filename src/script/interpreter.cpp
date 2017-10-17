@@ -1223,8 +1223,8 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 
 				//3DCoin Hash
 				case RIPEMD:
-				case SHA1:
-				case SHA2:
+				case SHA160:
+				case SHA256:
 				case HASH160:
 				case HASH256:
 				{
@@ -1264,12 +1264,12 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 						{
 						default:
 						{
-							valtype vchHash((opcode == RIPEMD || opcode == SHA1 || opcode == HASH160) ? 20 : 32);
+							valtype vchHash((opcode == RIPEMD || opcode == SHA160 || opcode == HASH160) ? 20 : 32);
 							if (opcode == RIPEMD)
 								CRIPEMD160().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
-							else if (opcode == SHA1)
+							else if (opcode == SHA160)
 								CSHA1().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
-							else if (opcode == SHA2)
+							else if (opcode == SHA256)
 								CSHA256().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
 							else if (opcode == HASH160)
 								CHash160().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
