@@ -560,47 +560,37 @@ void BitcoinGUI::createToolBars()
         /** Create additional container for toolbar and walletFrame and make it the central widget.
             This is a workaround mostly for toolbar styling on Mac OS but should work fine for every other OSes too.
         */
-//        QVBoxLayout *layout = new QVBoxLayout;
-//        layout->addWidget(toolbar);
-//        layout->addWidget(walletFrame);
-//        layout->setSpacing(0);
-//        layout->setContentsMargins(QMargins());
-//        QWidget *containerWidget = new QWidget();
-//        containerWidget->setLayout(layout);
-//        setCentralWidget(containerWidget);
+
+        toolbar->setOrientation(Qt::Vertical);
+
+        toolbar->widgetForAction(overviewAction)->setStyleSheet("QWidget { width:110; }");
+        toolbar->widgetForAction(sendCoinsAction)->setStyleSheet("QWidget { width:110; }");
+        toolbar->widgetForAction(receiveCoinsAction)->setStyleSheet("QWidget { width:110; }");
+        toolbar->widgetForAction(historyAction)->setStyleSheet("QWidget { width:110; }");
+
+        QLayout* lay = toolbar->layout();
+        for(int i = 0; i < lay->count(); ++i)
+        {
+            lay->itemAt(i)->setAlignment(Qt::AlignLeft);
+        }
 
         QWidget *centralWidget = new QWidget(this);
         QVBoxLayout* verticalLayout = new QVBoxLayout(centralWidget);
         TopInfoArea *topInfoArea = new TopInfoArea(centralWidget);
         topInfoArea->setMinimumHeight(172);
+        topInfoArea->setObjectName(QStringLiteral("topInfoArea"));
+        //topInfoArea->setStyleSheet("QWidget #topInfoArea{background-color: rgb(222, 247, 255);border: 2px solid gray;}");
         verticalLayout->addWidget(topInfoArea);
 
-        QTabWidget *tabWidget = new QTabWidget(centralWidget);
-        tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setTabPosition(QTabWidget::West);
-        //TODO: Insert overview page here
-        QWidget *overviewTab = new QWidget();
-        overviewTab->setObjectName(QStringLiteral("overview"));
-        tabWidget->addTab(overviewTab, QString("Overview"));
+        QHBoxLayout* horizontalLayout = new QHBoxLayout(centralWidget);
+        horizontalLayout->addWidget(toolbar);
+        horizontalLayout->addWidget(walletFrame);
+        horizontalLayout->setSpacing(0);
 
-        //TODO: Insert send page here
-        QWidget *sendTab = new QWidget();
-        sendTab->setObjectName(QStringLiteral("send"));
-        tabWidget->addTab(sendTab, QString("Send"));
-
-        //TODO: Insert receive page here
-        QWidget *receiveTab = new QWidget();
-        receiveTab->setObjectName(QStringLiteral("receive"));
-        tabWidget->addTab(receiveTab, QString("Receive"));
-
-         //TODO: Insert transaction page here
-        QWidget *transactionTab = new QWidget();
-        transactionTab->setObjectName(QStringLiteral("transaction"));
-        tabWidget->addTab(transactionTab, QString("Transaction"));
-
-        verticalLayout->addWidget(tabWidget);
+        verticalLayout->addLayout(horizontalLayout);
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        centralWidget->setStyleSheet("background-color: rgb(170, 255, 255);");
+        this->setStyleSheet("QWidget{background-color: rgb(179, 230, 255);} QWidget #topInfoArea{background-color: rgb(222, 247, 255);border: 2px solid gray;}");
+
         setCentralWidget(centralWidget);
     }
 }
