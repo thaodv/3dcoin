@@ -1027,6 +1027,64 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                 //
                 // Bitwise logic
                 //
+
+				//3DCoin EQUAL
+
+				case EQUAL:
+				case EQUALVERIFY:
+				{
+					valtype v;
+					valtypeInt VectCopy = ExecVector;
+					valtype Arg1, Arg2;
+
+					//Checking for EQUAL arguments
+					if (ExecVector.size() == 1)
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					}
+					if (ExecVector.size() > 2)
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					}
+					//Sorting vector copy and checking for stack arguments
+					sort(VectCopy.begin(), VectCopy.end(), greater<int>());
+					if (VectCopy[0] > stack.size())
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
+					}
+					//Checking for ducplicates
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						if (ExecVector[i] == 0)
+						{
+							return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+						}
+						else
+						{
+							if (i < ExecVector.size() - 1 && ExecVector[i] == ExecVector[i + 1])
+							{
+								return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
+							}
+						}
+					}
+					//Push true or false in stack
+					Arg1 = (stack.at(stack.size()-ExecVector[0]));
+					Arg2 = (stack.at(stack.size()-ExecVector[1]));
+					bool fEqual = (Arg1 == Arg2);
+					stack.push_back(fEqual ? vchTrue : vchFalse);
+					//if EQUALVERIFY ...
+					if (opcode == EQUALVERIFY)
+					{
+						if (fEqual)
+							popstack(stack);
+						else
+							return set_error(serror, SCRIPT_ERR_EQUALVERIFY);
+					}
+				}
+				break;
+				
+				//3DCoin EQUAL - ends
+
                 case OP_EQUAL:
                 case OP_EQUALVERIFY:
                 //case OP_NOTEQUAL: // use OP_NUMNOTEQUAL
@@ -1162,6 +1220,83 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                 //
                 // Crypto
                 //
+
+				//3DCoin Hash
+				case H160MD:
+				case H160SHA:
+				case H256SHA:
+				case H160XMD:
+				case H256XSHA:
+				{
+					if (!Arg_Verify(stack))
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+					get_Argument(stack);
+
+					vector<vector<unsigned char> > stackCopy;
+					valtype v;
+
+					//Sorting and checking for stack size
+					sort(ExecVector.begin(), ExecVector.end(), greater<int>());
+					if (ExecVector[0] > stack.size())
+					{
+						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_STACKSIZE_ERROR);
+					}
+					//end of 0 and duplicates
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						if (ExecVector[i] == 0)
+						{
+							return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
+						}
+						else
+						{
+							if (i < ExecVector.size() - 1 && ExecVector[i] == ExecVector[i + 1])
+							{
+								return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_DUP_ARG);
+							}
+						}
+					}
+					//Hashing ...
+					for (int i = 0; i <= ExecVector.size() - 1; i++)
+					{
+						valtype& vch = stack.at(stack.size()-ExecVector[i]);
+						switch (ExecVector[i])
+						{
+						default:
+						{
+							valtype vchHash((opcode == H160MD || opcode == H160SHA || opcode == H160XMD) ? 20 : 32);
+							if (opcode == H160MD)
+								CRIPEMD160().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
+							else if (opcode == H160SHA)
+								CSHA1().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
+							else if (opcode == H256SHA)
+								CSHA256().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
+							else if (opcode == H160XMD)
+								CHash160().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
+							else if (opcode == H256XSHA)
+								CHash256().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
+							stack.insert(stack.end() - ExecVector[i], vchHash);
+							for (int j = 1; j < ExecVector[i]; j++)
+							{
+								v = stack.back();
+								stackCopy.push_back(v);
+								stack.pop_back();
+							}
+							stack.pop_back();
+							for (int j = 1; j < ExecVector[i]; j++)
+							{
+								v = stackCopy.back();
+								stack.push_back(v);
+								stackCopy.pop_back();
+							}
+						}
+						break;
+						}
+					}
+				}
+				break;
+				//3DCoinHash -  ends
+
                 case OP_RIPEMD160:
                 case OP_SHA1:
                 case OP_SHA256:
