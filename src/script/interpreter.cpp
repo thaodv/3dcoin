@@ -1222,11 +1222,11 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
                 //
 
 				//3DCoin Hash
-				case RIPEMD:
-				case SHA160:
-				case SHA256:
-				case HASH160:
-				case HASH256:
+				case H160MD:
+				case H160SHA:
+				case H256SHA:
+				case H160XMD:
+				case H256XSHA:
 				{
 					if (!Arg_Verify(stack))
 						return set_error(serror, SCRIPT_ERR_INVALIDARGUMENT_INPUT);
@@ -1264,16 +1264,16 @@ bool EvalScript(vector<vector<unsigned char> >& stack, const CScript& script, un
 						{
 						default:
 						{
-							valtype vchHash((opcode == RIPEMD || opcode == SHA160 || opcode == HASH160) ? 20 : 32);
-							if (opcode == RIPEMD)
+							valtype vchHash((opcode == H160MD || opcode == H160SHA || opcode == H160XMD) ? 20 : 32);
+							if (opcode == H160MD)
 								CRIPEMD160().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
-							else if (opcode == SHA160)
+							else if (opcode == H160SHA)
 								CSHA1().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
-							else if (opcode == SHA256)
+							else if (opcode == H256SHA)
 								CSHA256().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
-							else if (opcode == HASH160)
+							else if (opcode == H160XMD)
 								CHash160().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
-							else if (opcode == HASH256)
+							else if (opcode == H256XSHA)
 								CHash256().Write(begin_ptr(vch), vch.size()).Finalize(begin_ptr(vchHash));
 							stack.insert(stack.end() - ExecVector[i], vchHash);
 							for (int j = 1; j < ExecVector[i]; j++)
