@@ -56,6 +56,8 @@
 #include <QTimer>
 #include <QToolBar>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QFile>
 
 #if QT_VERSION < 0x050000
 #include <QTextDocument>
@@ -163,6 +165,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     {
         /** Create wallet frame*/
         walletFrame = new WalletFrame(platformStyle, this);
+        walletFrame->setObjectName(QStringLiteral("walletFrame"));
     } else
 #endif // ENABLE_WALLET
     {
@@ -579,7 +582,7 @@ void BitcoinGUI::createToolBars()
         TopInfoArea *topInfoArea = new TopInfoArea(centralWidget);
         topInfoArea->setMinimumHeight(172);
         topInfoArea->setObjectName(QStringLiteral("topInfoArea"));
-        //topInfoArea->setStyleSheet("QWidget #topInfoArea{background-color: rgb(222, 247, 255);border: 2px solid gray;}");
+
         verticalLayout->addWidget(topInfoArea);
 
         QHBoxLayout* horizontalLayout = new QHBoxLayout(centralWidget);
@@ -589,9 +592,14 @@ void BitcoinGUI::createToolBars()
 
         verticalLayout->addLayout(horizontalLayout);
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        this->setStyleSheet("QWidget{background-color: rgb(179, 230, 255);} QWidget #topInfoArea{background-color: rgb(222, 247, 255);border: 2px solid gray;}");
-
+     
         setCentralWidget(centralWidget);
+
+        QFile File(":/themes/blueTheme");
+        File.open(QFile::ReadOnly);
+        QString StyleSheet = QLatin1String(File.readAll());
+
+        qApp->setStyleSheet(StyleSheet);
     }
 }
 

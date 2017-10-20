@@ -1,4 +1,7 @@
 <RCC>
+     <qresource prefix="/themes">
+        <file alias="blueTheme">res/themes/blue.qss</file>
+    </qresource>
     <qresource prefix="/icons">
         <file alias="bitcoin">res/icons/bitcoin.png</file>
         <file>res/icons/logo.png</file>
