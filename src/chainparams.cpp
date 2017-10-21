@@ -73,7 +73,7 @@ public:
 	CMainParams()
 	{
 		strNetworkID = "main";
-		consensus.nSubsidyHalvingInterval = 210240; // Note: actual number of blocks per calendar year with DGW v3 is ~200700 (for example 449750 - 249050)
+		consensus.nSubsidyHalvingInterval = 103680; // Note: actual number of blocks per calendar year with DGW v3 is ~200700 (for example 449750 - 249050)
 		consensus.nMasternodePaymentsStartBlock = 100000; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
 		consensus.nMasternodePaymentsIncreaseBlock = 158000; // actual historical value
 		consensus.nMasternodePaymentsIncreasePeriod = 576 * 30; // 17280 - actual historical value
@@ -91,8 +91,8 @@ public:
 		consensus.nMajorityRejectBlockOutdated = 950;
 		consensus.nMajorityWindow = 1000;
 		consensus.BIP34Height = 227931;
-		consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");
-		consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
+		consensus.BIP34Hash = uint256S("");
+		consensus.powLimit = uint256S("");
 		consensus.nPowTargetTimespan = 24 * 60 * 60; // 3DCoin: 1 day
 		consensus.nPowTargetSpacing = 2.5 * 60; // 3DCoin: 2.5 minutes
 		consensus.fPowAllowMinDifficultyBlocks = false;
@@ -191,7 +191,7 @@ public:
 		fMiningRequiresPeers = true;
 		fDefaultConsistencyChecks = false;
 		fRequireStandard = true;
-		fMineBlocksOnDemand = false;
+		fMineBlocksOnDemand = true;
 		fTestnetToBeDeprecatedFieldRPC = false;
 
 		nPoolMaxTransactions = 3;
@@ -367,16 +367,16 @@ public:
 	CRegTestParams()
 	{
 		strNetworkID = "regtest";
-		consensus.nSubsidyHalvingInterval = 150;
-		consensus.nMasternodePaymentsStartBlock = 240;
-		consensus.nMasternodePaymentsIncreaseBlock = 350;
+		consensus.nSubsidyHalvingInterval = 1500;
+		consensus.nMasternodePaymentsStartBlock = 2400;
+		consensus.nMasternodePaymentsIncreaseBlock = 3500;
 		consensus.nMasternodePaymentsIncreasePeriod = 10;
 		consensus.nInstantSendKeepLock = 6;
-		consensus.nBudgetPaymentsStartBlock = 1000;
+		consensus.nBudgetPaymentsStartBlock = 10000;
 		consensus.nBudgetPaymentsCycleBlocks = 50;
 		consensus.nBudgetPaymentsWindowBlocks = 10;
 		consensus.nBudgetProposalEstablishingTime = 60 * 20;
-		consensus.nSuperblockStartBlock = 1500;
+		consensus.nSuperblockStartBlock = 15000;
 		consensus.nSuperblockCycle = 10;
 		consensus.nGovernanceMinQuorum = 1;
 		consensus.nGovernanceFilterElements = 100;
