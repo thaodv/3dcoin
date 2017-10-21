@@ -1740,21 +1740,13 @@ NOTE:   unlike bitcoin we are using PREVIOUS block height here,
 */
 CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
-	double dDiff;
+	
 	CAmount nSubsidyBase;
-
-	if (nPrevHeight <= 4500 && Params().NetworkIDString() == CBaseChainParams::MAIN) {
-		/* a bug which caused diff to not be correctly calculated */
-		dDiff = (double)0x0000ffff / (double)(nPrevBits & 0x00ffffff);
-	}
-	else {
-		dDiff = ConvertBitsToDouble(nPrevBits);
-	}
 	if (nPrevHeight == 0) {
 		return 200000000 * COIN;
 	}
 
-	if (nPrevHeight < 21000) {
+	if (nPrevHeight < 1000) {
 		// CPU mining era
 		// 0.01 3DC avoid instamine
 		nSubsidyBase = 0.01;
