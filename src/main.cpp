@@ -1740,35 +1740,124 @@ NOTE:   unlike bitcoin we are using PREVIOUS block height here,
 */
 CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
+
 	
 	CAmount nSubsidyBase;
 	if (nPrevHeight == 0) {
 		return 200000000 * COIN;
 	}
 
-	if (nPrevHeight < 1000) {
+	if (nPrevHeight <= 10) {
 		// CPU mining era
 		// 0.01 3DC avoid instamine
 		nSubsidyBase = 0;
-	}
-	else
+	}else if(nPrevHeight >= 11 && nPrevHeight < 20)
+        {
+            nSubsidyBase = 1;
+        }
+	else if (nPrevHeight >= 20 && nPrevHeight < 30)
+        {
+            nSubsidyBase = 2;
+        }
+    else if (nPrevHeight >= 30 && nPrevHeight < 40)
+        {
+            nSubsidyBase = 3;
+        }
+    else if (nPrevHeight >= 40 && nPrevHeight < 50)
+        {
+            nSubsidyBase = 4;
+        }
+    else if (nPrevHeight >= 50 && nPrevHeight < 60)
+        {
+            nSubsidyBase = 5;
+        }
+    else if (nPrevHeight >= 60 && nPrevHeight < 70)
+        {
+            nSubsidyBase = 6;
+        }
+    else if (nPrevHeight >= 70 && nPrevHeight < 80)
+        {
+            nSubsidyBase = 7;
+        }
+    else if (nPrevHeight >= 80 && nPrevHeight < 90)
+        {
+            nSubsidyBase = 8;
+        }
+    else if (nPrevHeight >= 90 && nPrevHeight < 100)
+        {
+            nSubsidyBase = 9;
+        }
+    else if (nPrevHeight >= 100 && nPrevHeight < 110)
+        {
+            nSubsidyBase = 10;
+        }
+    else if (nPrevHeight >= 110 && nPrevHeight < 120)
+        {
+            nSubsidyBase = 11;
+        }
+    else if (nPrevHeight >= 120 && nPrevHeight < 130)
+        {
+            nSubsidyBase = 12;
+        }
+    else if (nPrevHeight >= 130)   
 	{		
-		nSubsidyBase = 13;
+	    nSubsidyBase = 13;
 	}
+
+     
+
+
+
 		// LogPrintf("height %u diff %4.2f reward %d\n", nPrevHeight, dDiff, nSubsidyBase);
 		CAmount nSubsidy = nSubsidyBase * COIN;
 
-		// yearly decline of production by 10 per year.
+		 //yearly decline of production by 2% per year.
 		for (int i = consensusParams.nSubsidyHalvingInterval; i <= nPrevHeight; i += consensusParams.nSubsidyHalvingInterval) {
-			nSubsidy -= nSubsidy / 20;
+			nSubsidy -= nSubsidy / 100;
 		}
 
-		return fSuperblockPartOnly ? 0 : nSubsidy;
+        int nMNPIBlock = Params().GetConsensus().nMasternodePaymentsIncreaseBlock;
+        int nMNPIPeriod = Params().GetConsensus().nMasternodePaymentsIncreasePeriod;
+        int nMNPIStart = Params().GetConsensus().nMasternodePaymentsStartBlock;
+
+                                                                      // Supernode reserve
+          if(nPrevHeight > nMNPIStart)                  nSubsidy -= nSubsidy / 10; //  - 10.0%
+          if(nPrevHeight > nMNPIBlock)                  nSubsidy -= nSubsidy / 20; //  - 15.0% 
+          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 1)) nSubsidy -= nSubsidy / 20; //  - 20.0% 
+          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 2)) nSubsidy -= nSubsidy / 20; //  - 25.0% 
+          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 3)) nSubsidy -= nSubsidy / 20; //  - 30.0% 
+          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 4)) nSubsidy -= nSubsidy / 20; //  - 35.0% 
+          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 5)) nSubsidy -= nSubsidy / 20; //  - 40.0% 
+          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 6)) nSubsidy -= nSubsidy / 20; //  - 45.0% 
+        
+        // reduce the block reward by 20 extra percent (allowing budget/superblocks)
+             CAmount nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy/20 : 0;
+        
+
+        
+
+
+    return fSuperblockPartOnly ? nSuperblockPart : nSubsidy - nSuperblockPart;
 }
 
 CAmount GetMasternodePayment(int nHeight, CAmount blockValue)
 {
-	return blockValue / 2;
+    CAmount ret = blockValue/10; // start at 10%
+
+    int nMNPIBlock = Params().GetConsensus().nMasternodePaymentsIncreaseBlock;
+    int nMNPIPeriod = Params().GetConsensus().nMasternodePaymentsIncreasePeriod;
+
+                                                                      // mainnet:
+    if(nHeight > nMNPIBlock)                  ret += blockValue / 20; // 158000 - 15.0% 
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 1)) ret += blockValue / 20; // 175280 - 20.0% 
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 2)) ret += blockValue / 20; // 192560 - 25.0% 
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 3)) ret += blockValue / 20; // 209840 - 30.0% 
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 4)) ret += blockValue / 20; // 227120 - 35.0% 
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 5)) ret += blockValue / 20; // 244400 - 40.0% 
+    if(nHeight > nMNPIBlock+(nMNPIPeriod* 6)) ret += blockValue / 20; // 261680 - 45.0% 
+
+
+    return ret;
 }
 
 bool IsInitialBlockDownload()
