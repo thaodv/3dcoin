@@ -1740,66 +1740,66 @@ NOTE:   unlike bitcoin we are using PREVIOUS block height here,
 */
 CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
-
+    
 	
 	CAmount nSubsidyBase;
 	if (nPrevHeight == 0) {
 		return 200000000 * COIN;
 	}
 
-	if (nPrevHeight <= 10) {
+	if (nPrevHeight <= 20160) {
 		// CPU mining era
 		// 0.01 3DC avoid instamine
 		nSubsidyBase = 0;
-	}else if(nPrevHeight >= 11 && nPrevHeight < 20)
+	}else if(nPrevHeight >= 20161 && nPrevHeight < 24481)
         {
             nSubsidyBase = 1;
         }
-	else if (nPrevHeight >= 20 && nPrevHeight < 30)
+	else if (nPrevHeight >= 24481 && nPrevHeight < 28801)
         {
             nSubsidyBase = 2;
         }
-    else if (nPrevHeight >= 30 && nPrevHeight < 40)
+    else if (nPrevHeight >= 28801 && nPrevHeight < 33121)
         {
             nSubsidyBase = 3;
         }
-    else if (nPrevHeight >= 40 && nPrevHeight < 50)
+    else if (nPrevHeight >= 33121 && nPrevHeight < 37441)
         {
             nSubsidyBase = 4;
         }
-    else if (nPrevHeight >= 50 && nPrevHeight < 60)
+    else if (nPrevHeight >= 37441 && nPrevHeight < 41761)
         {
             nSubsidyBase = 5;
         }
-    else if (nPrevHeight >= 60 && nPrevHeight < 70)
+    else if (nPrevHeight >= 41761 && nPrevHeight < 46081)
         {
             nSubsidyBase = 6;
         }
-    else if (nPrevHeight >= 70 && nPrevHeight < 80)
+    else if (nPrevHeight >= 46081 && nPrevHeight < 50401)
         {
             nSubsidyBase = 7;
         }
-    else if (nPrevHeight >= 80 && nPrevHeight < 90)
+    else if (nPrevHeight >= 50401 && nPrevHeight < 54721)
         {
             nSubsidyBase = 8;
         }
-    else if (nPrevHeight >= 90 && nPrevHeight < 100)
+    else if (nPrevHeight >= 54721 && nPrevHeight < 59041)
         {
             nSubsidyBase = 9;
         }
-    else if (nPrevHeight >= 100 && nPrevHeight < 110)
+    else if (nPrevHeight >= 59041 && nPrevHeight < 63361)
         {
             nSubsidyBase = 10;
         }
-    else if (nPrevHeight >= 110 && nPrevHeight < 120)
+    else if (nPrevHeight >= 63361 && nPrevHeight < 67681)
         {
             nSubsidyBase = 11;
         }
-    else if (nPrevHeight >= 120 && nPrevHeight < 130)
+    else if (nPrevHeight >= 67681 && nPrevHeight < 72001)
         {
             nSubsidyBase = 12;
         }
-    else if (nPrevHeight >= 130)   
+    else if (nPrevHeight >= 72001)   
 	{		
 	    nSubsidyBase = 13;
 	}
