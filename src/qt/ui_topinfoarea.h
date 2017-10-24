@@ -43,21 +43,21 @@ public:
     QHBoxLayout *horizontalLayout_5;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_4;
-    QLabel *label_9;
-    QLabel *label_10;
+    QLabel *labelAvailableText;
+    QLabel *labelAvailable;
     QFrame *line_5;
     QHBoxLayout *horizontalLayout_2;
-    QLabel *label_12;
-    QLabel *label_11;
+    QLabel *labelPendingText;
+    QLabel *labelPending;
     QFrame *line_7;
     QHBoxLayout *horizontalLayout;
-    QLabel *label_14;
-    QLabel *label_13;
+    QLabel *labelImmatureText;
+    QLabel *labelImmature;
     QFrame *line_4;
     QFrame *line_2;
     QVBoxLayout *verticalLayout_3;
-    QLabel *label_15;
-    QLabel *label_16;
+    QLabel *labelTotalText;
+    QLabel *labelTotal;
     QFrame *line_6;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_17;
@@ -162,15 +162,15 @@ public:
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         horizontalLayout_4->setContentsMargins(9, -1, 9, -1);
-        label_9 = new QLabel(TopInfoArea);
-        label_9->setObjectName(QStringLiteral("label_9"));
+        labelAvailableText = new QLabel(TopInfoArea);
+        labelAvailableText->setObjectName(QStringLiteral("labelAvailableText"));
 
-        horizontalLayout_4->addWidget(label_9);
+        horizontalLayout_4->addWidget(labelAvailableText);
 
-        label_10 = new QLabel(TopInfoArea);
-        label_10->setObjectName(QStringLiteral("label_10"));
+        labelAvailable = new QLabel(TopInfoArea);
+        labelAvailable->setObjectName(QStringLiteral("labelAvailable"));
 
-        horizontalLayout_4->addWidget(label_10);
+        horizontalLayout_4->addWidget(labelAvailable);
 
 
         verticalLayout->addLayout(horizontalLayout_4);
@@ -185,15 +185,15 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(9, -1, 9, -1);
-        label_12 = new QLabel(TopInfoArea);
-        label_12->setObjectName(QStringLiteral("label_12"));
+        labelPendingText = new QLabel(TopInfoArea);
+        labelPendingText->setObjectName(QStringLiteral("labelPendingText"));
 
-        horizontalLayout_2->addWidget(label_12);
+        horizontalLayout_2->addWidget(labelPendingText);
 
-        label_11 = new QLabel(TopInfoArea);
-        label_11->setObjectName(QStringLiteral("label_11"));
+        labelPending = new QLabel(TopInfoArea);
+        labelPending->setObjectName(QStringLiteral("labelPending"));
 
-        horizontalLayout_2->addWidget(label_11);
+        horizontalLayout_2->addWidget(labelPending);
 
 
         verticalLayout->addLayout(horizontalLayout_2);
@@ -208,15 +208,15 @@ public:
         horizontalLayout = new QHBoxLayout();
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(9, -1, 9, -1);
-        label_14 = new QLabel(TopInfoArea);
-        label_14->setObjectName(QStringLiteral("label_14"));
+        labelImmatureText = new QLabel(TopInfoArea);
+        labelImmatureText->setObjectName(QStringLiteral("labelImmatureText"));
 
-        horizontalLayout->addWidget(label_14);
+        horizontalLayout->addWidget(labelImmatureText);
 
-        label_13 = new QLabel(TopInfoArea);
-        label_13->setObjectName(QStringLiteral("label_13"));
+        labelImmature = new QLabel(TopInfoArea);
+        labelImmature->setObjectName(QStringLiteral("labelImmature"));
 
-        horizontalLayout->addWidget(label_13);
+        horizontalLayout->addWidget(labelImmature);
 
 
         verticalLayout->addLayout(horizontalLayout);
@@ -240,16 +240,16 @@ public:
 
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
-        label_15 = new QLabel(TopInfoArea);
-        label_15->setObjectName(QStringLiteral("label_15"));
+        labelTotalText = new QLabel(TopInfoArea);
+        labelTotalText->setObjectName(QStringLiteral("labelTotalText"));
 
-        verticalLayout_3->addWidget(label_15);
+        verticalLayout_3->addWidget(labelTotalText);
 
-        label_16 = new QLabel(TopInfoArea);
-        label_16->setObjectName(QStringLiteral("label_16"));
-        label_16->setAlignment(Qt::AlignCenter);
+        labelTotal = new QLabel(TopInfoArea);
+        labelTotal->setObjectName(QStringLiteral("labelTotal"));
+        labelTotal->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_3->addWidget(label_16);
+        verticalLayout_3->addWidget(labelTotal);
 
 
         horizontalLayout_5->addLayout(verticalLayout_3);
@@ -352,19 +352,19 @@ public:
         label->setText(QString());
         label_2->setText(QApplication::translate("TopInfoArea", "Main Net", 0));
         label_3->setText(QApplication::translate("TopInfoArea", "Block Number", 0));
-        label_4->setText(QApplication::translate("TopInfoArea", "Version", 0));
+        label_4->setText(QApplication::translate("TopInfoArea", "Version: v0.12.1.5-0a64a77", 0));
         label_5->setText(QApplication::translate("TopInfoArea", "www.districts.io", 0));
         label_6->setText(QApplication::translate("TopInfoArea", "Build", 0));
         label_7->setText(QApplication::translate("TopInfoArea", "Address:", 0));
         label_8->setText(QApplication::translate("TopInfoArea", "1212316548789784", 0));
-        label_9->setText(QApplication::translate("TopInfoArea", "Available:", 0));
-        label_10->setText(QApplication::translate("TopInfoArea", "00.000", 0));
-        label_12->setText(QApplication::translate("TopInfoArea", "Pending:", 0));
-        label_11->setText(QApplication::translate("TopInfoArea", "00.000", 0));
-        label_14->setText(QApplication::translate("TopInfoArea", "Immature:", 0));
-        label_13->setText(QApplication::translate("TopInfoArea", "00.000", 0));
-        label_15->setText(QApplication::translate("TopInfoArea", "TOTAL Balance :", 0));
-        label_16->setText(QApplication::translate("TopInfoArea", "0.00 USD", 0));
+        labelAvailableText->setText(QApplication::translate("TopInfoArea", "Available:", 0));
+        labelAvailable->setText(QApplication::translate("TopInfoArea", "00.000", 0));
+        labelPendingText->setText(QApplication::translate("TopInfoArea", "Pending:", 0));
+        labelPending->setText(QApplication::translate("TopInfoArea", "00.000", 0));
+        labelImmatureText->setText(QApplication::translate("TopInfoArea", "Immature:", 0));
+        labelImmature->setText(QApplication::translate("TopInfoArea", "00.000", 0));
+        labelTotalText->setText(QApplication::translate("TopInfoArea", "TOTAL Balance :", 0));
+        labelTotal->setText(QApplication::translate("TopInfoArea", "0.00 USD", 0));
         label_17->setText(QApplication::translate("TopInfoArea", "3DC Chart", 0));
         label_18->setText(QApplication::translate("TopInfoArea", "Market Price", 0));
         label_23->setText(QApplication::translate("TopInfoArea", "0.00 usd", 0));

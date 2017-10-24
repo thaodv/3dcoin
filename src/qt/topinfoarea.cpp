@@ -6,6 +6,8 @@ TopInfoArea::TopInfoArea(QWidget *parent) :
     ui(new Ui::TopInfoArea)
 {
     ui->setupUi(this);
+
+    
 }
 
 TopInfoArea::~TopInfoArea()

@@ -151,6 +151,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     MacDockIconHandler::instance()->setIcon(networkStyle->getAppIcon());
 #endif
     setWindowTitle(windowTitle);
+    setWindowIcon(QIcon(":/icons/res/icons/logo.png"));
 
 #if defined(Q_OS_MAC) && QT_VERSION < 0x050000
     // This property is not implemented in Qt 5. Setting it has no effect.
@@ -570,6 +571,9 @@ void BitcoinGUI::createToolBars()
         toolbar->widgetForAction(sendCoinsAction)->setStyleSheet("QWidget { width:110; }");
         toolbar->widgetForAction(receiveCoinsAction)->setStyleSheet("QWidget { width:110; }");
         toolbar->widgetForAction(historyAction)->setStyleSheet("QWidget { width:110; }");
+
+        toolbar->widgetForAction(overviewAction)->setFocusPolicy(Qt::StrongFocus);
+        toolbar->widgetForAction(overviewAction)->setFocus(Qt::OtherFocusReason);
 
         QLayout* lay = toolbar->layout();
         for(int i = 0; i < lay->count(); ++i)
