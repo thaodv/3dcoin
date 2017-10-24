@@ -73,16 +73,16 @@ public:
 	CMainParams()
 	{
 		strNetworkID = "main";
-		consensus.nSubsidyHalvingInterval = 210240; // Note: actual number of blocks per calendar year with DGW v3 is ~200700 (for example 449750 - 249050)
-		consensus.nMasternodePaymentsStartBlock = 100000; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
-		consensus.nMasternodePaymentsIncreaseBlock = 158000; // actual historical value
-		consensus.nMasternodePaymentsIncreasePeriod = 576 * 30; // 17280 - actual historical value
+		consensus.nSubsidyHalvingInterval = 103680; // Note: actual number of blocks per calendar year with DGW v3 is ~200700 (for example 449750 - 249050)
+		consensus.nMasternodePaymentsStartBlock = 20161; // not true, but it's ok as long as it's less then nMasternodePaymentsIncreaseBlock
+		consensus.nMasternodePaymentsIncreaseBlock = 54720; // actual historical value
+		consensus.nMasternodePaymentsIncreasePeriod = 576 * 60; // 17280 - actual historical value
 		consensus.nInstantSendKeepLock = 24;
-		consensus.nBudgetPaymentsStartBlock = 328008; // actual historical value
+		consensus.nBudgetPaymentsStartBlock = 20161; // actual historical value
 		consensus.nBudgetPaymentsCycleBlocks = 16616; // ~(60*24*30)/2.6, actual number of blocks per month is 200700 / 12 = 16725
 		consensus.nBudgetPaymentsWindowBlocks = 100;
 		consensus.nBudgetProposalEstablishingTime = 60 * 60 * 24;
-		consensus.nSuperblockStartBlock = 614820; // The block at which 12.1 goes live (end of final 12.0 budget cycle)
+		consensus.nSuperblockStartBlock = 37440; // The block at which 12.1 goes live (end of final 12.0 budget cycle)
 		consensus.nSuperblockCycle = 16616; // ~(60*24*30)/2.6, actual number of blocks per month is 200700 / 12 = 16725
 		consensus.nGovernanceMinQuorum = 10;
 		consensus.nGovernanceFilterElements = 20000;
@@ -90,8 +90,8 @@ public:
 		consensus.nMajorityEnforceBlockUpgrade = 750;
 		consensus.nMajorityRejectBlockOutdated = 950;
 		consensus.nMajorityWindow = 1000;
-		consensus.BIP34Height = 227931;
-		consensus.BIP34Hash = uint256S("0x000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");
+		consensus.BIP34Height = 0;
+		consensus.BIP34Hash = uint256S("0x");
 		consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
 		consensus.nPowTargetTimespan = 24 * 60 * 60; // 3DCoin: 1 day
 		consensus.nPowTargetSpacing = 2.5 * 60; // 3DCoin: 2.5 minutes
@@ -367,16 +367,16 @@ public:
 	CRegTestParams()
 	{
 		strNetworkID = "regtest";
-		consensus.nSubsidyHalvingInterval = 150;
-		consensus.nMasternodePaymentsStartBlock = 240;
-		consensus.nMasternodePaymentsIncreaseBlock = 350;
-		consensus.nMasternodePaymentsIncreasePeriod = 10;
+		consensus.nSubsidyHalvingInterval = 1000;
+		consensus.nMasternodePaymentsStartBlock = 10;
+		consensus.nMasternodePaymentsIncreaseBlock = 230;
+		consensus.nMasternodePaymentsIncreasePeriod = 230;
 		consensus.nInstantSendKeepLock = 6;
-		consensus.nBudgetPaymentsStartBlock = 1000;
+		consensus.nBudgetPaymentsStartBlock = 10;
 		consensus.nBudgetPaymentsCycleBlocks = 50;
 		consensus.nBudgetPaymentsWindowBlocks = 10;
 		consensus.nBudgetProposalEstablishingTime = 60 * 20;
-		consensus.nSuperblockStartBlock = 1500;
+		consensus.nSuperblockStartBlock = 2500;
 		consensus.nSuperblockCycle = 10;
 		consensus.nGovernanceMinQuorum = 1;
 		consensus.nGovernanceFilterElements = 100;
