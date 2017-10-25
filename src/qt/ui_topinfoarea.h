@@ -58,6 +58,8 @@ public:
     QVBoxLayout *verticalLayout_3;
     QLabel *labelTotalText;
     QLabel *labelTotal;
+    QFrame *frameChartMarket;
+    QHBoxLayout *horizontalLayout_8;
     QFrame *line_6;
     QVBoxLayout *verticalLayout_6;
     QLabel *label_17;
@@ -75,10 +77,12 @@ public:
     {
         if (TopInfoArea->objectName().isEmpty())
             TopInfoArea->setObjectName(QStringLiteral("TopInfoArea"));
-        TopInfoArea->resize(812, 172);
+        TopInfoArea->resize(1203, 192);
         TopInfoArea->setStyleSheet(QStringLiteral(""));
         horizontalLayout_7 = new QHBoxLayout(TopInfoArea);
+        horizontalLayout_7->setSpacing(0);
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
+        horizontalLayout_7->setContentsMargins(0, 0, 0, 0);
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
         label = new QLabel(TopInfoArea);
@@ -260,85 +264,100 @@ public:
 
         horizontalLayout_6->addLayout(verticalLayout_4);
 
-        line_6 = new QFrame(TopInfoArea);
+
+        horizontalLayout_7->addLayout(horizontalLayout_6);
+
+        frameChartMarket = new QFrame(TopInfoArea);
+        frameChartMarket->setObjectName(QStringLiteral("frameChartMarket"));
+        frameChartMarket->setFrameShape(QFrame::StyledPanel);
+        frameChartMarket->setFrameShadow(QFrame::Raised);
+        horizontalLayout_8 = new QHBoxLayout(frameChartMarket);
+        horizontalLayout_8->setSpacing(6);
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
+        horizontalLayout_8->setContentsMargins(0, 0, 6, 9);
+        line_6 = new QFrame(frameChartMarket);
         line_6->setObjectName(QStringLiteral("line_6"));
         line_6->setFrameShape(QFrame::VLine);
         line_6->setFrameShadow(QFrame::Sunken);
 
-        horizontalLayout_6->addWidget(line_6);
+        horizontalLayout_8->addWidget(line_6);
 
         verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setSpacing(6);
         verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
-        label_17 = new QLabel(TopInfoArea);
+        verticalLayout_6->setContentsMargins(0, -1, 2, -1);
+        label_17 = new QLabel(frameChartMarket);
         label_17->setObjectName(QStringLiteral("label_17"));
         label_17->setMaximumSize(QSize(16777215, 30));
         label_17->setAlignment(Qt::AlignCenter);
 
         verticalLayout_6->addWidget(label_17);
 
-        frame = new QFrame(TopInfoArea);
+        frame = new QFrame(frameChartMarket);
         frame->setObjectName(QStringLiteral("frame"));
-        frame->setMinimumSize(QSize(50, 50));
+        frame->setMinimumSize(QSize(150, 50));
+        frame->setBaseSize(QSize(150, 0));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Sunken);
 
         verticalLayout_6->addWidget(frame);
 
 
-        horizontalLayout_6->addLayout(verticalLayout_6);
+        horizontalLayout_8->addLayout(verticalLayout_6);
 
-        line_8 = new QFrame(TopInfoArea);
+        line_8 = new QFrame(frameChartMarket);
         line_8->setObjectName(QStringLiteral("line_8"));
         line_8->setFrameShape(QFrame::VLine);
         line_8->setFrameShadow(QFrame::Sunken);
 
-        horizontalLayout_6->addWidget(line_8);
+        horizontalLayout_8->addWidget(line_8);
 
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
         verticalLayout_5->setContentsMargins(9, 9, 9, 9);
-        label_18 = new QLabel(TopInfoArea);
+        label_18 = new QLabel(frameChartMarket);
         label_18->setObjectName(QStringLiteral("label_18"));
+        label_18->setMinimumSize(QSize(150, 0));
         label_18->setAlignment(Qt::AlignCenter);
 
         verticalLayout_5->addWidget(label_18);
 
-        label_23 = new QLabel(TopInfoArea);
+        label_23 = new QLabel(frameChartMarket);
         label_23->setObjectName(QStringLiteral("label_23"));
         label_23->setFrameShape(QFrame::StyledPanel);
         label_23->setAlignment(Qt::AlignCenter);
 
         verticalLayout_5->addWidget(label_23);
 
-        label_19 = new QLabel(TopInfoArea);
+        label_19 = new QLabel(frameChartMarket);
         label_19->setObjectName(QStringLiteral("label_19"));
         label_19->setAlignment(Qt::AlignCenter);
 
         verticalLayout_5->addWidget(label_19);
 
-        label_20 = new QLabel(TopInfoArea);
+        label_20 = new QLabel(frameChartMarket);
         label_20->setObjectName(QStringLiteral("label_20"));
         label_20->setAlignment(Qt::AlignCenter);
 
         verticalLayout_5->addWidget(label_20);
 
-        label_21 = new QLabel(TopInfoArea);
+        label_21 = new QLabel(frameChartMarket);
         label_21->setObjectName(QStringLiteral("label_21"));
         label_21->setAlignment(Qt::AlignCenter);
 
         verticalLayout_5->addWidget(label_21);
 
-        label_22 = new QLabel(TopInfoArea);
+        label_22 = new QLabel(frameChartMarket);
         label_22->setObjectName(QStringLiteral("label_22"));
         label_22->setAlignment(Qt::AlignCenter);
 
         verticalLayout_5->addWidget(label_22);
 
 
-        horizontalLayout_6->addLayout(verticalLayout_5);
+        horizontalLayout_8->addLayout(verticalLayout_5);
 
 
-        horizontalLayout_7->addLayout(horizontalLayout_6);
+        horizontalLayout_7->addWidget(frameChartMarket);
 
 
         retranslateUi(TopInfoArea);

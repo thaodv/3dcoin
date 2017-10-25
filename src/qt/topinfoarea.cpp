@@ -10,6 +10,7 @@ TopInfoArea::TopInfoArea(QWidget *parent) :
     ui(new Ui::TopInfoArea)
 {
     ui->setupUi(this);
+    ui->frameChartMarket->hide();
     walletModel = 0;
 
     

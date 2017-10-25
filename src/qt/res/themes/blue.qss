@@ -7,6 +7,15 @@ background-color: #B3E7FF;
 border: 1px solid gray;
 }
 
+QWidget#sendCoinForm{
+background-color: #B3E7FF;
+}
+
+QWidget#scrollAreaWidgetContents{
+background-color: #B3E7FF;
+border: 1px solid gray;
+}
+
 QMainWindow {
 background: #E0F7FF;
 color: #888;
@@ -163,4 +172,21 @@ QMenu::indicator {}
 
 QStatusBar {
     background: #F8EBCB;
+}
+
+QPushButton {
+	background: #7FC1FE;
+	color: black;
+	font-size: 12px;
+ }
+	
+QPushButton:hover {
+	background:  #E0F7FF;
+
+		color: black; }
+	
+QPushButton:pressed {
+	background: #B3E7FF;
+
+		color: black; 
 }
