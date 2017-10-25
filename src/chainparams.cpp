@@ -168,10 +168,10 @@ public:
 		assert(genesis.hashMerkleRoot == uint256S("0x0f06ea982c10bfcbad17e6ad1b7e577c3ac069e281e24278f4118e75af3c85ee"));
 
 
-		vSeeds.push_back(CDNSSeedData("3dcoin.io", "seed1.3dcoin.io"));
-		/*vSeeds.push_back(CDNSSeedData("3dcoindot.io", "dnsseed.3dcoindot.io"));
-		vSeeds.push_back(CDNSSeedData("masternode.io", "dnsseed.masternode.io"));
-		vSeeds.push_back(CDNSSeedData("3dcoinpay.io", "dnsseed.3dcoinpay.io"));*/
+		vSeeds.push_back(CDNSSeedData("3dcoin", "seed1.3dcoin.io"));
+		vSeeds.push_back(CDNSSeedData("3dcoin", "seed2.3dcoin.io"));
+		vSeeds.push_back(CDNSSeedData("Districts", "seed1.districts.io"));
+		vSeeds.push_back(CDNSSeedData("Districts2", "seed2.districts.io"));
 
 		// 3DCoin addresses start with 'A'
 		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 23);
@@ -315,8 +315,8 @@ public:
 
 		vFixedSeeds.clear();
 		vSeeds.clear();
-		vSeeds.push_back(CDNSSeedData("3dcoin.io", "seed2.3dcoin.io"));
-		//vSeeds.push_back(CDNSSeedData("masternode.io", "test.dnsseed.masternode.io"));
+		vSeeds.push_back(CDNSSeedData("3dcoin", "testseed.3dcoin.io"));
+		vSeeds.push_back(CDNSSeedData("Districts", "testseed.districts.io"));
 
 		// Testnet 3DCoin addresses start with 'T'
 		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 66);
