@@ -136,6 +136,7 @@ OverviewPage::OverviewPage(const PlatformStyle *platformStyle, QWidget *parent) 
     filter(0)
 {
     ui->setupUi(this);
+    ui->frame->hide();
     QString theme = GUIUtil::getThemeName();
 
     // Recent transactions

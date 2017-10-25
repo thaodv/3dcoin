@@ -23,6 +23,7 @@ SendCoinsEntry::SendCoinsEntry(const PlatformStyle *platformStyle, QWidget *pare
     platformStyle(platformStyle)
 {
     ui->setupUi(this);
+    setObjectName(QStringLiteral("sendCoinForm"));
 
     setCurrentWidget(ui->SendCoins);
 

@@ -17,6 +17,8 @@
 #include "platformstyle.h"
 #include "rpcconsole.h"
 #include "utilitydialog.h"
+#include "topinfoarea.h"
+
 
 #ifdef ENABLE_WALLET
 #include "walletframe.h"
@@ -54,6 +56,8 @@
 #include <QTimer>
 #include <QToolBar>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QFile>
 
 #if QT_VERSION < 0x050000
 #include <QTextDocument>
@@ -147,6 +151,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     MacDockIconHandler::instance()->setIcon(networkStyle->getAppIcon());
 #endif
     setWindowTitle(windowTitle);
+    setWindowIcon(QIcon(":/icons/res/icons/logo.png"));
 
 #if defined(Q_OS_MAC) && QT_VERSION < 0x050000
     // This property is not implemented in Qt 5. Setting it has no effect.
@@ -161,6 +166,7 @@ BitcoinGUI::BitcoinGUI(const PlatformStyle *platformStyle, const NetworkStyle *n
     {
         /** Create wallet frame*/
         walletFrame = new WalletFrame(platformStyle, this);
+        walletFrame->setObjectName(QStringLiteral("walletFrame"));
     } else
 #endif // ENABLE_WALLET
     {
@@ -551,6 +557,7 @@ void BitcoinGUI::createToolBars()
         if (settings.value("fShowMasternodesTab").toBool())
         {
             toolbar->addAction(masternodeAction);
+            toolbar->widgetForAction(masternodeAction)->setStyleSheet("QWidget { width:110; }");
         }
         toolbar->setMovable(false); // remove unused icon in upper left corner
         overviewAction->setChecked(true);
@@ -558,14 +565,46 @@ void BitcoinGUI::createToolBars()
         /** Create additional container for toolbar and walletFrame and make it the central widget.
             This is a workaround mostly for toolbar styling on Mac OS but should work fine for every other OSes too.
         */
-        QVBoxLayout *layout = new QVBoxLayout;
-        layout->addWidget(toolbar);
-        layout->addWidget(walletFrame);
-        layout->setSpacing(0);
-        layout->setContentsMargins(QMargins());
-        QWidget *containerWidget = new QWidget();
-        containerWidget->setLayout(layout);
-        setCentralWidget(containerWidget);
+
+        toolbar->setOrientation(Qt::Vertical);
+
+        toolbar->widgetForAction(overviewAction)->setStyleSheet("QWidget { width:110; }");
+        toolbar->widgetForAction(sendCoinsAction)->setStyleSheet("QWidget { width:110; }");
+        toolbar->widgetForAction(receiveCoinsAction)->setStyleSheet("QWidget { width:110; }");
+        toolbar->widgetForAction(historyAction)->setStyleSheet("QWidget { width:110; }");
+
+        toolbar->widgetForAction(overviewAction)->setFocusPolicy(Qt::StrongFocus);
+        toolbar->widgetForAction(overviewAction)->setFocus(Qt::OtherFocusReason);
+
+        QLayout* lay = toolbar->layout();
+        for(int i = 0; i < lay->count(); ++i)
+        {
+            lay->itemAt(i)->setAlignment(Qt::AlignLeft);
+        }
+
+        QWidget *centralWidget = new QWidget(this);
+        QVBoxLayout* verticalLayout = new QVBoxLayout(centralWidget);
+        topInfoArea = new TopInfoArea(centralWidget);
+        topInfoArea->setMinimumHeight(172);
+        topInfoArea->setObjectName(QStringLiteral("topInfoArea"));
+
+        verticalLayout->addWidget(topInfoArea);
+
+        QHBoxLayout* horizontalLayout = new QHBoxLayout(centralWidget);
+        horizontalLayout->addWidget(toolbar);
+        horizontalLayout->addWidget(walletFrame);
+        horizontalLayout->setSpacing(0);
+
+        verticalLayout->addLayout(horizontalLayout);
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+     
+        setCentralWidget(centralWidget);
+
+        QFile File(":/themes/blueTheme");
+        File.open(QFile::ReadOnly);
+        QString StyleSheet = QLatin1String(File.readAll());
+
+        qApp->setStyleSheet(StyleSheet);
     }
 }
 
@@ -645,6 +684,15 @@ bool BitcoinGUI::addWallet(const QString& name, WalletModel *walletModel)
     if(!walletFrame)
         return false;
     setWalletActionsEnabled(true);
+
+    if(topInfoArea)
+    {
+        topInfoArea->setWalletModel(walletModel);
+        connect(walletModel,
+            SIGNAL(balanceChanged(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)),
+            topInfoArea, 
+            SLOT(setBalance(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)));
+    }
     return walletFrame->addWallet(name, walletModel);
 }
 

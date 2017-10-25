@@ -31,6 +31,7 @@ class WalletFrame;
 class WalletModel;
 class HelpMessageDialog;
 class MasternodeList;
+class TopInfoArea;
 
 class CWallet;
 
@@ -90,6 +91,7 @@ private:
     QLabel *progressBarLabel;
     QProgressBar *progressBar;
     QProgressDialog *progressDialog;
+    TopInfoArea *topInfoArea;
 
     QMenuBar *appMenuBar;
     QAction *overviewAction;
