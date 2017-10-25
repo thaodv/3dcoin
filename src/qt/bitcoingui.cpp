@@ -557,6 +557,7 @@ void BitcoinGUI::createToolBars()
         if (settings.value("fShowMasternodesTab").toBool())
         {
             toolbar->addAction(masternodeAction);
+            toolbar->widgetForAction(masternodeAction)->setStyleSheet("QWidget { width:110; }");
         }
         toolbar->setMovable(false); // remove unused icon in upper left corner
         overviewAction->setChecked(true);
@@ -583,7 +584,7 @@ void BitcoinGUI::createToolBars()
 
         QWidget *centralWidget = new QWidget(this);
         QVBoxLayout* verticalLayout = new QVBoxLayout(centralWidget);
-        TopInfoArea *topInfoArea = new TopInfoArea(centralWidget);
+        topInfoArea = new TopInfoArea(centralWidget);
         topInfoArea->setMinimumHeight(172);
         topInfoArea->setObjectName(QStringLiteral("topInfoArea"));
 
@@ -683,6 +684,15 @@ bool BitcoinGUI::addWallet(const QString& name, WalletModel *walletModel)
     if(!walletFrame)
         return false;
     setWalletActionsEnabled(true);
+
+    if(topInfoArea)
+    {
+        topInfoArea->setWalletModel(walletModel);
+        connect(walletModel,
+            SIGNAL(balanceChanged(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)),
+            topInfoArea, 
+            SLOT(setBalance(CAmount,CAmount,CAmount,CAmount,CAmount,CAmount,CAmount)));
+    }
     return walletFrame->addWallet(name, walletModel);
 }
 
