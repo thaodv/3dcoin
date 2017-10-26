@@ -1747,15 +1747,11 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 		return 200000000 * COIN;
 	}
 
-	if (nPrevHeight <= 20160) {
+	if (nPrevHeight <= 24480) {
 		// CPU mining era
-		// 0.01 3DC avoid instamine
+		// 1 3DC avoid instamine
 		nSubsidyBase = 1;
-	}else if(nPrevHeight >= 20161 && nPrevHeight < 24481)
-        {
-            nSubsidyBase = 1;
-        }
-	else if (nPrevHeight >= 24481 && nPrevHeight < 28801)
+	}else if (nPrevHeight >= 24481 && nPrevHeight < 28801)
         {
             nSubsidyBase = 2;
         }

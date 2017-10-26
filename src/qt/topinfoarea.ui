@@ -77,14 +77,14 @@
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Build: Alpha </string>
+          <string>Build: alpha-test </string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Version: v0.0.1a</string>
+          <string>Version: v0.12.5</string>
          </property>
         </widget>
        </item>

@@ -371,8 +371,8 @@ public:
         TopInfoArea->setWindowTitle(QApplication::translate("TopInfoArea", "TopInfoArea", 0));
         label->setText(QString());
         label_2->setText(QString());
-        label_3->setText(QApplication::translate("TopInfoArea", "Build: Alpha ", 0));
-        label_4->setText(QApplication::translate("TopInfoArea", "Version: v0.0.1a", 0));
+        label_3->setText(QApplication::translate("TopInfoArea", "Build: alpha-test ", 0));
+        label_4->setText(QApplication::translate("TopInfoArea", "Version: v0.12.5", 0));
         label_5->setText(QApplication::translate("TopInfoArea", "www.Districts.io", 0));
         label_6->setText(QString());
         label_7->setText(QString());

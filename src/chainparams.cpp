@@ -169,7 +169,7 @@ public:
 		{
 			boost::assign::map_list_of
 			(0, uint256S("0x000006421e4f07d4d4ec8884ce41be66ccbb5bc423983859f10cadbc1346febb"))
-			(1, uint256S("0x000007bf620d5252d39e0de2c0b68f86f1f2329414f40772c1aba2f5496e1e89")),
+			(1, uint256S("0x000000cdbfc45b4fd1c20c0ae0455a1489ecf64d751ff2024e029f2f2d53622f")),
 
 			
 				1503187200, // * UNIX timestamp of last checkpoint block
