@@ -70,35 +70,35 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Main Net</string>
+          <string></string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="label_3">
          <property name="text">
-          <string>Block Number</string>
+          <string>Build: Alpha </string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Version: v0.12.1.5-0a64a77</string>
+          <string>Version: v0.0.1a</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>www.districts.io</string>
+          <string>www.Districts.io</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QLabel" name="label_6">
          <property name="text">
-          <string>Build</string>
+          <string></string>
          </property>
         </widget>
        </item>
@@ -127,14 +127,14 @@
          <item>
           <widget class="QLabel" name="label_7">
            <property name="text">
-            <string>Address:</string>
+            <string></string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_8">
            <property name="text">
-            <string>1212316548789784</string>
+            <string></string>
            </property>
           </widget>
          </item>
@@ -169,7 +169,7 @@
              <item>
               <widget class="QLabel" name="labelAvailable">
                <property name="text">
-                <string>00.000</string>
+                <string>00.00 3DC</string>
                </property>
               </widget>
              </item>
@@ -200,7 +200,7 @@
              <item>
               <widget class="QLabel" name="labelPending">
                <property name="text">
-                <string>00.000</string>
+                <string>00.00 3DC</string>
                </property>
               </widget>
              </item>
@@ -231,7 +231,7 @@
              <item>
               <widget class="QLabel" name="labelImmature">
                <property name="text">
-                <string>00.000</string>
+                <string>00.00 3DC</string>
                </property>
               </widget>
              </item>
@@ -259,13 +259,16 @@
             <widget class="QLabel" name="labelTotalText">
              <property name="text">
               <string>TOTAL Balance :</string>
-             </property>
+              </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+              </property>
             </widget>
            </item>
            <item>
             <widget class="QLabel" name="labelTotal">
              <property name="text">
-              <string>0.00 USD</string>
+              <string>00.00 3DC</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>

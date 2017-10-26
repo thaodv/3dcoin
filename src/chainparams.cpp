@@ -157,7 +157,7 @@ public:
 		fMiningRequiresPeers = true;
 		fDefaultConsistencyChecks = false;
 		fRequireStandard = true;
-		fMineBlocksOnDemand = false;
+		fMineBlocksOnDemand = true;
 		fTestnetToBeDeprecatedFieldRPC = false;
 
 		nPoolMaxTransactions = 3;
@@ -168,7 +168,10 @@ public:
 		checkpointData = (CCheckpointData)
 		{
 			boost::assign::map_list_of
-			(0, uint256S("0x000006421e4f07d4d4ec8884ce41be66ccbb5bc423983859f10cadbc1346febb")),
+			(0, uint256S("0x000006421e4f07d4d4ec8884ce41be66ccbb5bc423983859f10cadbc1346febb"))
+			(1, uint256S("0x000007bf620d5252d39e0de2c0b68f86f1f2329414f40772c1aba2f5496e1e89")),
+
+			
 				1503187200, // * UNIX timestamp of last checkpoint block
 				0,    // * total number of transactions between genesis and last checkpoint
 							//   (the tx=... number in the SetBestChain debug.log lines)

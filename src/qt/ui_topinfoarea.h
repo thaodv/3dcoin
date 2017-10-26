@@ -246,6 +246,7 @@ public:
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         labelTotalText = new QLabel(TopInfoArea);
         labelTotalText->setObjectName(QStringLiteral("labelTotalText"));
+        labelTotalText->setAlignment(Qt::AlignCenter);
 
         verticalLayout_3->addWidget(labelTotalText);
 
@@ -369,21 +370,21 @@ public:
     {
         TopInfoArea->setWindowTitle(QApplication::translate("TopInfoArea", "TopInfoArea", 0));
         label->setText(QString());
-        label_2->setText(QApplication::translate("TopInfoArea", "Main Net", 0));
-        label_3->setText(QApplication::translate("TopInfoArea", "Block Number", 0));
-        label_4->setText(QApplication::translate("TopInfoArea", "Version: v0.12.1.5-0a64a77", 0));
-        label_5->setText(QApplication::translate("TopInfoArea", "www.districts.io", 0));
-        label_6->setText(QApplication::translate("TopInfoArea", "Build", 0));
-        label_7->setText(QApplication::translate("TopInfoArea", "Address:", 0));
-        label_8->setText(QApplication::translate("TopInfoArea", "1212316548789784", 0));
+        label_2->setText(QString());
+        label_3->setText(QApplication::translate("TopInfoArea", "Build: Alpha ", 0));
+        label_4->setText(QApplication::translate("TopInfoArea", "Version: v0.0.1a", 0));
+        label_5->setText(QApplication::translate("TopInfoArea", "www.Districts.io", 0));
+        label_6->setText(QString());
+        label_7->setText(QString());
+        label_8->setText(QString());
         labelAvailableText->setText(QApplication::translate("TopInfoArea", "Available:", 0));
-        labelAvailable->setText(QApplication::translate("TopInfoArea", "00.000", 0));
+        labelAvailable->setText(QApplication::translate("TopInfoArea", "00.00 3DC", 0));
         labelPendingText->setText(QApplication::translate("TopInfoArea", "Pending:", 0));
-        labelPending->setText(QApplication::translate("TopInfoArea", "00.000", 0));
+        labelPending->setText(QApplication::translate("TopInfoArea", "00.00 3DC", 0));
         labelImmatureText->setText(QApplication::translate("TopInfoArea", "Immature:", 0));
-        labelImmature->setText(QApplication::translate("TopInfoArea", "00.000", 0));
+        labelImmature->setText(QApplication::translate("TopInfoArea", "00.00 3DC", 0));
         labelTotalText->setText(QApplication::translate("TopInfoArea", "TOTAL Balance :", 0));
-        labelTotal->setText(QApplication::translate("TopInfoArea", "0.00 USD", 0));
+        labelTotal->setText(QApplication::translate("TopInfoArea", "00.00 3DC", 0));
         label_17->setText(QApplication::translate("TopInfoArea", "3DC Chart", 0));
         label_18->setText(QApplication::translate("TopInfoArea", "Market Price", 0));
         label_23->setText(QApplication::translate("TopInfoArea", "0.00 usd", 0));
