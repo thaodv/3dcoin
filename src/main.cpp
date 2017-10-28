@@ -1740,66 +1740,44 @@ NOTE:   unlike bitcoin we are using PREVIOUS block height here,
 */
 CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params& consensusParams, bool fSuperblockPartOnly)
 {
-    
-	
+	double dDiff;
 	CAmount nSubsidyBase;
 	if (nPrevHeight == 0) {
 		return 200000000 * COIN;
 	}
-
-	if (nPrevHeight <= 24480) {
-		// CPU mining era
-		// 1 3DC avoid instamine
-		nSubsidyBase = 1;
-	}else if (nPrevHeight >= 24481 && nPrevHeight < 28801)
-        {
-            nSubsidyBase = 2;
-        }
-    else if (nPrevHeight >= 28801 && nPrevHeight < 33121)
-        {
-            nSubsidyBase = 3;
-        }
-    else if (nPrevHeight >= 33121 && nPrevHeight < 37441)
-        {
-            nSubsidyBase = 4;
-        }
-    else if (nPrevHeight >= 37441 && nPrevHeight < 41761)
-        {
-            nSubsidyBase = 5;
-        }
-    else if (nPrevHeight >= 41761 && nPrevHeight < 46081)
-        {
-            nSubsidyBase = 6;
-        }
-    else if (nPrevHeight >= 46081 && nPrevHeight < 50401)
-        {
-            nSubsidyBase = 7;
-        }
-    else if (nPrevHeight >= 50401 && nPrevHeight < 54721)
-        {
-            nSubsidyBase = 8;
-        }
-    else if (nPrevHeight >= 54721 && nPrevHeight < 59041)
-        {
-            nSubsidyBase = 9;
-        }
-    else if (nPrevHeight >= 59041 && nPrevHeight < 63361)
-        {
-            nSubsidyBase = 10;
-        }
-    else if (nPrevHeight >= 63361 && nPrevHeight < 67681)
-        {
-            nSubsidyBase = 11;
-        }
-    else if (nPrevHeight >= 67681 && nPrevHeight < 72001)
-        {
-            nSubsidyBase = 12;
-        }
-    else if (nPrevHeight >= 72001)   
-	{		
-	    nSubsidyBase = 13;
+	
+	
+	if (nPrevHeight <= 4500 && Params().NetworkIDString() == CBaseChainParams::MAIN) {
+		/* a bug which caused diff to not be correctly calculated */
+		dDiff = (double)0x0000ffff / (double)(nPrevBits & 0x00ffffff);
+	}
+	else {
+		dDiff = ConvertBitsToDouble(nPrevBits);
 	}
 
+	if (nPrevHeight < 5500) {
+		// Early ages...
+		// 1111/((x+1)^2)
+		nSubsidyBase = (1111.0 / (pow((dDiff + 1.0), 2.0)));
+		if (nSubsidyBase > 500) nSubsidyBase = 1;
+		else if (nSubsidyBase < 1) nSubsidyBase = 1;
+	}
+	else if (nPrevHeight < 24480 || (dDiff <= 75 && nPrevHeight < 25000)) {
+		// CPU mining era
+		// 11111/(((x+51)/6)^2)
+		nSubsidyBase = (11111.0 / (pow((dDiff + 51.0) / 6.0, 2.0)));
+		if (nSubsidyBase > 500) nSubsidyBase = 7;
+		else if (nSubsidyBase < 25) nSubsidyBase = 3;
+	}
+	else {
+		// GPU/ASIC mining era
+		// 2222222/(((x+2600)/9)^2)
+		nSubsidyBase = (2222222.0 / (pow((dDiff + 2600.0) / 9.0, 2.0)));
+		if (nSubsidyBase > 25) nSubsidyBase = 13;
+		else if (nSubsidyBase < 5) nSubsidyBase = 13;
+	}
+
+	
      
 
 
@@ -1812,21 +1790,9 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 			nSubsidy -= nSubsidy / 100;
 		}
 
-        int nMNPIBlock = Params().GetConsensus().nMasternodePaymentsIncreaseBlock;
-        int nMNPIPeriod = Params().GetConsensus().nMasternodePaymentsIncreasePeriod;
-        int nMNPIStart = Params().GetConsensus().nMasternodePaymentsStartBlock;
-
-                                                                      // Supernode reserve
-          if(nPrevHeight > nMNPIStart)                  nSubsidy -= nSubsidy / 10; //  - 10.0%
-          if(nPrevHeight > nMNPIBlock)                  nSubsidy -= nSubsidy / 20; //  - 15.0% 
-          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 1)) nSubsidy -= nSubsidy / 20; //  - 20.0% 
-          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 2)) nSubsidy -= nSubsidy / 20; //  - 25.0% 
-          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 3)) nSubsidy -= nSubsidy / 20; //  - 30.0% 
-          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 4)) nSubsidy -= nSubsidy / 20; //  - 35.0% 
-          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 5)) nSubsidy -= nSubsidy / 20; //  - 40.0% 
-          if(nPrevHeight > nMNPIBlock+(nMNPIPeriod* 6)) nSubsidy -= nSubsidy / 20; //  - 45.0% 
+       
         
-        // reduce the block reward by 20 extra percent (allowing budget/superblocks)
+        // reduce the block reward by 5 extra percent (allowing budget/superblocks)
              CAmount nSuperblockPart = (nPrevHeight > consensusParams.nBudgetPaymentsStartBlock) ? nSubsidy/20 : 0;
         
 
