@@ -113,12 +113,12 @@ public:
 																				 * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
 																				 * a large 32-bit integer with any alignment.
 																				 */
-		pchMessageStart[0] = 0xd1;
-		pchMessageStart[1] = 0xd0;
-		pchMessageStart[2] = 0xa2;
-		pchMessageStart[3] = 0x7d;
+		pchMessageStart[0] = 0xd2;
+		pchMessageStart[1] = 0xd1;
+		pchMessageStart[2] = 0xa3;
+		pchMessageStart[3] = 0x7c;
 		vAlertPubKey = ParseHex("0x");
-		nDefaultPort = 15015;
+		nDefaultPort = 21024;
 		nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in bitcoin
 		nPruneAfterHeight = 100000;
 
@@ -130,14 +130,14 @@ public:
 		assert(genesis.hashMerkleRoot == uint256S("0x0f06ea982c10bfcbad17e6ad1b7e577c3ac069e281e24278f4118e75af3c85ee"));
 
 
-		vSeeds.push_back(CDNSSeedData("3dcoin1", "seed1.3dcoin.io"));
+		/*vSeeds.push_back(CDNSSeedData("3dcoin1", "seed1.3dcoin.io"));
 		vSeeds.push_back(CDNSSeedData("3dcoin2", "seed2.3dcoin.io"));
 		vSeeds.push_back(CDNSSeedData("3dcoin3", "seed3.3dcoin.io"));
 		vSeeds.push_back(CDNSSeedData("3dcoin4", "seed4.3dcoin.io"));
 		vSeeds.push_back(CDNSSeedData("Districts1", "seed1.districts.io"));
 		vSeeds.push_back(CDNSSeedData("Districts2", "seed2.districts.io"));
 		vSeeds.push_back(CDNSSeedData("Districts3", "seed3.districts.io"));
-		vSeeds.push_back(CDNSSeedData("Districts4", "seed4.districts.io"));
+		vSeeds.push_back(CDNSSeedData("Districts4", "seed4.districts.io"));*/
 
 		// 3DCoin addresses start with 'A'
 		base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 23);
