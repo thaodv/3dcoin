@@ -93,12 +93,12 @@ public:
 		consensus.BIP34Height = 0;
 		consensus.BIP34Hash = uint256S("0x");
 		consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
-		consensus.nPowTargetTimespan = 5 * 60; // 3DCoin: 5 minutes
-		consensus.nPowTargetSpacing = 2.5 * 60; // 3DCoin: 2.5 minutes
-		consensus.fPowAllowMinDifficultyBlocks = false;
+		consensus.nPowTargetTimespan = 6* 60 * 60; // 3DCoin: 6 hours
+		consensus.nPowTargetSpacing = 2 * 60; // 3DCoin: 2 minutes
+		consensus.fPowAllowMinDifficultyBlocks = true;
 		consensus.fPowNoRetargeting = false;
 		consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
-		consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
+		consensus.nMinerConfirmationWindow = 180; // nPowTargetTimespan / nPowTargetSpacing
 		consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
 		consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
 		consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -119,7 +119,7 @@ public:
 		pchMessageStart[3] = 0x7c;
 		vAlertPubKey = ParseHex("0x");
 		nDefaultPort = 21024;
-		nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in bitcoin
+		nMaxTipAge = 3 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in bitcoin
 		nPruneAfterHeight = 100000;
 
 		genesis = CreateGenesisBlock(1503187200, 151965, 0x1e0ffff0, 1, 50 * COIN);
@@ -154,7 +154,7 @@ public:
 
 		vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
-		fMiningRequiresPeers = true;
+		fMiningRequiresPeers = false;
 		fDefaultConsistencyChecks = false;
 		fRequireStandard = true;
 		fMineBlocksOnDemand = false;
@@ -168,8 +168,8 @@ public:
 		checkpointData = (CCheckpointData)
 		{
 			boost::assign::map_list_of
-			(0, uint256S("0x000006421e4f07d4d4ec8884ce41be66ccbb5bc423983859f10cadbc1346febb"))
-			(1, uint256S("0x000000cdbfc45b4fd1c20c0ae0455a1489ecf64d751ff2024e029f2f2d53622f")),
+			(0, uint256S("0x000006421e4f07d4d4ec8884ce41be66ccbb5bc423983859f10cadbc1346febb")),
+			//(1, uint256S("0x000000cdbfc45b4fd1c20c0ae0455a1489ecf64d751ff2024e029f2f2d53622f")),
 
 			
 				1503187200, // * UNIX timestamp of last checkpoint block
