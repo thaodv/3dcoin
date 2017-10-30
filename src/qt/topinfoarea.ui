@@ -84,7 +84,7 @@
        <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Version: v0.12.5</string>
+          <string>Version: v0.12.6.2</string>
          </property>
         </widget>
        </item>
