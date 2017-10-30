@@ -93,12 +93,12 @@ public:
 		consensus.BIP34Height = 0;
 		consensus.BIP34Hash = uint256S("0x");
 		consensus.powLimit = uint256S("00000fffff000000000000000000000000000000000000000000000000000000");
-		consensus.nPowTargetTimespan = 5 * 60; // 3DCoin: 5 minutes
-		consensus.nPowTargetSpacing = 2.5 * 60; // 3DCoin: 2.5 minutes
+		consensus.nPowTargetTimespan = 6* 60 * 60; // 3DCoin: 5 minutes
+		consensus.nPowTargetSpacing = 2 * 60; // 3DCoin: 2.5 minutes
 		consensus.fPowAllowMinDifficultyBlocks = false;
 		consensus.fPowNoRetargeting = false;
 		consensus.nRuleChangeActivationThreshold = 1916; // 95% of 2016
-		consensus.nMinerConfirmationWindow = 2016; // nPowTargetTimespan / nPowTargetSpacing
+		consensus.nMinerConfirmationWindow = 180; // nPowTargetTimespan / nPowTargetSpacing
 		consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
 		consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
 		consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -170,9 +170,10 @@ public:
 			boost::assign::map_list_of
 			(0, uint256S("0x000006421e4f07d4d4ec8884ce41be66ccbb5bc423983859f10cadbc1346febb"))
 			(1, uint256S("0x000000cdbfc45b4fd1c20c0ae0455a1489ecf64d751ff2024e029f2f2d53622f")),
+			(4900, uint256S("0x00000001877820daa297f05744023a6ed46ba2e1ac358a4f75363347ec8f1bd9")),
 
 			
-				1503187200, // * UNIX timestamp of last checkpoint block
+				1509325352, // * UNIX timestamp of last checkpoint block
 				0,    // * total number of transactions between genesis and last checkpoint
 							//   (the tx=... number in the SetBestChain debug.log lines)
 				0        // * estimated number of transactions per day after checkpoint

@@ -1755,26 +1755,37 @@ CAmount GetBlockSubsidy(int nPrevBits, int nPrevHeight, const Consensus::Params&
 		dDiff = ConvertBitsToDouble(nPrevBits);
 	}
 
-	if (nPrevHeight < 5500) {
+	if (nPrevHeight < 25000) {
 		// Early ages...
 		// 1111/((x+1)^2)
 		nSubsidyBase = (1111.0 / (pow((dDiff + 1.0), 2.0)));
-		if (nSubsidyBase > 500) nSubsidyBase = 1;
-		else if (nSubsidyBase < 1) nSubsidyBase = 1;
+		if (nSubsidyBase >= 1) nSubsidyBase = 1;
+		
 	}
-	else if (nPrevHeight < 24480 || (dDiff <= 75 && nPrevHeight < 25000)) {
+	else if (nPrevHeight > 25001 || (dDiff <= 75 && nPrevHeight > 26000)) {
 		// CPU mining era
 		// 11111/(((x+51)/6)^2)
 		nSubsidyBase = (11111.0 / (pow((dDiff + 51.0) / 6.0, 2.0)));
-		if (nSubsidyBase > 500) nSubsidyBase = 7;
-		else if (nSubsidyBase < 25) nSubsidyBase = 3;
+		if (nSubsidyBase > 500) nSubsidyBase = 2;
+		else if (nSubsidyBase > 400) nSubsidyBase = 3;
+		else if (nSubsidyBase > 350) nSubsidyBase = 4;
+		else if (nSubsidyBase > 300) nSubsidyBase = 5;
+		else if (nSubsidyBase > 250) nSubsidyBase = 6;
+		else if (nSubsidyBase > 200) nSubsidyBase = 7;
+		else if (nSubsidyBase > 150) nSubsidyBase = 8;
+		else if (nSubsidyBase > 100) nSubsidyBase = 9;
+		else if (nSubsidyBase > 85 ) nSubsidyBase = 10;
+		else if (nSubsidyBase > 70 ) nSubsidyBase = 11;
+		else if (nSubsidyBase > 50 ) nSubsidyBase = 12;
+		else if (nSubsidyBase < 25 ) nSubsidyBase = 13;
 	}
-	else {
+	else if (nPrevHeight > 50000)
+		{
 		// GPU/ASIC mining era
 		// 2222222/(((x+2600)/9)^2)
 		nSubsidyBase = (2222222.0 / (pow((dDiff + 2600.0) / 9.0, 2.0)));
-		if (nSubsidyBase > 25) nSubsidyBase = 13;
-		else if (nSubsidyBase < 5) nSubsidyBase = 13;
+		if (nSubsidyBase > 25) nSubsidyBase = 11;
+		else if (nSubsidyBase < 25) nSubsidyBase = 13;
 	}
 
 	
